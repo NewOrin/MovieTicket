@@ -21,6 +21,7 @@
 
     <!--LinearLayout-->
     <dimen name="linearlayout_margin_10_dp">10dp</dimen>
+    <dimen name="linearlayout_bottom_height">50dp</dimen>
 
     <!--RelativeLayout-->
     <dimen name="relativelayout_margin_10_dp">10dp</dimen>

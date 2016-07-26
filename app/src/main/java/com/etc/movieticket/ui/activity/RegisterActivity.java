@@ -56,12 +56,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     private void submit() {
         // validate
-        String account = mEtRegisterAccount.getText().toString().trim();
+        String account = getUserPhone();
         if (TextUtils.isEmpty(account)) {
             return;
         }
 
-        String nickname = mEtRegisterNickname.getText().toString().trim();
+        String nickname = getNickName();
         if (TextUtils.isEmpty(nickname)) {
             return;
         }
