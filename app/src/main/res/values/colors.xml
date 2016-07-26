@@ -3,4 +3,28 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="red">#FF0000</color>
+    <color name="red_dark">#EE0000</color>
+    <color name="red_shadow">#FFB9B9</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <!--TextView-->
+    <color name="text_color_white">#FFFFFF</color>
+    <color name="text_color_black">#000000</color>
+    <color name="text_color_gray">#767A82</color>
+    <color name="tv_line_bg">#CCCFFF</color>
+
+    <!--Button-->
+    <color name="btn_color_pressed">#CC4556</color>
+    <color name="btn_color_normal">#FF4D64</color>
+
+    <!--BackGround-->
+    <color name="layout_bg">#EEEEEE</color>
+    <color name="layout_bg_white">#FFFFFF</color>
+
+    <!--Toolbar-->
+    <color name="toolbar_bg">#F9F9F9</color>
+    <color name="toolbar_title_color">#000000</color>
 </resources>

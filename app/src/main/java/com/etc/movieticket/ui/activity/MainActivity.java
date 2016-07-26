@@ -1,4 +1,4 @@
-package com.etc.movieticket.view.activity;
+package com.etc.movieticket.ui.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

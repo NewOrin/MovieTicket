@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_bg"
+    android:orientation="vertical"
+    tools:context="com.etc.movieticket.ui.activity.RegisterActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/linearlayout_margin_10_dp"
+        android:background="@color/layout_bg_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/MyLoginTextViewStyle"
+            android:text="账号" />
+
+        <EditText
+            android:id="@+id/et_register_account"
+            style="@style/MyEditTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/et_height_50_dp"
+            android:layout_marginLeft="@dimen/et_marginLeft_10_dp"
+            android:layout_weight="1"
+            android:hint="手机号" />
+    </LinearLayout>
+
+    <include layout="@layout/tv_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/layout_bg_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/MyLoginTextViewStyle"
+            android:text="昵称" />
+
+        <EditText
+            android:id="@+id/et_register_nickname"
+            style="@style/MyEditTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/et_height_50_dp"
+            android:layout_marginLeft="@dimen/et_marginLeft_10_dp"
+            android:layout_weight="1"
+            android:hint="请输入昵称" />
+    </LinearLayout>
+
+    <include layout="@layout/tv_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/layout_bg_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/MyLoginTextViewStyle"
+            android:text="密码" />
+
+        <com.subhrajyoti.passwordview.PasswordView
+            android:id="@+id/et_register_password"
+            style="@style/MyEditTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/et_height_50_dp"
+            android:layout_marginLeft="@dimen/et_marginLeft_10_dp"
+            android:layout_weight="1"
+            android:hint="请输入密码" />
+    </LinearLayout>
+
+    <include layout="@layout/tv_line" />
+
+    <Button
+        android:id="@+id/btn_register"
+        style="@style/MyButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="@dimen/btn_margin_5_dp"
+        android:layout_marginRight="@dimen/btn_margin_5_dp"
+        android:layout_marginTop="25dp"
+        android:text="注册" />
+
+</LinearLayout>
