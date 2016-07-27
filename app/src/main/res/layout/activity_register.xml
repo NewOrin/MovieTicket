@@ -28,7 +28,8 @@
             android:layout_height="@dimen/et_height_50_dp"
             android:layout_marginLeft="@dimen/et_marginLeft_10_dp"
             android:layout_weight="1"
-            android:hint="手机号" />
+            android:hint="手机号"
+            android:inputType="phone" />
     </LinearLayout>
 
     <include layout="@layout/tv_line" />

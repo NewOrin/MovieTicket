@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:toolbar="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_toolbar"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/toolbar_bg"
-        toolbar:titleTextColor="@color/toolbar_title_color" />
-</LinearLayout>
+        android:textSize="@dimen/text_size_18_sp"
+        toolbar:titleTextColor="@color/toolbar_title_color">
+
+        <TextView
+            android:id="@+id/toolbar_tv_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="@dimen/text_size_18_sp"
+            android:visibility="gone"
+            toolbar:titleTextColor="@color/toolbar_title_color" />
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/toolbar_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="@dimen/tv_margin_5_dp"
+        android:textColor="@color/toolbar_title_color"
+        android:textSize="@dimen/text_large_size" />
+</RelativeLayout>

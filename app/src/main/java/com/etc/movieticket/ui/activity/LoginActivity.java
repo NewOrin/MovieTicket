@@ -31,7 +31,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         setContentView(R.layout.activity_login);
         initView();
         initListener();
-        setToolbar(mToolbar, "账号登录");
+        setToolbar(mToolbar, "账号登录", null, "");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

@@ -27,4 +27,10 @@
     <!--Toolbar-->
     <color name="toolbar_bg">#F9F9F9</color>
     <color name="toolbar_title_color">#000000</color>
+
+    <!--TabLayout-->
+    <color name="tab_layout_indicator_color">#FF0000</color>
+    <color name="tab_layout_bg_color">#FFFFFF</color>
+    <color name="tab_layout_tab_color_normal">#2F4F4F</color>
+    <color name="tab_layout_tab_color_focused">#FF0000</color>
 </resources>

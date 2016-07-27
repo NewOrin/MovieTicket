@@ -28,4 +28,6 @@ dependencies {
     compile 'com.squareup.okio:okio:1.9.0'
     compile 'com.alibaba:fastjson:1.2.14'
     compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
 }

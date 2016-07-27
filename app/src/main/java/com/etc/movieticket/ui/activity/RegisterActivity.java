@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,8 +30,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         initView();
-        setToolbar(mToolbar, "账号注册");
+        setToolbar(mToolbar, "账号注册", null, "");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        initListener();
     }
 
     @Override
@@ -43,6 +47,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void initListener() {
         mBtnRegister.setOnClickListener(this);
+
     }
 
     @Override
@@ -58,19 +63,21 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         // validate
         String account = getUserPhone();
         if (TextUtils.isEmpty(account)) {
+            showToast("手机号不能为空");
             return;
         }
 
         String nickname = getNickName();
         if (TextUtils.isEmpty(nickname)) {
+            showToast("昵称不能为空");
             return;
         }
         String password = getPassword();
         if (TextUtils.isEmpty(password)) {
+            showToast("密码不能为空");
             return;
         }
         userPresenter.userRegister();
-
     }
 
     @Override
@@ -98,4 +105,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     public void registerFailed(String errorMsg) {
         showToast("注册失败" + errorMsg);
     }
+
+
 }

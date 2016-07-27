@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -75,9 +76,15 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param toolbar
      * @param title
      */
-    protected void setToolbar(Toolbar toolbar, String title) {
-        setSupportActionBar(toolbar);
+    protected void setToolbar(Toolbar toolbar, String title, TextView textView, String tv_title) {
         toolbar.setTitle(title);
+        setSupportActionBar(toolbar);
+        if (textView != null) {
+            setTextViewTitle(textView, tv_title);
+        }
     }
 
+    protected void setTextViewTitle(TextView textViewTitle, String tv_title) {
+        textViewTitle.setText(tv_title);
+    }
 }

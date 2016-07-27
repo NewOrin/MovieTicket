@@ -16,7 +16,7 @@ import com.etc.movieticket.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BaseFragment extends Fragment {
+public   class BaseFragment extends Fragment {
     private Toast toast;
     protected final static String NULL = "";
 

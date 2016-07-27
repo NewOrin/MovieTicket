@@ -7,10 +7,12 @@
     <dimen name="text_small_size">12sp</dimen>
     <dimen name="text_medium_size">16sp</dimen>
     <dimen name="text_size_18_sp">18sp</dimen>
+    <dimen name="text_size_20_sp">20sp</dimen>
     <dimen name="text_size_14_sp">14sp</dimen>
     <dimen name="text_large_size">22sp</dimen>
     <dimen name="tv_padding_10_dp">10dp</dimen>
     <dimen name="tv_margin_10_dp">10dp</dimen>
+    <dimen name="tv_margin_5_dp">5dp</dimen>
     <dimen name="tv_margin_15_dp">15dp</dimen>
     <dimen name="tv_line_height">1dp</dimen>
 
@@ -31,4 +33,6 @@
     <dimen name="btn_corner_radius">5dp</dimen>
     <dimen name="btn_margin_5_dp">5dp</dimen>
 
+    <!--TabLayout-->
+    <dimen name="tablayout_height">40dp</dimen>
 </resources>
