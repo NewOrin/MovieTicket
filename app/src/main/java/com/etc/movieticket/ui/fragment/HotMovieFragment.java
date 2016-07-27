@@ -66,18 +66,17 @@ public class HotMovieFragment extends BaseFragment {
             @Override
             public void hide() {
                 EventBus.getDefault().post(new MoveLayoutEvent(false));
-                mRecyclerViewHotMovie.animate().translationY(-105).setInterpolator(new AccelerateDecelerateInterpolator());
                 Log.d(TAG, "隐藏toolbar");
             }
 
             @Override
             public void show() {
                 EventBus.getDefault().post(new MoveLayoutEvent(true));
-                mRecyclerViewHotMovie.animate().translationY(0).setInterpolator(new AccelerateDecelerateInterpolator());
                 Log.d(TAG, "显示toolbar");
             }
         });
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

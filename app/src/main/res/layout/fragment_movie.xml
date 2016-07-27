@@ -1,28 +1,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_fragment_movie"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/ll_fragment_movie"
     android:orientation="vertical"
     tools:context="com.etc.movieticket.ui.fragment.MovieFragment">
 
-    <LinearLayout
+    <android.support.design.widget.TabLayout
+        android:id="@+id/fragment_tablayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <include layout="@layout/toolbar" />
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/fragment_tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/tablayout_height"
-            android:background="@color/tab_layout_bg_color"
-            app:tabIndicatorColor="@color/tab_layout_indicator_color"
-            app:tabSelectedTextColor="@color/tab_layout_tab_color_focused"
-            app:tabTextColor="@color/tab_layout_tab_color_normal" />
-    </LinearLayout>
+        android:layout_height="@dimen/tablayout_height"
+        android:background="@color/tab_layout_bg_color"
+        app:tabIndicatorColor="@color/tab_layout_indicator_color"
+        app:tabSelectedTextColor="@color/tab_layout_tab_color_focused"
+        app:tabTextColor="@color/tab_layout_tab_color_normal" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/fragment_movie_viewPager"

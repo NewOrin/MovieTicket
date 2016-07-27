@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.transition.Transition;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -23,6 +26,8 @@ import com.etc.movieticket.ui.fragment.MovieFragment;
 import com.etc.movieticket.ui.fragment.UserFragment;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -30,6 +35,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private LinearLayout mLlMovie;
     private LinearLayout mLlCinema;
     private LinearLayout mLlUser;
+    private LinearLayout ll_toolbar_fragment;
     FragmentTransaction transaction;
     private RelativeLayout mRlToolbar;
     private Toolbar mToolbar;
@@ -40,16 +46,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private MovieFragment movieFragment;
     private CinemaFragment cinemaFragment;
     private UserFragment userFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
         initListener();
-        currentFragment = new MovieFragment();
+        currentFragment = movieFragment;
         transaction = getSupportFragmentManager().beginTransaction();
-        mRlToolbar.setVisibility(View.GONE);
-        transaction.add(R.id.fragment_container, new MovieFragment()).commit();
+        transaction.add(R.id.fragment_container, movieFragment).commit();
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -59,12 +66,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mLlMovie = (LinearLayout) findViewById(R.id.ll_movie);
         mLlCinema = (LinearLayout) findViewById(R.id.ll_cinema);
         mLlUser = (LinearLayout) findViewById(R.id.ll_user);
+        ll_toolbar_fragment = (LinearLayout) findViewById(R.id.ll_toolbar_fragment);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbarTvTitle = (TextView) findViewById(R.id.toolbar_tv_title);
+
         setToolbar(mToolbar, "厦门", mToolbarTvTitle, "电影");
+
         mToolbarTvLeft = (TextView) findViewById(R.id.toolbar_tv_left);
         mToolbarTvLeft.setVisibility(View.VISIBLE);
         mToolbarTvLeft.setText("下拉");
+
         movieFragment = new MovieFragment();
         cinemaFragment = new CinemaFragment();
         userFragment = new UserFragment();
@@ -88,11 +99,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     /**
      * 切换Fragment
      *
@@ -102,8 +108,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (currentFragment != null) {
             transaction = getSupportFragmentManager().beginTransaction();
             if (!fragment.isAdded()) {
-                transaction.hide(currentFragment).replace(R.id.fragment_container, fragment);
+                Log.d(TAG, "isAdd（）方法");
+                transaction.add(R.id.fragment_container, fragment).hide(currentFragment);
             } else {
+                Log.d(TAG, "未执行isAdd（）方法");
                 transaction.hide(currentFragment).show(fragment);
             }
             transaction.commit();
@@ -116,19 +124,35 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.ll_movie:
                 switchFragment(movieFragment);
-                mRlToolbar.setVisibility(View.GONE);
+                setTextViewTitle(mToolbarTvTitle, "电影");
                 break;
             case R.id.ll_cinema:
                 switchFragment(cinemaFragment);
                 setTextViewTitle(mToolbarTvTitle, "影院");
-                mRlToolbar.setVisibility(View.VISIBLE);
                 break;
             case R.id.ll_user:
                 switchFragment(userFragment);
                 setTextViewTitle(mToolbarTvTitle, "我的");
-                mRlToolbar.setVisibility(View.VISIBLE);
                 break;
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void moveEvenBus(MoveLayoutEvent event) {
+        changeLayoutHeight(ll_toolbar_fragment.getHeight());
+        if (event.getShow()) {
+            ll_toolbar_fragment.animate().translationY(0).setInterpolator(new AccelerateDecelerateInterpolator());
+        } else {
+            ll_toolbar_fragment.animate().translationY(-mToolbar.getHeight()).setInterpolator(new AccelerateDecelerateInterpolator());
+        }
+    }
+
+    private void changeLayoutHeight(int layoutHeight) {
+        Log.d(TAG, "未增加前layoutHeight高度=" + layoutHeight + ",Toolbar高度=" + mToolbar.getHeight());
+        ViewGroup.LayoutParams layoutParams = ll_toolbar_fragment.getLayoutParams();
+        layoutParams.height = mToolbar.getHeight() + layoutHeight;
+        ll_toolbar_fragment.setLayoutParams(layoutParams);
+        Log.d(TAG, "增加后layoutHeight高度=" + layoutParams.height);
     }
 
     @Override
@@ -136,5 +160,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

@@ -13,10 +13,10 @@ import java.util.List;
  */
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private List<String> mTitles;
+    private String[] mTitles;
     private List<Fragment> mFragments;
 
-    public MyFragmentPagerAdapter(FragmentManager fm, List<String> titles, List<Fragment> fragments) {
+    public MyFragmentPagerAdapter(FragmentManager fm, String[] titles, List<Fragment> fragments) {
         super(fm);
         this.mTitles = titles;
         this.mFragments = fragments;
@@ -34,6 +34,6 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mTitles.get(position);
+        return mTitles[position];
     }
 }
