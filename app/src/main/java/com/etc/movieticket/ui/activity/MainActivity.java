@@ -35,7 +35,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private LinearLayout mLlMovie;
     private LinearLayout mLlCinema;
     private LinearLayout mLlUser;
-    private LinearLayout ll_toolbar_fragment;
     FragmentTransaction transaction;
     private RelativeLayout mRlToolbar;
     private Toolbar mToolbar;
@@ -56,7 +55,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         currentFragment = movieFragment;
         transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.fragment_container, movieFragment).commit();
-        EventBus.getDefault().register(this);
+        mRlToolbar.setVisibility(View.GONE);
     }
 
     @Override
@@ -66,13 +65,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mLlMovie = (LinearLayout) findViewById(R.id.ll_movie);
         mLlCinema = (LinearLayout) findViewById(R.id.ll_cinema);
         mLlUser = (LinearLayout) findViewById(R.id.ll_user);
-        ll_toolbar_fragment = (LinearLayout) findViewById(R.id.ll_toolbar_fragment);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbarTvTitle = (TextView) findViewById(R.id.toolbar_tv_title);
+        mToolbarTvLeft = (TextView) findViewById(R.id.toolbar_tv_left);
 
         setToolbar(mToolbar, "厦门", mToolbarTvTitle, "电影");
 
-        mToolbarTvLeft = (TextView) findViewById(R.id.toolbar_tv_left);
         mToolbarTvLeft.setVisibility(View.VISIBLE);
         mToolbarTvLeft.setText("下拉");
 
@@ -123,36 +121,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_movie:
+                mRlToolbar.setVisibility(View.GONE);
                 switchFragment(movieFragment);
                 setTextViewTitle(mToolbarTvTitle, "电影");
                 break;
             case R.id.ll_cinema:
+                mRlToolbar.setVisibility(View.VISIBLE);
                 switchFragment(cinemaFragment);
                 setTextViewTitle(mToolbarTvTitle, "影院");
                 break;
             case R.id.ll_user:
+                mRlToolbar.setVisibility(View.VISIBLE);
                 switchFragment(userFragment);
                 setTextViewTitle(mToolbarTvTitle, "我的");
                 break;
         }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void moveEvenBus(MoveLayoutEvent event) {
-        changeLayoutHeight(ll_toolbar_fragment.getHeight());
-        if (event.getShow()) {
-            ll_toolbar_fragment.animate().translationY(0).setInterpolator(new AccelerateDecelerateInterpolator());
-        } else {
-            ll_toolbar_fragment.animate().translationY(-mToolbar.getHeight()).setInterpolator(new AccelerateDecelerateInterpolator());
-        }
-    }
-
-    private void changeLayoutHeight(int layoutHeight) {
-        Log.d(TAG, "未增加前layoutHeight高度=" + layoutHeight + ",Toolbar高度=" + mToolbar.getHeight());
-        ViewGroup.LayoutParams layoutParams = ll_toolbar_fragment.getLayoutParams();
-        layoutParams.height = mToolbar.getHeight() + layoutHeight;
-        ll_toolbar_fragment.setLayoutParams(layoutParams);
-        Log.d(TAG, "增加后layoutHeight高度=" + layoutParams.height);
     }
 
     @Override
@@ -160,11 +143,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 }

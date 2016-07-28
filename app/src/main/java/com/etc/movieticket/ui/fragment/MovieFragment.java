@@ -32,6 +32,9 @@ import java.util.List;
 public class MovieFragment extends BaseFragment {
 
     private TabLayout mFragmentTablayout;
+    private TextView mToolbarTvTitle;
+    private TextView mToolbarTvLeft;
+    private Toolbar myToolbar;
     private ViewPager mFragmentMovieViewPager;
     private View view;
     private List<Fragment> list_fragment;
@@ -55,6 +58,17 @@ public class MovieFragment extends BaseFragment {
     }
 
     private void initView() {
+
+        myToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+
+        mToolbarTvTitle = (TextView) view.findViewById(R.id.toolbar_tv_title);
+        mToolbarTvLeft = (TextView) view.findViewById(R.id.toolbar_tv_left);
+
+        mToolbarTvLeft.setVisibility(View.VISIBLE);
+        myToolbar.setTitle("厦门");
+        mToolbarTvLeft.setText("下拉");
+        mToolbarTvTitle.setText("电影");
+
         list_fragment = new ArrayList<>();
         Log.d(TAG, "MovieFrg初始化..");
         hotMovieFragment = new HotMovieFragment();

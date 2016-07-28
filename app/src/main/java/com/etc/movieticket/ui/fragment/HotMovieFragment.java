@@ -65,14 +65,14 @@ public class HotMovieFragment extends BaseFragment {
         mRecyclerViewHotMovie.addOnScrollListener(new RecyclerViewScrollListener() {
             @Override
             public void hide() {
-                EventBus.getDefault().post(new MoveLayoutEvent(false));
-                Log.d(TAG, "隐藏toolbar");
+//                EventBus.getDefault().post(new MoveLayoutEvent(false));
+//                Log.d(TAG, "隐藏toolbar");
             }
 
             @Override
             public void show() {
-                EventBus.getDefault().post(new MoveLayoutEvent(true));
-                Log.d(TAG, "显示toolbar");
+//                EventBus.getDefault().post(new MoveLayoutEvent(true));
+//                Log.d(TAG, "显示toolbar");
             }
         });
     }
