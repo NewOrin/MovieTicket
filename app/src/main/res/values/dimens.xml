@@ -4,7 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!--TextView-->
-    <dimen name="text_small_size">12sp</dimen>
+    <dimen name="text_small_size">12dp</dimen>
+    <dimen name="text_size_10dp">10dp</dimen>
     <dimen name="text_medium_size">16sp</dimen>
     <dimen name="text_size_18_sp">18sp</dimen>
     <dimen name="text_size_20_sp">20sp</dimen>
@@ -30,9 +31,24 @@
     <dimen name="relativelayout_margin_15_dp">15dp</dimen>
 
     <!--Button-->
-    <dimen name="btn_corner_radius">5dp</dimen>
+    <dimen name="btn_corner_radius">3dp</dimen>
     <dimen name="btn_margin_5_dp">5dp</dimen>
 
     <!--TabLayout-->
     <dimen name="tablayout_height">40dp</dimen>
+
+    <!--Bottom Bar-->
+    <dimen name="bottom_bar_height">50dp</dimen>
+
+    <!--Toolbar-->
+    <dimen name="toolbar_height">40dp</dimen>
+
+    <!--Item RecyclerView Height-->
+    <dimen name="item_recyclerview_movie_height">100dp</dimen>
+    <!--TextView Show 3D and IMAX-->
+    <dimen name="text_show_3D_bg_radius">2dp</dimen>
+    <dimen name="text_show_IMAX_bg_radius">2dp</dimen>
+    <dimen name="text_show_3D_padding">2dp</dimen>
+    <dimen name="text_show_3D_stroke_width">1dp</dimen>
+    <dimen name="text_show_IMAX_stroke_width">1dp</dimen>
 </resources>

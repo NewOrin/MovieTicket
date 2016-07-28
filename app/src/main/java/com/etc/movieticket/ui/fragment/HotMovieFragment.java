@@ -47,7 +47,7 @@ public class HotMovieFragment extends BaseFragment {
         mRecyclerViewHotMovie = (RecyclerView) view.findViewById(R.id.recyclerview_hot_movie);
         mDatas = new ArrayList<>();
         for (int i = 1; i < 51; i++) {
-            mDatas.add(i + "");
+            mDatas.add("泰山归来：险战丛林");
         }
     }
 
@@ -59,7 +59,7 @@ public class HotMovieFragment extends BaseFragment {
 
             @Override
             public void convert(ViewHolder holder, String s) {
-                holder.setText(R.id.textview, s);
+                holder.setText(R.id.item_movie_title, s);
             }
         });
         mRecyclerViewHotMovie.addOnScrollListener(new RecyclerViewScrollListener() {

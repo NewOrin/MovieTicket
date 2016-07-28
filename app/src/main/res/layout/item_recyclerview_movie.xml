@@ -1,12 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_height="@dimen/item_recyclerview_movie_height"
+    android:background="@color/item_recyclerview_bg">
 
-    <TextView
-        android:id="@+id/textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+    <ImageView
+        android:id="@+id/item_recyclerview_movie_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_test"
+        app:layout_heightPercent="90%"
+        app:layout_marginLeftPercent="3%"
+        app:layout_widthPercent="17%" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="0dp"
+        android:layout_toRightOf="@+id/item_recyclerview_movie_image"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        app:layout_heightPercent="80%"
+        app:layout_marginLeftPercent="3%"
+        app:layout_widthPercent="60%">
+
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/item_movie_title"
+                style="@style/MyRecyclerViewMovieTextViewStyle"
+                android:text="绝地逃亡"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_medium_size" />
+
+            <TextView
+                android:id="@+id/item_movie_is3D"
+                style="@style/MyRecyclerViewMovieTextViewStyle"
+                android:layout_marginLeft="0dp"
+                android:layout_toRightOf="@+id/item_movie_title"
+                android:background="@drawable/tv_3d_shape"
+                android:gravity="center"
+                android:padding="@dimen/text_show_3D_padding"
+                android:text="3D"
+                android:textColor="@color/text_show_3D_color"
+                android:textSize="@dimen/text_size_10dp"
+                app:layout_marginLeftPercent="5%" />
+
+            <TextView
+                android:id="@+id/item_movie_isImax"
+                style="@style/MyRecyclerViewMovieTextViewStyle"
+                android:layout_toRightOf="@+id/item_movie_is3D"
+                android:background="@drawable/tv_show_imax_shape"
+                android:gravity="center"
+                android:padding="@dimen/text_show_3D_padding"
+                android:text="IMAX"
+                android:textSize="@dimen/text_size_10dp" />
+
+        </android.support.percent.PercentRelativeLayout>
+
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <RatingBar
+                android:id="@+id/item_movie_ratingbar"
+                style="?android:ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:progressDrawable="@drawable/ratingbar_layer"
+                android:rating="3.7" />
+
+            <TextView
+                android:id="@+id/item_movie_ratingNums"
+                style="@style/MyRecyclerViewMovieTextViewStyle"
+                android:layout_marginLeft="0dp"
+                android:layout_toRightOf="@+id/item_movie_ratingbar"
+                android:text="3.7"
+                android:textSize="@dimen/text_small_size"
+                app:layout_marginLeftPercent="1%" />
+
+        </android.support.percent.PercentRelativeLayout>
+
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/MyRecyclerViewMovieTextViewStyle"
+                android:layout_weight="1"
+                android:text="警匪片"
+                android:textSize="@dimen/text_small_size" />
+        </android.support.percent.PercentRelativeLayout>
+
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/MyRecyclerViewMovieTextViewStyle"
+                android:layout_weight="1"
+                android:text="警匪片"
+                android:textSize="@dimen/text_small_size" />
+        </android.support.percent.PercentRelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="0dp"
+        android:background="@drawable/btn_buy_selector"
+        android:text="购票"
+        android:textColor="@color/btn_buy_text_normal"
+        android:textSize="@dimen/text_size_14_sp"
+        app:layout_heightPercent="25%"
+        app:layout_marginRightPercent="5%"
+        app:layout_widthPercent="12%" />
+</android.support.percent.PercentRelativeLayout>

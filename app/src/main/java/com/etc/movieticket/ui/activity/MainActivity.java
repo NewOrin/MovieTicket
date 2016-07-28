@@ -131,7 +131,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 setTextViewTitle(mToolbarTvTitle, "影院");
                 break;
             case R.id.ll_user:
-                mRlToolbar.setVisibility(View.VISIBLE);
+                mRlToolbar.setVisibility(View.GONE);
                 switchFragment(userFragment);
                 setTextViewTitle(mToolbarTvTitle, "我的");
                 break;
