@@ -1,10 +1,12 @@
 package com.etc.movieticket.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by NewOrin Zhang on 2016/7/26.
  * E-mail: NewOrin@163.com
  */
-public class Info {
+public class Info implements Serializable {
     private Integer code;
     private String type;
     private String msg;
