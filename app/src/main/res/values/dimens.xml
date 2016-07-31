@@ -4,13 +4,14 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!--TextView-->
-    <dimen name="text_small_size">12dp</dimen>
-    <dimen name="text_size_10dp">10dp</dimen>
+    <dimen name="text_small_size">12sp</dimen>
+    <dimen name="text_size_10_sp">10sp</dimen>
     <dimen name="text_medium_size">16sp</dimen>
     <dimen name="text_size_18_sp">18sp</dimen>
     <dimen name="text_size_20_sp">20sp</dimen>
     <dimen name="text_size_14_sp">14sp</dimen>
     <dimen name="text_large_size">22sp</dimen>
+    <dimen name="text_size_24_sp">24sp</dimen>
     <dimen name="tv_padding_10_dp">10dp</dimen>
     <dimen name="tv_margin_10_dp">10dp</dimen>
     <dimen name="tv_margin_5_dp">5dp</dimen>
@@ -39,6 +40,7 @@
 
     <!--Bottom Bar-->
     <dimen name="bottom_bar_height">50dp</dimen>
+    <dimen name="text_margin_top">5dp</dimen>
 
     <!--Toolbar-->
     <dimen name="toolbar_height">40dp</dimen>
@@ -51,4 +53,26 @@
     <dimen name="text_show_3D_padding">2dp</dimen>
     <dimen name="text_show_3D_stroke_width">1dp</dimen>
     <dimen name="text_show_IMAX_stroke_width">1dp</dimen>
+
+    <!--User TextView Vip-->
+    <dimen name="text_corner_user_vip">10dp</dimen>
+    <dimen name="text_stroke_width">1dp</dimen>
+    <dimen name="text_user_vip_padding_height">5dp</dimen>
+    <dimen name="text_user_vip_padding_width">10dp</dimen>
+    <dimen name="userinfo_layout_height">220dp</dimen>
+    <dimen name="user_fg_layout_height">15dp</dimen>
+
+    <!--Item RecyclerView Cinema-->
+    <dimen name="item_recyclerview_cinema_height">90dp</dimen>
+
+    <!--Cinema Summer Vacation-->
+    <dimen name="text_summer_vaction_padding_height">3dp</dimen>
+    <dimen name="text_summer_vacation_padding_width">5dp</dimen>
+
+    <!--Movie Info-->
+    <dimen name="movie_info_layout_height">180dp</dimen>
+
+    <dimen name="app_bar_height">220dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

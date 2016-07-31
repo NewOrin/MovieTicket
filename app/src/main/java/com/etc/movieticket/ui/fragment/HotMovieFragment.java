@@ -19,6 +19,7 @@ import com.etc.movieticket.R;
 import com.etc.movieticket.adapter.MovieImagePageAdapter;
 import com.etc.movieticket.adapter.RecyclerViewMovieAdapter;
 import com.etc.movieticket.entity.Movie;
+import com.etc.movieticket.ui.activity.MovieInfoActivity;
 import com.etc.movieticket.utils.DividerItemDecoration;
 import com.etc.movieticket.widget.WrapAdapter;
 
@@ -71,7 +72,7 @@ public class HotMovieFragment extends BaseFragment {
             movieDatas.add(new Movie("泰山归来：险战丛林"));
         }
         //轮播图片数据
-        int[] movieImageIds = {R.drawable.pic_movie_carousel_01, R.drawable.pic_movie_carousel_02, R.drawable.pic_movie_carousel_03, R.drawable.pic_movie_carousel_04};
+        int[] movieImageIds = {R.drawable.pic_test1, R.drawable.pic_test2, R.drawable.pic_test3};
         for (int i = 0; i < movieImageIds.length; i++) {
             imageView = new ImageView(getActivity());
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -121,6 +122,7 @@ public class HotMovieFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mWrapAdapter.adjustSpanSize(mRecyclerView);
         mRecyclerView.setAdapter(mWrapAdapter);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         //添加头部
         mWrapAdapter.addHeaderView(headerLayout);
         //轮播图片设置
@@ -149,7 +151,7 @@ public class HotMovieFragment extends BaseFragment {
         mRecyclerViewMovieAdapter.setOnItemClickListener(new RecyclerViewMovieAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity(), "click " + position, Toast.LENGTH_SHORT).show();
+                startActivity(MovieInfoActivity.class, null);
             }
 
             @Override
@@ -180,7 +182,6 @@ public class HotMovieFragment extends BaseFragment {
             mDotLayout.getChildAt(i).setEnabled(i == currentPage);
         }
     }
-
 
     private Handler mHandler = new Handler() {
         @Override

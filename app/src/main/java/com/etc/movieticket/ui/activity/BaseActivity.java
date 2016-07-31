@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,11 +15,12 @@ import android.widget.Toast;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private ProgressDialog mProgressDialog;
+    protected Typeface mTypeface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        mTypeface = Typeface.createFromAsset(getAssets(), "iconfont.ttf");
     }
 
     protected abstract void initView();//初始化控件

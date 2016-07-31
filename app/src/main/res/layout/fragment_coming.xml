@@ -4,10 +4,8 @@
     android:layout_height="match_parent"
     tools:context="com.etc.movieticket.ui.fragment.ComingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <se.emilsjolander.stickylistheaders.StickyListHeadersListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="COMINGGGG" />
-
+        android:id="@+id/listview_coming_frg"
+        android:layout_height="match_parent" />
 </FrameLayout>

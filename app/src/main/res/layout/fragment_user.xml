@@ -1,13 +1,240 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.etc.movieticket.ui.fragment.UserFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Fragment User" />
+        android:background="@color/layout_bg">
 
-</FrameLayout>
+        <android.support.percent.PercentRelativeLayout
+            android:id="@+id/user_prlayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/userinfo_layout_height"
+            android:background="@color/layout_bg_white">
+
+            <com.etc.movieticket.view.CircleImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_avatar"
+                app:layout_marginTopPercent="8%" />
+
+            <TextView
+                android:id="@+id/tv_user_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_avatar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
+                android:text="NewOrin"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_18_sp"
+                app:layout_marginTopPercent="3%" />
+
+            <TextView
+                android:id="@+id/tv_user_vip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_user_nickname"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/tv_user_vip_shape"
+                android:paddingBottom="@dimen/text_user_vip_padding_height"
+                android:paddingLeft="@dimen/text_user_vip_padding_width"
+                android:paddingRight="@dimen/text_user_vip_padding_width"
+                android:paddingTop="@dimen/text_user_vip_padding_height"
+                android:text="普通会员"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_small_size"
+                app:layout_marginTopPercent="3%" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_user_vip"
+                android:layout_centerHorizontal="true"
+                android:text="再积26经验值,可升级到青铜会员"
+                android:textColor="@color/text_color_vip"
+                android:textSize="@dimen/text_size_14_sp"
+                app:layout_marginTopPercent="5%" />
+        </android.support.percent.PercentRelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/user_llayout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@+id/user_prlayout"
+            android:layout_marginTop="@dimen/user_fg_layout_height"
+            android:background="@color/layout_bg_white"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="电影票"
+                    android:textSize="@dimen/text_size_18_sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="电影票"
+                    android:textSize="@dimen/text_size_14_sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="演出票"
+                    android:textSize="@dimen/text_size_18_sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="演出票"
+                    android:textSize="@dimen/text_size_14_sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="优惠券"
+                    android:textSize="@dimen/text_size_18_sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="优惠券"
+                    android:textSize="@dimen/text_size_14_sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VIP"
+                    android:textSize="@dimen/text_size_18_sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="影城卡"
+                    android:textSize="@dimen/text_size_14_sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/user_llayout"
+            android:layout_marginTop="@dimen/user_fg_layout_height"
+            android:orientation="vertical">
+
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/layout_bg_white"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="想看的电影"
+                    android:textSize="@dimen/text_medium_size"
+                    app:layout_marginLeftPercent="5%" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="想看的电影"
+                    android:textSize="@dimen/text_medium_size"
+                    app:layout_marginRightPercent="5%" />
+            </android.support.percent.PercentRelativeLayout>
+
+            <include layout="@layout/tv_line" />
+
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/layout_bg_white"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="看过的电影"
+                    android:textSize="@dimen/text_medium_size"
+                    app:layout_marginLeftPercent="5%" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="看过的电影"
+                    android:textSize="@dimen/text_medium_size"
+                    app:layout_marginRightPercent="5%" />
+            </android.support.percent.PercentRelativeLayout>
+
+            <include layout="@layout/tv_line" />
+
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/layout_bg_white"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="设置"
+                    android:textSize="@dimen/text_medium_size"
+                    app:layout_marginLeftPercent="5%" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="设置"
+                    android:textSize="@dimen/text_medium_size"
+                    app:layout_marginRightPercent="5%" />
+            </android.support.percent.PercentRelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</ScrollView>

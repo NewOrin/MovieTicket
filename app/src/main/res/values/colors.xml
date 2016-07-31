@@ -15,7 +15,8 @@
     <color name="text_color_black">#000000</color>
     <color name="text_color_gray">#767A82</color>
     <color name="tv_line_bg">#CCCFFF</color>
-
+    <color name="tv_bottom_color">#757575</color>
+    <color name="tv_cinema_summber_vacation">#FEB56C</color>
     <!--Button-->
     <color name="btn_color_pressed">#CC4556</color>
     <color name="btn_color_normal">#FF4D64</color>
@@ -28,7 +29,7 @@
     <color name="btn_buy_text_pressed">#FFFFFF</color>
 
     <!--BackGround-->
-    <color name="layout_bg">#EEEEEE</color>
+    <color name="layout_bg">#F5F5F5</color>
     <color name="layout_bg_white">#FFFFFF</color>
 
     <!--Toolbar-->
@@ -43,7 +44,8 @@
 
     <!--RecyclerView Item-->
     <color name="item_recyclerview_bg">#FFFFFF</color>
-    
+    <color name="item_recyclerview_click">#FFCCE6</color>
+
     <!--TextView Show 3D and IMAX-->
     <color name="text_show_3D">#A8AAB4</color>
     <color name="text_show_3D_single">#FFFFFF</color>
@@ -51,4 +53,8 @@
     <color name="text_show_3D_color">#FFFFFF</color>
     <color name="text_show_IMAX_color">#FFFFFF</color>
     <color name="text_show_IMAX_stroke">#A8AAB4</color>
+
+    <!--User TextView VIP-->
+    <color name="text_color_vip">#9D99FF</color>
+    <color name="text_stroke_color">#CC4556</color>
 </resources>

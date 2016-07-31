@@ -7,13 +7,15 @@
     android:orientation="vertical"
     tools:context=".ui.activity.MainActivity">
 
-        <include layout="@layout/toolbar" />
+    <include layout="@layout/toolbar" />
 
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <include layout="@layout/tv_line" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,12 +28,16 @@
             style="@style/MyBottomLinearLayoutStyle">
 
             <TextView
+                android:id="@+id/tv_bottom_movie"
                 style="@style/MyBottomTextViewStyle"
-                android:text="电影" />
+                android:text="@string/bottom_bar_movie"
+                android:textSize="@dimen/text_size_24_sp" />
 
             <TextView
                 style="@style/MyBottomTextViewStyle"
-                android:text="电影" />
+                android:layout_marginTop="@dimen/text_margin_top"
+                android:text="电影"
+                android:textSize="@dimen/text_size_10_sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -39,12 +45,16 @@
             style="@style/MyBottomLinearLayoutStyle">
 
             <TextView
+                android:id="@+id/tv_bottom_cinema"
                 style="@style/MyBottomTextViewStyle"
-                android:text="影院" />
+                android:text="@string/bottom_bar_cinema"
+                android:textSize="@dimen/text_size_24_sp" />
 
             <TextView
                 style="@style/MyBottomTextViewStyle"
-                android:text="影院" />
+                android:layout_marginTop="@dimen/text_margin_top"
+                android:text="影院"
+                android:textSize="@dimen/text_size_10_sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -52,12 +62,16 @@
             style="@style/MyBottomLinearLayoutStyle">
 
             <TextView
+                android:id="@+id/tv_bottom_user"
                 style="@style/MyBottomTextViewStyle"
-                android:text="我的" />
+                android:text="@string/bottom_bar_user"
+                android:textSize="@dimen/text_size_24_sp" />
 
             <TextView
                 style="@style/MyBottomTextViewStyle"
-                android:text="我的" />
+                android:layout_marginTop="@dimen/text_margin_top"
+                android:text="我的"
+                android:textSize="@dimen/text_size_10_sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

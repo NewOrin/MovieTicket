@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_recyclerview_movie_height"
-    android:background="@color/item_recyclerview_bg">
+    android:clickable="true"
+    android:background="@drawable/recyclerview_item_selector">
 
     <ImageView
         android:id="@+id/item_recyclerview_movie_image"
@@ -12,7 +13,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_test"
+        android:src="@drawable/ic_avatar"
         app:layout_heightPercent="90%"
         app:layout_marginLeftPercent="3%"
         app:layout_widthPercent="17%" />
@@ -36,34 +37,34 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/item_movie_title"
+                android:id="@+id/movie_info_title"
                 style="@style/MyRecyclerViewMovieTextViewStyle"
                 android:text="绝地逃亡"
                 android:textColor="@color/text_color_black"
                 android:textSize="@dimen/text_medium_size" />
 
             <TextView
-                android:id="@+id/item_movie_is3D"
+                android:id="@+id/movie_info_is3D"
                 style="@style/MyRecyclerViewMovieTextViewStyle"
                 android:layout_marginLeft="0dp"
-                android:layout_toRightOf="@+id/item_movie_title"
+                android:layout_toRightOf="@+id/movie_info_title"
                 android:background="@drawable/tv_3d_shape"
                 android:gravity="center"
                 android:padding="@dimen/text_show_3D_padding"
                 android:text="3D"
                 android:textColor="@color/text_show_3D_color"
-                android:textSize="@dimen/text_size_10dp"
+                android:textSize="@dimen/text_size_10_sp"
                 app:layout_marginLeftPercent="5%" />
 
             <TextView
-                android:id="@+id/item_movie_isImax"
+                android:id="@+id/movie_info_isImax"
                 style="@style/MyRecyclerViewMovieTextViewStyle"
-                android:layout_toRightOf="@+id/item_movie_is3D"
+                android:layout_toRightOf="@+id/movie_info_is3D"
                 android:background="@drawable/tv_show_imax_shape"
                 android:gravity="center"
                 android:padding="@dimen/text_show_3D_padding"
                 android:text="IMAX"
-                android:textSize="@dimen/text_size_10dp" />
+                android:textSize="@dimen/text_size_10_sp" />
 
         </android.support.percent.PercentRelativeLayout>
 

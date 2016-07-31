@@ -19,8 +19,6 @@ public class UserFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        Log.d("UserFragment", "User初始化。。。");
         return inflater.inflate(R.layout.fragment_user, container, false);
     }
 

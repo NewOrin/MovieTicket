@@ -9,22 +9,29 @@ import android.view.ViewGroup;
 
 import com.etc.movieticket.R;
 
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ComingFragment extends Fragment {
 
+    private StickyListHeadersListView mListviewComingFrg;
+    private View view;
 
     public ComingFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_coming, container, false);
+        view = inflater.inflate(R.layout.fragment_coming, container, false);
+        initView();
+        return view;
     }
 
+    private void initView() {
+        mListviewComingFrg = (StickyListHeadersListView) view.findViewById(R.id.listview_coming_frg);
+    }
 }

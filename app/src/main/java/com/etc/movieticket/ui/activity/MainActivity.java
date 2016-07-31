@@ -1,33 +1,24 @@
 package com.etc.movieticket.ui.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
-import android.transition.Transition;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.etc.movieticket.R;
-import com.etc.movieticket.entity.User;
-import com.etc.movieticket.event.MoveLayoutEvent;
 import com.etc.movieticket.ui.fragment.CinemaFragment;
-import com.etc.movieticket.ui.fragment.HotMovieFragment;
 import com.etc.movieticket.ui.fragment.MovieFragment;
 import com.etc.movieticket.ui.fragment.UserFragment;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -45,6 +36,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private MovieFragment movieFragment;
     private CinemaFragment cinemaFragment;
     private UserFragment userFragment;
+    private TextView mTvBottomMovie;
+    private TextView mTvBottomCinema;
+    private TextView mTvBottomUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +49,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         currentFragment = movieFragment;
         transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.fragment_container, movieFragment).commit();
+        mTvBottomMovie.setTextColor(Color.RED);
         mRlToolbar.setVisibility(View.GONE);
     }
 
@@ -77,6 +72,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         movieFragment = new MovieFragment();
         cinemaFragment = new CinemaFragment();
         userFragment = new UserFragment();
+        mTvBottomMovie = (TextView) findViewById(R.id.tv_bottom_movie);
+        mTvBottomCinema = (TextView) findViewById(R.id.tv_bottom_cinema);
+        mTvBottomUser = (TextView) findViewById(R.id.tv_bottom_user);
+
+        mTvBottomMovie.setTypeface(mTypeface);
+        mTvBottomCinema.setTypeface(mTypeface);
+        mTvBottomUser.setTypeface(mTypeface);
     }
 
     @Override
@@ -121,16 +123,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_movie:
+                mTvBottomMovie.setTextColor(Color.RED);
+                mTvBottomCinema.setTextColor(getResources().getColor(R.color.tv_bottom_color));
+                mTvBottomUser.setTextColor(getResources().getColor(R.color.tv_bottom_color));
                 mRlToolbar.setVisibility(View.GONE);
                 switchFragment(movieFragment);
                 setTextViewTitle(mToolbarTvTitle, "电影");
                 break;
             case R.id.ll_cinema:
+                mTvBottomCinema.setTextColor(Color.RED);
+                mTvBottomMovie.setTextColor(getResources().getColor(R.color.tv_bottom_color));
+                mTvBottomUser.setTextColor(getResources().getColor(R.color.tv_bottom_color));
                 mRlToolbar.setVisibility(View.VISIBLE);
                 switchFragment(cinemaFragment);
                 setTextViewTitle(mToolbarTvTitle, "影院");
                 break;
             case R.id.ll_user:
+                mTvBottomUser.setTextColor(Color.RED);
+                mTvBottomCinema.setTextColor(getResources().getColor(R.color.tv_bottom_color));
+                mTvBottomMovie.setTextColor(getResources().getColor(R.color.tv_bottom_color));
                 mRlToolbar.setVisibility(View.GONE);
                 switchFragment(userFragment);
                 setTextViewTitle(mToolbarTvTitle, "我的");

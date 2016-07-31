@@ -32,10 +32,15 @@ public class MovieImagePageAdapter extends PagerAdapter {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "点击了第" + (position % 5) + 1 + "张图片");
+                Log.d(TAG, "点击了第" + (position % imageViewList.size()) + 1 + "张图片");
             }
         });
-        container.addView(imageView);
+        if (imageView.getParent() == null) {
+            container.addView(imageView);
+        } else {
+            ((ViewGroup) imageView.getParent()).removeView(imageView);
+            container.addView(imageView);
+        }
         return imageView;
     }
 

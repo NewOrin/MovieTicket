@@ -14,11 +14,10 @@ import com.etc.movieticket.widget.BaseRecyclerAdapter;
 import java.util.LinkedList;
 
 /**
- * Created by NewOrin Zhang on 2016/7/29.
- * E-mail: NewOrin@163.com
+ * Created by NewOrin Zhang on 2016/7/31.
+ * E-Mail : NewOrinZhang@Gmail.com
  */
-
-public class RecyclerViewMovieAdapter extends BaseRecyclerAdapter<Movie, MyViewHolder> {
+public class RecyclerViewCinemaAdapter extends BaseRecyclerAdapter<Movie, MyViewHolder> {
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -32,28 +31,27 @@ public class RecyclerViewMovieAdapter extends BaseRecyclerAdapter<Movie, MyViewH
         this.mOnItemClickListener = listener;
     }
 
-    public RecyclerViewMovieAdapter(Context context) {
+    public RecyclerViewCinemaAdapter(Context context) {
         super(context);
     }
 
-    public RecyclerViewMovieAdapter(Context mContext, LinkedList<Movie> mItemLists) {
+    public RecyclerViewCinemaAdapter(Context mContext, LinkedList<Movie> mItemLists) {
         super(mContext, mItemLists);
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_recyclerview_movie, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_recyclerview_cinema, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        holder.tv_item_movie_movieName.setText(mItemLists.get(position).getMv_cname());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final int layoutPosition = holder.getLayoutPosition();
-                mOnItemClickListener.onItemClick(holder.itemView,layoutPosition);
+                mOnItemClickListener.onItemClick(holder.itemView, layoutPosition);
             }
         });
 
@@ -61,19 +59,17 @@ public class RecyclerViewMovieAdapter extends BaseRecyclerAdapter<Movie, MyViewH
             @Override
             public boolean onLongClick(View v) {
                 int layoutPosition = holder.getLayoutPosition();
-                mOnItemClickListener.onItemLongClick(holder.itemView,layoutPosition);
+                mOnItemClickListener.onItemLongClick(holder.itemView, layoutPosition);
                 return false;
             }
         });
     }
 }
 
-class MyViewHolder extends RecyclerView.ViewHolder {
+class CinemaViewHolder extends RecyclerView.ViewHolder {
 
-    TextView tv_item_movie_movieName;
-
-    public MyViewHolder(View itemView) {
+    public CinemaViewHolder(View itemView) {
         super(itemView);
-        tv_item_movie_movieName = (TextView) itemView.findViewById(R.id.movie_info_title);
+
     }
 }

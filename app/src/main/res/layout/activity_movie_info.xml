@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.etc.movieticket.ui.activity.MovieInfoActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/movie_info_swipe_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:id="@+id/movie_info_scrollview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <android.support.percent.PercentRelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/movie_info_layout_height"
+                    android:background="#687676">
+
+                    <ImageView
+                        android:id="@+id/movie_info_imageview"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="0dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_avatar"
+                        app:layout_heightPercent="90%"
+                        app:layout_marginLeftPercent="5%"
+                        app:layout_widthPercent="35%" />
+
+                    <android.support.percent.PercentRelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_toRightOf="@+id/movie_info_imageview"
+                        app:layout_heightPercent="90%"
+                        app:layout_marginLeftPercent="5%"
+                        app:layout_marginRightPercent="5%"
+                        app:layout_widthPercent="55%">
+
+                        <android.support.percent.PercentRelativeLayout
+                            android:id="@+id/movie_info_rl_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/movie_info_title"
+                                style="@style/MyRecyclerViewMovieTextViewStyle"
+                                android:text="绝地逃亡"
+                                android:textSize="@dimen/text_large_size" />
+
+                            <TextView
+                                android:id="@+id/movie_info_is3D"
+                                style="@style/MyRecyclerViewMovieTextViewStyle"
+                                android:layout_marginLeft="0dp"
+                                android:layout_toRightOf="@+id/movie_info_title"
+                                android:background="@drawable/tv_3d_shape"
+                                android:gravity="center"
+                                android:padding="@dimen/text_show_3D_padding"
+                                android:text="3D"
+                                android:textColor="@color/text_show_3D_color"
+                                android:textSize="@dimen/text_size_10_sp"
+                                app:layout_marginLeftPercent="5%" />
+
+                            <TextView
+                                android:id="@+id/movie_info_isImax"
+                                style="@style/MyRecyclerViewMovieTextViewStyle"
+                                android:layout_toRightOf="@+id/movie_info_is3D"
+                                android:background="@drawable/tv_show_imax_shape"
+                                android:gravity="center"
+                                android:padding="@dimen/text_show_3D_padding"
+                                android:text="IMAX"
+                                android:textColor="@color/text_color_black"
+                                android:textSize="@dimen/text_size_10_sp" />
+
+                        </android.support.percent.PercentRelativeLayout>
+
+                        <TextView
+                            android:id="@+id/movie_info_ename"
+                            style="@style/MyMovieInfoTextViewStyle"
+                            android:layout_below="@+id/movie_info_rl_title"
+                            android:text="Skiptrace"
+                            app:layout_marginTopPercent="5%" />
+
+                        <TextView
+                            android:id="@+id/movie_info_type"
+                            style="@style/MyMovieInfoTextViewStyle"
+                            android:layout_below="@+id/movie_info_ename"
+                            android:text="Skiptrace"
+                            app:layout_marginTopPercent="3%" />
+
+                        <TextView
+                            android:id="@+id/movie_info_location"
+                            style="@style/MyMovieInfoTextViewStyle"
+                            android:layout_below="@+id/movie_info_type"
+                            android:text="Skiptrace"
+                            app:layout_marginTopPercent="3%" />
+
+                        <TextView
+                            android:id="@+id/movie_info_time"
+                            style="@style/MyMovieInfoTextViewStyle"
+                            android:layout_below="@+id/movie_info_location"
+                            android:text="Skiptrace"
+                            app:layout_marginTopPercent="3%" />
+
+                        <android.support.percent.PercentRelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@+id/movie_info_time">
+
+                            <RatingBar
+                                android:id="@+id/item_movie_ratingbar"
+                                style="?android:ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:progressDrawable="@drawable/ratingbar_layer"
+                                android:rating="3.7" />
+
+                            <TextView
+                                android:id="@+id/item_movie_ratingNums"
+                                style="@style/MyMovieInfoTextViewStyle"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="0dp"
+                                android:layout_toRightOf="@+id/item_movie_ratingbar"
+                                android:text="3.7"
+                                android:textSize="@dimen/text_small_size"
+                                app:layout_marginLeftPercent="3%" />
+
+                        </android.support.percent.PercentRelativeLayout>
+                    </android.support.percent.PercentRelativeLayout>
+                </android.support.percent.PercentRelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"></LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>
