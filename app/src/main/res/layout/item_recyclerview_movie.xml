@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_recyclerview_movie_height"
-    android:clickable="true"
-    android:background="@drawable/recyclerview_item_selector">
+    android:background="@drawable/recyclerview_item_selector"
+    android:clickable="true">
 
     <ImageView
         android:id="@+id/item_recyclerview_movie_image"
@@ -37,17 +37,17 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/movie_info_title"
+                android:id="@+id/movie_buy_name"
                 style="@style/MyRecyclerViewMovieTextViewStyle"
                 android:text="绝地逃亡"
                 android:textColor="@color/text_color_black"
                 android:textSize="@dimen/text_medium_size" />
 
             <TextView
-                android:id="@+id/movie_info_is3D"
+                android:id="@+id/movie_buy_is3D"
                 style="@style/MyRecyclerViewMovieTextViewStyle"
                 android:layout_marginLeft="0dp"
-                android:layout_toRightOf="@+id/movie_info_title"
+                android:layout_toRightOf="@+id/movie_buy_name"
                 android:background="@drawable/tv_3d_shape"
                 android:gravity="center"
                 android:padding="@dimen/text_show_3D_padding"
@@ -57,14 +57,14 @@
                 app:layout_marginLeftPercent="5%" />
 
             <TextView
-                android:id="@+id/movie_info_isImax"
+                android:id="@+id/movie_buy_isImax"
                 style="@style/MyRecyclerViewMovieTextViewStyle"
-                android:layout_toRightOf="@+id/movie_info_is3D"
-                android:textColor="#A8AAB4"
+                android:layout_toRightOf="@+id/movie_buy_is3D"
                 android:background="@drawable/tv_show_imax_shape"
                 android:gravity="center"
                 android:padding="@dimen/text_show_3D_padding"
                 android:text="IMAX"
+                android:textColor="#A8AAB4"
                 android:textSize="@dimen/text_size_10_sp" />
 
         </android.support.percent.PercentRelativeLayout>
@@ -120,6 +120,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/item_btn_buy_ticket"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_alignParentRight="true"

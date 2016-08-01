@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:toolbar="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/tools"
     android:id="@+id/rl_toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -32,4 +31,5 @@
         android:layout_marginRight="@dimen/tv_margin_5_dp"
         android:textColor="@color/toolbar_title_color"
         android:textSize="@dimen/text_size_18_sp" />
+
 </RelativeLayout>

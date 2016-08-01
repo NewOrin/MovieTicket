@@ -91,6 +91,8 @@
     <dimen name="item_comment_imageview_width">50dp</dimen>
     <dimen name="item_comment_imageview_height">50dp</dimen>
 
+    <!--BuyTicketActivity-->
+
     <dimen name="app_bar_height">220dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>

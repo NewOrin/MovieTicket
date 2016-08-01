@@ -33,7 +33,7 @@
                     android:paddingBottom="@dimen/movie_info_layout_padding_bottom">
 
                     <ImageView
-                        android:id="@+id/movie_info_imageview"
+                        android:id="@+id/movie_buy_imageview"
                         android:layout_width="@dimen/movie_info_imageview_width"
                         android:layout_height="@dimen/movie_info_imageview_height"
                         android:layout_alignParentBottom="true"
@@ -46,21 +46,21 @@
                         android:layout_height="@dimen/movie_info_tv_height"
                         android:layout_alignParentBottom="true"
                         android:layout_marginLeft="@dimen/movie_info_margin"
-                        android:layout_toRightOf="@+id/movie_info_imageview">
+                        android:layout_toRightOf="@+id/movie_buy_imageview">
 
                         <TextView
-                            android:id="@+id/movie_info_title"
+                            android:id="@+id/movie_buy_name"
                             style="@style/MyRecyclerViewMovieTextViewStyle"
                             android:layout_alignParentTop="true"
                             android:text="绝地逃亡"
                             android:textSize="@dimen/text_size_20_sp" />
 
                         <TextView
-                            android:id="@+id/movie_info_is3D"
+                            android:id="@+id/movie_buy_is3D"
                             style="@style/MyRecyclerViewMovieTextViewStyle"
                             android:layout_alignParentTop="true"
                             android:layout_marginLeft="10dp"
-                            android:layout_toRightOf="@+id/movie_info_title"
+                            android:layout_toRightOf="@+id/movie_buy_name"
                             android:background="@drawable/tv_3d_shape"
                             android:gravity="center"
                             android:padding="@dimen/text_show_3D_padding"
@@ -69,10 +69,10 @@
                             android:textSize="@dimen/text_size_10_sp" />
 
                         <TextView
-                            android:id="@+id/movie_info_isImax"
+                            android:id="@+id/movie_buy_isImax"
                             style="@style/MyRecyclerViewMovieTextViewStyle"
                             android:layout_alignParentTop="true"
-                            android:layout_toRightOf="@+id/movie_info_is3D"
+                            android:layout_toRightOf="@+id/movie_buy_is3D"
                             android:background="@drawable/tv_show_imax_shape"
                             android:gravity="center"
                             android:padding="@dimen/text_show_3D_padding"
@@ -81,34 +81,34 @@
                             android:textSize="@dimen/text_size_10_sp" />
 
                         <TextView
-                            android:id="@+id/movie_info_ename"
+                            android:id="@+id/movie_buy_ename"
                             style="@style/MyMovieInfoTextViewStyle"
-                            android:layout_below="@+id/movie_info_title"
+                            android:layout_below="@+id/movie_buy_name"
                             android:text="Skiptrace" />
 
                         <TextView
-                            android:id="@+id/movie_info_type"
+                            android:id="@+id/movie_buy_type"
                             style="@style/MyMovieInfoTextViewStyle"
-                            android:layout_below="@+id/movie_info_ename"
+                            android:layout_below="@+id/movie_buy_ename"
                             android:text="Skiptrace" />
 
                         <TextView
-                            android:id="@+id/movie_info_location"
+                            android:id="@+id/movie_buy_location"
                             style="@style/MyMovieInfoTextViewStyle"
-                            android:layout_below="@+id/movie_info_type"
+                            android:layout_below="@+id/movie_buy_type"
                             android:text="Skiptrace" />
 
                         <TextView
-                            android:id="@+id/movie_info_time"
+                            android:id="@+id/movie_buy_time"
                             style="@style/MyMovieInfoTextViewStyle"
-                            android:layout_below="@+id/movie_info_location"
+                            android:layout_below="@+id/movie_buy_location"
                             android:text="Skiptrace" />
 
                         <android.support.percent.PercentRelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
-                            android:layout_below="@+id/movie_info_time">
+                            android:layout_below="@+id/movie_buy_time">
 
                             <RatingBar
                                 android:id="@+id/item_movie_ratingbar"

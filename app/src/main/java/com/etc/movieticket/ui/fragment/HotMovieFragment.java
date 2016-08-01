@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.etc.movieticket.R;
 import com.etc.movieticket.adapter.MovieImagePageAdapter;
 import com.etc.movieticket.adapter.RecyclerViewMovieAdapter;
 import com.etc.movieticket.entity.Movie;
+import com.etc.movieticket.ui.activity.BuyTicketActivity;
 import com.etc.movieticket.ui.activity.MovieInfoActivity;
 import com.etc.movieticket.utils.DividerItemDecoration;
 import com.etc.movieticket.widget.WrapAdapter;
@@ -169,6 +171,12 @@ public class HotMovieFragment extends BaseFragment {
                         mSwipeLayout.setRefreshing(false);
                     }
                 });
+            }
+        });
+        mRecyclerViewMovieAdapter.setOnItemViewClickListener(new RecyclerViewMovieAdapter.OnItemViewClickListener() {
+            @Override
+            public void onItemViewClick(View view, int position) {
+                startActivity(BuyTicketActivity.class, null);
             }
         });
     }

@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.etc.movieticket.R;
@@ -26,7 +27,16 @@ public class RecyclerViewMovieAdapter extends BaseRecyclerAdapter<Movie, MyViewH
         void onItemLongClick(View view, int position);
     }
 
+    public interface OnItemViewClickListener {
+        void onItemViewClick(View view, int position);
+    }
+
     private OnItemClickListener mOnItemClickListener;
+    private OnItemViewClickListener onItemViewClickListener;
+
+    public void setOnItemViewClickListener(OnItemViewClickListener onItemViewClickListener) {
+        this.onItemViewClickListener = onItemViewClickListener;
+    }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.mOnItemClickListener = listener;
@@ -47,13 +57,13 @@ public class RecyclerViewMovieAdapter extends BaseRecyclerAdapter<Movie, MyViewH
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.tv_item_movie_movieName.setText(mItemLists.get(position).getMv_cname());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final int layoutPosition = holder.getLayoutPosition();
-                mOnItemClickListener.onItemClick(holder.itemView,layoutPosition);
+                mOnItemClickListener.onItemClick(holder.itemView, layoutPosition);
             }
         });
 
@@ -61,8 +71,16 @@ public class RecyclerViewMovieAdapter extends BaseRecyclerAdapter<Movie, MyViewH
             @Override
             public boolean onLongClick(View v) {
                 int layoutPosition = holder.getLayoutPosition();
-                mOnItemClickListener.onItemLongClick(holder.itemView,layoutPosition);
+                mOnItemClickListener.onItemLongClick(holder.itemView, layoutPosition);
                 return false;
+            }
+        });
+
+        holder.btn_item_movie_buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int layoutPosition = holder.getLayoutPosition();
+                onItemViewClickListener.onItemViewClick(v, layoutPosition);
             }
         });
     }
@@ -71,9 +89,11 @@ public class RecyclerViewMovieAdapter extends BaseRecyclerAdapter<Movie, MyViewH
 class MyViewHolder extends RecyclerView.ViewHolder {
 
     TextView tv_item_movie_movieName;
+    Button btn_item_movie_buy;
 
     public MyViewHolder(View itemView) {
         super(itemView);
-        tv_item_movie_movieName = (TextView) itemView.findViewById(R.id.movie_info_title);
+        tv_item_movie_movieName = (TextView) itemView.findViewById(R.id.movie_buy_name);
+        btn_item_movie_buy = (Button) itemView.findViewById(R.id.item_btn_buy_ticket);
     }
 }
