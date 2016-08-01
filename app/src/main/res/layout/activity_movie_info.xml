@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,7 +12,9 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/movie_info_swipe_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="40dp">
 
         <ScrollView
             android:id="@+id/movie_info_scrollview"
@@ -24,97 +26,83 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <android.support.percent.PercentRelativeLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/movie_info_layout_height"
-                    android:background="#687676">
+                    android:background="#687676"
+                    android:paddingBottom="@dimen/movie_info_layout_padding_bottom">
 
                     <ImageView
                         android:id="@+id/movie_info_imageview"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_width="@dimen/movie_info_imageview_width"
+                        android:layout_height="@dimen/movie_info_imageview_height"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginLeft="0dp"
+                        android:layout_marginLeft="@dimen/movie_info_margin"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_avatar"
-                        app:layout_heightPercent="90%"
-                        app:layout_marginLeftPercent="5%"
-                        app:layout_widthPercent="35%" />
+                        android:src="@drawable/ic_test" />
 
-                    <android.support.percent.PercentRelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
+                    <RelativeLayout
+                        android:layout_width="@dimen/movie_info_tv_width"
+                        android:layout_height="@dimen/movie_info_tv_height"
                         android:layout_alignParentBottom="true"
-                        android:layout_toRightOf="@+id/movie_info_imageview"
-                        app:layout_heightPercent="90%"
-                        app:layout_marginLeftPercent="5%"
-                        app:layout_marginRightPercent="5%"
-                        app:layout_widthPercent="55%">
+                        android:layout_marginLeft="@dimen/movie_info_margin"
+                        android:layout_toRightOf="@+id/movie_info_imageview">
 
-                        <android.support.percent.PercentRelativeLayout
-                            android:id="@+id/movie_info_rl_title"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/movie_info_title"
+                            style="@style/MyRecyclerViewMovieTextViewStyle"
+                            android:layout_alignParentTop="true"
+                            android:text="绝地逃亡"
+                            android:textSize="@dimen/text_size_20_sp" />
 
-                            <TextView
-                                android:id="@+id/movie_info_title"
-                                style="@style/MyRecyclerViewMovieTextViewStyle"
-                                android:text="绝地逃亡"
-                                android:textSize="@dimen/text_large_size" />
+                        <TextView
+                            android:id="@+id/movie_info_is3D"
+                            style="@style/MyRecyclerViewMovieTextViewStyle"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/movie_info_title"
+                            android:background="@drawable/tv_3d_shape"
+                            android:gravity="center"
+                            android:padding="@dimen/text_show_3D_padding"
+                            android:text="3D"
+                            android:textColor="@color/text_show_3D_color"
+                            android:textSize="@dimen/text_size_10_sp" />
 
-                            <TextView
-                                android:id="@+id/movie_info_is3D"
-                                style="@style/MyRecyclerViewMovieTextViewStyle"
-                                android:layout_marginLeft="0dp"
-                                android:layout_toRightOf="@+id/movie_info_title"
-                                android:background="@drawable/tv_3d_shape"
-                                android:gravity="center"
-                                android:padding="@dimen/text_show_3D_padding"
-                                android:text="3D"
-                                android:textColor="@color/text_show_3D_color"
-                                android:textSize="@dimen/text_size_10_sp"
-                                app:layout_marginLeftPercent="5%" />
-
-                            <TextView
-                                android:id="@+id/movie_info_isImax"
-                                style="@style/MyRecyclerViewMovieTextViewStyle"
-                                android:layout_toRightOf="@+id/movie_info_is3D"
-                                android:background="@drawable/tv_show_imax_shape"
-                                android:gravity="center"
-                                android:padding="@dimen/text_show_3D_padding"
-                                android:text="IMAX"
-                                android:textColor="@color/text_color_black"
-                                android:textSize="@dimen/text_size_10_sp" />
-
-                        </android.support.percent.PercentRelativeLayout>
+                        <TextView
+                            android:id="@+id/movie_info_isImax"
+                            style="@style/MyRecyclerViewMovieTextViewStyle"
+                            android:layout_alignParentTop="true"
+                            android:layout_toRightOf="@+id/movie_info_is3D"
+                            android:background="@drawable/tv_show_imax_shape"
+                            android:gravity="center"
+                            android:padding="@dimen/text_show_3D_padding"
+                            android:text="IMAX"
+                            android:textColor="@color/text_color_black"
+                            android:textSize="@dimen/text_size_10_sp" />
 
                         <TextView
                             android:id="@+id/movie_info_ename"
                             style="@style/MyMovieInfoTextViewStyle"
-                            android:layout_below="@+id/movie_info_rl_title"
-                            android:text="Skiptrace"
-                            app:layout_marginTopPercent="5%" />
+                            android:layout_below="@+id/movie_info_title"
+                            android:text="Skiptrace" />
 
                         <TextView
                             android:id="@+id/movie_info_type"
                             style="@style/MyMovieInfoTextViewStyle"
                             android:layout_below="@+id/movie_info_ename"
-                            android:text="Skiptrace"
-                            app:layout_marginTopPercent="3%" />
+                            android:text="Skiptrace" />
 
                         <TextView
                             android:id="@+id/movie_info_location"
                             style="@style/MyMovieInfoTextViewStyle"
                             android:layout_below="@+id/movie_info_type"
-                            android:text="Skiptrace"
-                            app:layout_marginTopPercent="3%" />
+                            android:text="Skiptrace" />
 
                         <TextView
                             android:id="@+id/movie_info_time"
                             style="@style/MyMovieInfoTextViewStyle"
                             android:layout_below="@+id/movie_info_location"
-                            android:text="Skiptrace"
-                            app:layout_marginTopPercent="3%" />
+                            android:text="Skiptrace" />
 
                         <android.support.percent.PercentRelativeLayout
                             android:layout_width="match_parent"
@@ -142,14 +130,152 @@
                                 app:layout_marginLeftPercent="3%" />
 
                         </android.support.percent.PercentRelativeLayout>
-                    </android.support.percent.PercentRelativeLayout>
-                </android.support.percent.PercentRelativeLayout>
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/movie_info_wanted_margin"
+                        android:layout_marginRight="@dimen/movie_info_wanted_margin"
+                        android:layout_weight="1"
+                        android:background="@color/movie_info_wanted_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="想看" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/movie_info_wanted_margin"
+                            android:text="想看" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/movie_info_wanted_margin"
+                        android:layout_marginRight="@dimen/movie_info_wanted_margin"
+                        android:layout_weight="1"
+                        android:background="@color/movie_info_wanted_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="写影评" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/movie_info_wanted_margin"
+                            android:text="写影评" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/movie_info_layout_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/movie_info_margin"
+                    android:layout_marginRight="@dimen/movie_info_margin"
+                    android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/movie_info_tv_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/large_text"
+                        android:textSize="@dimen/text_medium_size" />
+
+                    <TextView
+                        android:id="@+id/movie_info_tv_expand"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="展开"
+                        android:textColor="@color/movie_info_tv_expand"
+                        android:textSize="@dimen/text_medium_size" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="20dp"></LinearLayout>
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/movie_info_margin"
+                    android:layout_marginRight="@dimen/movie_info_margin"
+                    android:layout_marginTop="@dimen/movie_info_margin"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="演职人员"
+                        android:textColor="@color/text_color_black"
+                        android:textSize="@dimen/text_size_18_sp" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/movie_info_actor_recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" />
+                </LinearLayout>
+
+                <android.support.percent.PercentRelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/movie_info_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="热门影评"
+                        android:textColor="@color/text_color_black"
+                        android:textSize="@dimen/text_size_18_sp"
+                        app:layout_marginLeftPercent="5%" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="写影评"
+                        android:textColor="@color/movie_info_tv_expand"
+                        android:textSize="@dimen/text_size_18_sp"
+                        app:layout_marginRightPercent="5%" />
+                </android.support.percent.PercentRelativeLayout>
+
+                <include layout="@layout/tv_line" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/movie_info_comment_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/movie_info_margin" />
             </LinearLayout>
         </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
-</LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:background="@color/red"
+        android:text="特惠选座"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_medium_size" />
+</FrameLayout>

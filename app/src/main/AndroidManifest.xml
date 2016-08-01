@@ -22,7 +22,8 @@
         <activity
             android:name=".ui.activity.MovieInfoActivity"
             android:label="@string/title_activity_movie_info"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ui.activity.BuyTicketActivity"></activity>
     </application>
 
 </manifest>

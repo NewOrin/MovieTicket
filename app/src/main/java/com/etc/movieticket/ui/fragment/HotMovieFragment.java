@@ -72,7 +72,7 @@ public class HotMovieFragment extends BaseFragment {
             movieDatas.add(new Movie("泰山归来：险战丛林"));
         }
         //轮播图片数据
-        int[] movieImageIds = {R.drawable.pic_test1, R.drawable.pic_test2, R.drawable.pic_test3};
+        int[] movieImageIds = {R.drawable.pic_test1, R.drawable.pic_test2, R.drawable.pic_test3, R.drawable.pic_test4, R.drawable.pic_test5};
         for (int i = 0; i < movieImageIds.length; i++) {
             imageView = new ImageView(getActivity());
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

@@ -57,4 +57,8 @@
     <!--User TextView VIP-->
     <color name="text_color_vip">#9D99FF</color>
     <color name="text_stroke_color">#CC4556</color>
+
+    <!--Movie Info-->
+    <color name="movie_info_wanted_bg">#EAEAEA</color>
+    <color name="movie_info_tv_expand">#9E3EFF</color>
 </resources>

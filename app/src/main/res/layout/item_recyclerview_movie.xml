@@ -13,7 +13,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_avatar"
+        android:src="@drawable/ic_test"
         app:layout_heightPercent="90%"
         app:layout_marginLeftPercent="3%"
         app:layout_widthPercent="17%" />
@@ -60,6 +60,7 @@
                 android:id="@+id/movie_info_isImax"
                 style="@style/MyRecyclerViewMovieTextViewStyle"
                 android:layout_toRightOf="@+id/movie_info_is3D"
+                android:textColor="#A8AAB4"
                 android:background="@drawable/tv_show_imax_shape"
                 android:gravity="center"
                 android:padding="@dimen/text_show_3D_padding"

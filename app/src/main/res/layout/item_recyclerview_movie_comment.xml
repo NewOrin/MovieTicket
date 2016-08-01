@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/item_comment_margin">
+
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/item_comment_prlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/item_comment_content_margin"
+        android:orientation="horizontal">
+
+        <com.etc.movieticket.view.CircleImageView
+            android:id="@+id/item_comment_avatar"
+            android:layout_width="@dimen/item_comment_imageview_width"
+            android:layout_height="@dimen/item_comment_imageview_height"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/ic_launcher"
+            app:border_color="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_comment_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/item_comment_avatar"
+            android:text="名字"
+            app:layout_marginLeftPercent="3%" />
+
+        <RatingBar
+            android:id="@+id/item_movie_ratingbar"
+            style="?android:ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/item_comment_content_margin"
+            android:layout_toRightOf="@+id/tv_comment_name"
+            android:progressDrawable="@drawable/ratingbar_layer"
+            android:rating="3.7"
+            app:layout_marginLeftPercent="3%" />
+    </android.support.percent.PercentRelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_comment_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_comment_prlayout"
+        android:layout_marginTop="@dimen/item_comment_content_margin"
+        android:maxEms="100"
+        android:singleLine="false"
+        android:text="评价..."
+        android:textSize="@dimen/text_medium_size" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_comment_rating"
+        android:layout_marginBottom="@dimen/item_comment_content_margin"
+        android:layout_marginTop="@dimen/item_comment_content_margin"
+        android:text="时间"
+        android:textSize="@dimen/text_medium_size" />
+</android.support.percent.PercentRelativeLayout>
