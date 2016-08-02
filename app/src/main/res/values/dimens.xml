@@ -93,6 +93,11 @@
 
     <!--BuyTicketActivity-->
 
+
+    <!--RecyclerView Buy Ticket-->
+    <dimen name="recyclerview_buy_ticket_height">100dp</dimen>
+    <dimen name="recyclerview_buy_ticket_margin">20dp</dimen>
+
     <dimen name="app_bar_height">220dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>

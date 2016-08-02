@@ -13,6 +13,7 @@ import com.etc.movieticket.R;
 import com.etc.movieticket.entity.User;
 import com.etc.movieticket.presenter.UserPresenter;
 import com.etc.movieticket.ui.i.IUserLoginView;
+import com.etc.movieticket.utils.SharedPreferenceUtil;
 import com.subhrajyoti.passwordview.PasswordView;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener, IUserLoginView {
@@ -93,13 +94,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void startRegister() {
-        startActivity(new Intent(this, RegisterActivity.class));
+        startActivity(RegisterActivity.class, null);
     }
 
     @Override
     public void loginSuccess() {
         showToast("登录成功");
-        startActivity(new Intent(this, MainActivity.class));
+        saveSharedPfStr("u_phone", getUserPhone());
+        saveSharedPfStr("u_pwd", getPassword());
+        startActivity(MainActivity.class, null);
+        finish();
     }
 
     @Override

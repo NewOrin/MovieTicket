@@ -5,9 +5,11 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.etc.movieticket.biz.IUserBiz;
 import com.etc.movieticket.entity.Info;
+import com.etc.movieticket.entity.User;
 import com.etc.movieticket.http.OkHttpClientManager;
 import com.etc.movieticket.utils.Constants;
 import com.etc.movieticket.utils.JsonToString;
+import com.etc.movieticket.utils.SharedPreferenceUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,13 +28,13 @@ public class IUserBizImpl implements IUserBiz {
     public interface OnLoginListener {
         void loginSuccess();
 
-        void loginFailed();
+        void loginFailed(String errorMsg);
     }
 
     public interface OnRegisterLinstener {
         void registerSuccess();
 
-        void registerFailed();
+        void registerFailed(String errorMsg);
     }
 
     @Override
@@ -40,16 +42,17 @@ public class IUserBizImpl implements IUserBiz {
         new Thread() {
             @Override
             public void run() {
-                Map<String, Object> userinfo = new HashMap<>();
-                userinfo.put("password", password);
-                userinfo.put("phone", phone);
-                String json = JsonToString.json2String(userinfo);
+                User user = new User();
+                user.setU_phone(phone);
+                user.setU_pwd(password);
+                String json = JSON.toJSONString(user);
                 Log.d(TAG, "用户登录:" + json);
                 String result = OkHttpClientManager.getInstance().doHttpPost(Constants.SERVER_URL + Constants.DO_LOGIN, json);
-                if (result.equals("success")) {
+                Log.d(TAG, "返回：" + result);
+                if (result.equals("ok")) {
                     onLoginListener.loginSuccess();
                 } else {
-                    onLoginListener.loginFailed();
+                    onLoginListener.loginFailed(result);
                 }
             }
         }.start();
@@ -60,17 +63,17 @@ public class IUserBizImpl implements IUserBiz {
         new Thread() {
             @Override
             public void run() {
-                Map<String, Object> userinfo = new HashMap<String, Object>();
-                userinfo.put("password", password);
-                userinfo.put("nickname", nickname);
-                userinfo.put("phone", phone);
-                String json = JsonToString.json2String(userinfo);
+                User user = new User();
+                user.setU_phone(phone);
+                user.setU_pwd(password);
+                user.setU_nickname(nickname);
+                String json = JSON.toJSONString(user);
                 Log.d(TAG, "用户注册:" + json);
-                String result = OkHttpClientManager.getInstance().doHttpPost(Constants.SERVER_URL + Constants.DO_LOGIN, json);
-                if (result.equals("success")) {
+                String result = OkHttpClientManager.getInstance().doHttpPost(Constants.SERVER_URL + Constants.DO_REGISTER, json);
+                if (result.equals("ok")) {
                     onRegisterLinstener.registerSuccess();
                 } else {
-                    onRegisterLinstener.registerFailed();
+                    onRegisterLinstener.registerFailed(result);
                 }
             }
         }.start();

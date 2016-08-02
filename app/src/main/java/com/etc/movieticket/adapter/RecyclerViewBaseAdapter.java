@@ -15,8 +15,9 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Vi
     protected List<T> mDatas;
     protected LayoutInflater mInflater;
     private OnItemClickListener onItemClickListener;
+    private int mPosition;
 
-    private interface OnItemClickListener {
+    public interface OnItemClickListener {
         void onItemClickListener(View view, int position);
 
         void onItemLongClickListener(View view, int position);
@@ -35,7 +36,20 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Vi
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewHolder viewHolder = ViewHolder.get(mContext, parent, mLayoutId);
+        final ViewHolder viewHolder = ViewHolder.get(mContext, parent, mLayoutId);
+        viewHolder.getmConvertView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onItemClickListener(v, getPosition(viewHolder));
+            }
+        });
+        viewHolder.getmConvertView().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                onItemClickListener.onItemLongClickListener(v, getPosition(viewHolder));
+                return false;
+            }
+        });
         return viewHolder;
     }
 
@@ -52,4 +66,18 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Vi
         return mDatas.size();
     }
 
+    /**
+     * 获取Position
+     *
+     * @param viewHolder
+     * @return
+     */
+    public int getPosition(RecyclerView.ViewHolder viewHolder) {
+        return viewHolder.getAdapterPosition();
+    }
+
+    public void notifyData(List<T> mDatas) {
+        this.mDatas = mDatas;
+        notifyDataSetChanged();
+    }
 }

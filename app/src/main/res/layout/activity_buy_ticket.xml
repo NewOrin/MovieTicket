@@ -1,156 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/buy_ticket_swipe_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.etc.movieticket.ui.activity.BuyTicketActivity">
 
-    <include layout="@layout/toolbar" />
-
-    <android.support.percent.PercentRelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:id="@+id/buy_ticket_scrollview"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_buy_ticket_movie_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="中影国际影城厦门翔安店"
-            android:textColor="@color/text_color_black"
-            android:textSize="@dimen/text_medium_size"
-            app:layout_marginLeftPercent="5%" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_buy_ticket_movie_name"
-            android:layout_centerVertical="true"
-            android:text="厦门市翔安区购物广场四楼"
-            android:textSize="@dimen/text_size_14_sp"
-            app:layout_marginLeftPercent="5%"
-            app:layout_marginTopPercent="5%" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="电话"
-            app:layout_marginRightPercent="5%" />
-    </android.support.percent.PercentRelativeLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:background="@color/black"
-        android:layout_height="0.5dp" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/movie_info_layout_height"
-        android:background="#687676"
-        android:paddingBottom="@dimen/movie_info_layout_padding_bottom">
-
-        <ImageView
-            android:id="@+id/movie_buy_imageview"
-            android:layout_width="@dimen/movie_info_imageview_width"
-            android:layout_height="@dimen/movie_info_imageview_height"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="@dimen/movie_info_margin"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_test" />
-
-        <RelativeLayout
-            android:layout_width="@dimen/movie_info_tv_width"
-            android:layout_height="@dimen/movie_info_tv_height"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="@dimen/movie_info_margin"
-            android:layout_toRightOf="@+id/movie_buy_imageview">
+            <include layout="@layout/toolbar" />
 
             <TextView
-                android:id="@+id/movie_buy_name"
-                style="@style/MyRecyclerViewMovieTextViewStyle"
-                android:layout_alignParentTop="true"
-                android:text="绝地逃亡"
-                android:textSize="@dimen/text_size_20_sp" />
-
-            <TextView
-                android:id="@+id/movie_buy_is3D"
-                style="@style/MyRecyclerViewMovieTextViewStyle"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/movie_buy_name"
-                android:background="@drawable/tv_3d_shape"
-                android:gravity="center"
-                android:padding="@dimen/text_show_3D_padding"
-                android:text="3D"
-                android:textColor="@color/text_show_3D_color"
-                android:textSize="@dimen/text_size_10_sp" />
-
-            <TextView
-                android:id="@+id/movie_buy_isImax"
-                style="@style/MyRecyclerViewMovieTextViewStyle"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/movie_buy_is3D"
-                android:background="@drawable/tv_show_imax_shape"
-                android:gravity="center"
-                android:padding="@dimen/text_show_3D_padding"
-                android:text="IMAX"
-                android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_10_sp" />
-
-            <TextView
-                android:id="@+id/movie_buy_ename"
-                style="@style/MyMovieInfoTextViewStyle"
-                android:layout_below="@+id/movie_buy_name"
-                android:text="Skiptrace" />
-
-            <TextView
-                android:id="@+id/movie_buy_type"
-                style="@style/MyMovieInfoTextViewStyle"
-                android:layout_below="@+id/movie_buy_ename"
-                android:text="Skiptrace" />
-
-            <TextView
-                android:id="@+id/movie_buy_location"
-                style="@style/MyMovieInfoTextViewStyle"
-                android:layout_below="@+id/movie_buy_type"
-                android:text="Skiptrace" />
-
-            <TextView
-                android:id="@+id/movie_buy_time"
-                style="@style/MyMovieInfoTextViewStyle"
-                android:layout_below="@+id/movie_buy_location"
-                android:text="Skiptrace" />
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/text_color_black" />
 
             <android.support.percent.PercentRelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@+id/movie_buy_time">
-
-                <RatingBar
-                    android:id="@+id/item_movie_ratingbar"
-                    style="?android:ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:progressDrawable="@drawable/ratingbar_layer"
-                    android:rating="3.7" />
+                android:gravity="center_vertical"
+                android:layout_height="80dp">
 
                 <TextView
-                    android:id="@+id/item_movie_ratingNums"
-                    style="@style/MyMovieInfoTextViewStyle"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="0dp"
-                    android:layout_toRightOf="@+id/item_movie_ratingbar"
-                    android:text="3.7"
-                    android:textSize="@dimen/text_small_size"
-                    app:layout_marginLeftPercent="3%" />
+                    android:id="@+id/tv_buy_ticket_movie_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="中影国际影城厦门翔安店"
+                    android:textColor="@color/text_color_black"
+                    android:textSize="@dimen/text_medium_size"
+                    app:layout_marginLeftPercent="5%" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_buy_ticket_movie_name"
+                    android:layout_centerVertical="true"
+                    android:text="厦门市翔安区购物广场四楼"
+                    android:textSize="@dimen/text_size_14_sp"
+                    app:layout_marginLeftPercent="5%"
+                    app:layout_marginTopPercent="5%" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="电话"
+                    app:layout_marginRightPercent="5%" />
             </android.support.percent.PercentRelativeLayout>
-        </RelativeLayout>
-    </RelativeLayout>
-</LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/black" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/movie_info_layout_height"
+                android:background="#687676"
+                android:paddingBottom="@dimen/movie_info_layout_padding_bottom">
+
+                <ImageView
+                    android:id="@+id/movie_buy_imageview"
+                    android:layout_width="@dimen/movie_info_imageview_width"
+                    android:layout_height="@dimen/movie_info_imageview_height"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/movie_info_margin"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_test" />
+
+                <RelativeLayout
+                    android:layout_width="@dimen/movie_info_tv_width"
+                    android:layout_height="@dimen/movie_info_tv_height"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/movie_info_margin"
+                    android:layout_toRightOf="@+id/movie_buy_imageview">
+
+                    <TextView
+                        android:id="@+id/movie_buy_name"
+                        style="@style/MyRecyclerViewMovieTextViewStyle"
+                        android:layout_alignParentTop="true"
+                        android:text="绝地逃亡"
+                        android:textSize="@dimen/text_size_20_sp" />
+
+                    <TextView
+                        android:id="@+id/movie_buy_is3D"
+                        style="@style/MyRecyclerViewMovieTextViewStyle"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/movie_buy_name"
+                        android:background="@drawable/tv_3d_shape"
+                        android:gravity="center"
+                        android:padding="@dimen/text_show_3D_padding"
+                        android:text="3D"
+                        android:textColor="@color/text_show_3D_color"
+                        android:textSize="@dimen/text_size_10_sp" />
+
+                    <TextView
+                        android:id="@+id/movie_buy_isImax"
+                        style="@style/MyRecyclerViewMovieTextViewStyle"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/movie_buy_is3D"
+                        android:background="@drawable/tv_show_imax_shape"
+                        android:gravity="center"
+                        android:padding="@dimen/text_show_3D_padding"
+                        android:text="IMAX"
+                        android:textColor="@color/text_color_black"
+                        android:textSize="@dimen/text_size_10_sp" />
+
+                    <TextView
+                        android:id="@+id/movie_buy_ename"
+                        style="@style/MyMovieInfoTextViewStyle"
+                        android:layout_below="@+id/movie_buy_name"
+                        android:text="Skiptrace" />
+
+                    <TextView
+                        android:id="@+id/movie_buy_type"
+                        style="@style/MyMovieInfoTextViewStyle"
+                        android:layout_below="@+id/movie_buy_ename"
+                        android:text="Skiptrace" />
+
+                    <TextView
+                        android:id="@+id/movie_buy_location"
+                        style="@style/MyMovieInfoTextViewStyle"
+                        android:layout_below="@+id/movie_buy_type"
+                        android:text="Skiptrace" />
+
+                    <TextView
+                        android:id="@+id/movie_buy_time"
+                        style="@style/MyMovieInfoTextViewStyle"
+                        android:layout_below="@+id/movie_buy_location"
+                        android:text="Skiptrace" />
+
+                    <android.support.percent.PercentRelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_below="@+id/movie_buy_time">
+
+                        <RatingBar
+                            android:id="@+id/item_movie_ratingbar"
+                            style="?android:ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:progressDrawable="@drawable/ratingbar_layer"
+                            android:rating="3.7" />
+
+                        <TextView
+                            android:id="@+id/item_movie_ratingNums"
+                            style="@style/MyMovieInfoTextViewStyle"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginLeft="0dp"
+                            android:layout_toRightOf="@+id/item_movie_ratingbar"
+                            android:text="3.7"
+                            android:textSize="@dimen/text_small_size"
+                            app:layout_marginLeftPercent="3%" />
+                    </android.support.percent.PercentRelativeLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout_buy_ticket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_buy_ticket"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+</android.support.v4.widget.SwipeRefreshLayout>

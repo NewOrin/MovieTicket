@@ -49,11 +49,11 @@ public class UserPresenter {
             }
 
             @Override
-            public void loginFailed() {
+            public void loginFailed(final String errorMsg) {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        userLoginView.loginFailed("网络请求错误");
+                        userLoginView.loginFailed(errorMsg);
                     }
                 });
             }
@@ -71,8 +71,8 @@ public class UserPresenter {
             }
 
             @Override
-            public void registerFailed() {
-                userRegisterView.registerFailed("错误");
+            public void registerFailed(String errorMsg) {
+                userRegisterView.registerFailed(errorMsg);
             }
         });
     }

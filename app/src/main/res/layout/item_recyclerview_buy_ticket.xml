@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/recyclerview_buy_ticket_height"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/rv_ll_buy_ticket_show_time"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_widthPercent="40%">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/recyclerview_buy_ticket_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12:35"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_medium_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="14:24散场"
+                android:textSize="@dimen/text_small_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/recyclerview_buy_ticket_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="国语3D"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_14_sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="2号厅"
+                android:textSize="@dimen/text_small_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/recyclerview_buy_ticket_margin"
+        android:layout_toRightOf="@+id/rv_ll_buy_ticket_show_time"
+        android:orientation="horizontal"
+        app:layout_widthPercent="60%">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暑期特惠37.5元"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_medium_size" />
+
+            <TextView
+                android:id="@+id/tv_buy_ticket_origin_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="80元"
+                android:textSize="@dimen/text_small_size" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_buy_ticket"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="@dimen/recyclerview_buy_ticket_margin"
+            android:background="@drawable/btn_buy_selector"
+            android:text="购票"
+            android:textColor="@color/btn_buy_text_normal"
+            android:textSize="@dimen/text_size_14_sp" />
+    </LinearLayout>
+</android.support.percent.PercentRelativeLayout>

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.etc.movieticket">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,13 +19,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.BaseActivity" />
-        <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.LoginActivity">
+
+        </activity>
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity
             android:name=".ui.activity.MovieInfoActivity"
             android:label="@string/title_activity_movie_info"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.activity.BuyTicketActivity"></activity>
+        <activity android:name=".ui.activity.BuyTicketActivity" />
+        <activity android:name=".adapter.PickSeatActivity" />
+        <activity android:name=".ui.activity.SplashActivity"></activity>
     </application>
 
 </manifest>

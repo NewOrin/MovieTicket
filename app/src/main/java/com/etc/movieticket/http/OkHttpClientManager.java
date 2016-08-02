@@ -51,7 +51,7 @@ public class OkHttpClientManager {
      */
     public String doHttpPost(String url, String json) {
         String result;
-        RequestBody body = RequestBody.create(JSON, json);
+        RequestBody body = new FormBody.Builder().add("data", json).build();
         Request request = new Request.Builder().url(url).post(body).build();
         Response response = null;
         try {
@@ -60,7 +60,8 @@ public class OkHttpClientManager {
                 result = response.body().string();
                 return result;
             } else {
-                return "error";
+                result = "网络请求错误";
+                return result;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,6 +70,7 @@ public class OkHttpClientManager {
                 response.close();
             }
         }
-        return "error";
+        result = "网络请求错误";
+        return result;
     }
 }

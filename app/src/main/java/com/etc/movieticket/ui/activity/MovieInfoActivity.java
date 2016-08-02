@@ -1,5 +1,6 @@
 package com.etc.movieticket.ui.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -56,6 +57,7 @@ public class MovieInfoActivity extends BaseActivity implements View.OnClickListe
         mMovieInfoTvDescription.setHeight(mMovieInfoTvDescription.getLineHeight() * maxDescripLine);
         mMovieInfoActorRecyclerview = (RecyclerView) findViewById(R.id.movie_info_actor_recyclerview);
         mMovieInfoCommentRecyclerview = (RecyclerView) findViewById(R.id.movie_info_comment_recyclerview);
+        mMovieInfoSwipeLayout.setColorSchemeColors(Color.RED);
     }
 
     @Override

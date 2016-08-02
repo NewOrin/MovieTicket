@@ -27,6 +27,10 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         return holder;
     }
 
+    public View getmConvertView() {
+        return mConvertView;
+    }
+
     /**
      * 通过viewId获取控件
      *

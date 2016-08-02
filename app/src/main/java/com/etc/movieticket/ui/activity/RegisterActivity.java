@@ -1,12 +1,8 @@
 package com.etc.movieticket.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -98,13 +94,15 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void registerSuccess() {
         showToast("注册成功");
-        startActivity(new Intent(this, MainActivity.class));
+        saveSharedPfStr("u_pwd", getPassword());
+        saveSharedPfStr("u_phone", getUserPhone());
+        startActivity(MainActivity.class, null);
+        finish();
     }
 
     @Override
     public void registerFailed(String errorMsg) {
         showToast("注册失败" + errorMsg);
     }
-
 
 }

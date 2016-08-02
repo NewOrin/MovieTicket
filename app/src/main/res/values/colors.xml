@@ -61,4 +61,7 @@
     <!--Movie Info-->
     <color name="movie_info_wanted_bg">#EAEAEA</color>
     <color name="movie_info_tv_expand">#9E3EFF</color>
+
+    <!--SwipeRefreshLayout-->
+    <color name="swipe_refresh_layout">#FF0000</color>
 </resources>

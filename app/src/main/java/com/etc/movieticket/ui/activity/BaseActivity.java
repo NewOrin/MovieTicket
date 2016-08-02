@@ -1,8 +1,6 @@
 package com.etc.movieticket.ui.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.etc.movieticket.utils.SharedPreferenceUtil;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -88,5 +88,28 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void setTextViewTitle(TextView textViewTitle, String tv_title) {
         textViewTitle.setText(tv_title);
+    }
+
+    /**
+     * 启动界面
+     *
+     * @param target
+     * @param bundle
+     */
+    protected void startActivity(Class<? extends AppCompatActivity> target, Bundle bundle) {
+        Intent intent = new Intent();
+        intent.setClass(this, target);
+        if (bundle != null) {
+            intent.putExtra(this.getPackageName(), bundle);
+        }
+        this.startActivity(intent);
+    }
+
+    protected void saveSharedPfStr(String key, String value) {
+        new SharedPreferenceUtil(this).putStr(key, value);
+    }
+
+    protected String getSharedPfStr(String key) {
+        return new SharedPreferenceUtil(this).getStr(key);
     }
 }
