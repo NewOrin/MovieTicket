@@ -1,8 +1,11 @@
 package com.etc.movieticket.ui.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +19,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private ProgressDialog mProgressDialog;
     protected Typeface mTypeface;
-
+    protected SwipeRefreshLayout mSwipeRefreshLayout;
+    protected boolean isRefresh = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +30,26 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void initView();//初始化控件
 
     protected abstract void initListener();//初始化监听事件
+
+
+    protected void runOnMain(Runnable runnable) {
+        this.runOnUiThread(runnable);
+    }
+
+    protected void initSwipeLayout(SwipeRefreshLayout mSwipeRefreshLayout) {
+        this.mSwipeRefreshLayout = mSwipeRefreshLayout;
+        mSwipeRefreshLayout.setColorSchemeColors(Color.RED);
+    }
+    protected void showRefreshLayout(){
+        if(mSwipeRefreshLayout!=null){
+            mSwipeRefreshLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    mSwipeRefreshLayout.setRefreshing(true);
+                }
+            });
+        }
+    }
 
     /**
      * 显示Toast
@@ -104,7 +128,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         this.startActivity(intent);
     }
-
+    protected String getPassStringData(Intent intent,String key){
+        return intent.getBundleExtra(this.getPackageName()).getString(key);
+    }
     protected void saveSharedPfStr(String key, String value) {
         new SharedPreferenceUtil(this).putStr(key, value);
     }

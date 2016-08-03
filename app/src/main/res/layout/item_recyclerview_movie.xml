@@ -46,6 +46,7 @@
             <TextView
                 android:id="@+id/movie_buy_is3D"
                 style="@style/MyRecyclerViewMovieTextViewStyle"
+                android:visibility="gone"
                 android:layout_marginLeft="0dp"
                 android:layout_toRightOf="@+id/movie_buy_name"
                 android:background="@drawable/tv_3d_shape"
@@ -60,6 +61,7 @@
                 android:id="@+id/movie_buy_isImax"
                 style="@style/MyRecyclerViewMovieTextViewStyle"
                 android:layout_toRightOf="@+id/movie_buy_is3D"
+                android:visibility="gone"
                 android:background="@drawable/tv_show_imax_shape"
                 android:gravity="center"
                 android:padding="@dimen/text_show_3D_padding"
@@ -100,6 +102,7 @@
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/item_movie_category"
                 style="@style/MyRecyclerViewMovieTextViewStyle"
                 android:layout_weight="1"
                 android:text="警匪片"
@@ -112,6 +115,7 @@
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/item_movie_releaseTime"
                 style="@style/MyRecyclerViewMovieTextViewStyle"
                 android:layout_weight="1"
                 android:text="警匪片"

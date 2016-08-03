@@ -17,7 +17,7 @@ public class MovieImagePageAdapter extends PagerAdapter {
     private List<ImageView> imageViewList;
     private String TAG = "MovieImagePageAdapter";
 
-    public MovieImagePageAdapter(List<ImageView> imageViewList) {
+    public MovieImagePageAdapter(List<ImageView> imageViewList ) {
         this.imageViewList = imageViewList;
     }
 

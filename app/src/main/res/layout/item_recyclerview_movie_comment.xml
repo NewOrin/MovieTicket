@@ -45,7 +45,7 @@
     </android.support.percent.PercentRelativeLayout>
 
     <TextView
-        android:id="@+id/tv_comment_rating"
+        android:id="@+id/tv_comment_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/item_comment_prlayout"
@@ -56,9 +56,10 @@
         android:textSize="@dimen/text_medium_size" />
 
     <TextView
+        android:id="@+id/tv_comment_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_comment_rating"
+        android:layout_below="@+id/tv_comment_content"
         android:layout_marginBottom="@dimen/item_comment_content_margin"
         android:layout_marginTop="@dimen/item_comment_content_margin"
         android:text="时间"

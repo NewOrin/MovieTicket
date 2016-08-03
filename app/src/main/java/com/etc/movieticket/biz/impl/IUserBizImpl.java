@@ -4,18 +4,9 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.etc.movieticket.biz.IUserBiz;
-import com.etc.movieticket.entity.Info;
 import com.etc.movieticket.entity.User;
 import com.etc.movieticket.http.OkHttpClientManager;
 import com.etc.movieticket.utils.Constants;
-import com.etc.movieticket.utils.JsonToString;
-import com.etc.movieticket.utils.SharedPreferenceUtil;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by NewOrin Zhang on 2016/7/26.

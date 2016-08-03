@@ -24,7 +24,9 @@
     <!--Button Buy-->
     <color name="btn_buy_bg_normal">#FFFFFF</color>
     <color name="btn_buy_bg_pressed">#FF0000</color>
+    <color name="btn_sell_bg_pressed">#8000FF</color>
     <color name="btn_buy_stroke_normal">#FF0000</color>
+    <color name="btn_sell_stroke_normal">#8000FF</color>
     <color name="btn_buy_text_normal">#FF0000</color>
     <color name="btn_buy_text_pressed">#FFFFFF</color>
 

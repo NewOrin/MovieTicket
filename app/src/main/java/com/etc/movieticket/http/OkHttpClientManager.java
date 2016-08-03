@@ -27,7 +27,6 @@ public class OkHttpClientManager {
 
     private OkHttpClientManager() {
         mOkHttpClient = new OkHttpClient.Builder().connectTimeout(20, TimeUnit.SECONDS).build();
-
     }
 
     public static OkHttpClientManager getInstance() {
@@ -44,20 +43,47 @@ public class OkHttpClientManager {
     /**
      * Post请求
      *
-     * @param url  请求的url
-     * @param json 封装的json字符串
+     * @param url          请求的url
+     * @param requestParam 请求参数字符串
      * @return 返回json字符串
      * @throws IOException
      */
-    public String doHttpPost(String url, String json) {
+    public String doHttpPost(String url, String requestParam) {
+        RequestBody body = new FormBody.Builder().add("data", requestParam).build();
+        return doHttp(body, url);
+    }
+
+    /**
+     * Get请求
+     *
+     * @param url 请求的url
+     * @return 返回json字符串
+     */
+    public String doHttpGet(String url) {
+        return doHttp(null, url);
+    }
+
+    /**
+     * 网络访问
+     *
+     * @param body
+     * @param url
+     * @return
+     */
+    public String doHttp(RequestBody body, String url) {
         String result;
-        RequestBody body = new FormBody.Builder().add("data", json).build();
-        Request request = new Request.Builder().url(url).post(body).build();
+        Request request;
+        if (body == null) {
+            request = new Request.Builder().url(url).build();
+        } else {
+            request = new Request.Builder().url(url).post(body).build();
+        }
         Response response = null;
         try {
             response = mOkHttpClient.newCall(request).execute();
             if (response.isSuccessful()) {
                 result = response.body().string();
+                Log.d(TAG, "返回数据:" + result);
                 return result;
             } else {
                 result = "网络请求错误";

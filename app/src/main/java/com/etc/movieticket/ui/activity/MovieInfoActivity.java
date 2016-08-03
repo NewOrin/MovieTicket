@@ -10,21 +10,28 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.etc.movieticket.R;
 import com.etc.movieticket.adapter.RecyclerViewBaseAdapter;
+import com.etc.movieticket.adapter.RecyclerViewMovieAdapter;
 import com.etc.movieticket.adapter.ViewHolder;
+import com.etc.movieticket.entity.Comment;
+import com.etc.movieticket.entity.Movie;
+import com.etc.movieticket.entity.MovieActor;
+import com.etc.movieticket.presenter.MoviePresenter;
+import com.etc.movieticket.ui.i.IMovieInfoView;
 import com.etc.movieticket.utils.DividerItemDecoration;
+import com.etc.movieticket.utils.MyImageUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MovieInfoActivity extends BaseActivity implements View.OnClickListener {
+public class MovieInfoActivity extends BaseActivity implements View.OnClickListener, IMovieInfoView, SwipeRefreshLayout.OnRefreshListener {
 
-    private SwipeRefreshLayout mMovieInfoSwipeLayout;
     private ScrollView mMovieInfoScrollview;
     private TextView mMovieInfoTvDescription;
     private TextView mMovieInfoTvExpand;
@@ -33,21 +40,43 @@ public class MovieInfoActivity extends BaseActivity implements View.OnClickListe
     private boolean isExpand = false;
     private RecyclerView mMovieInfoActorRecyclerview;
     private RecyclerView mMovieInfoCommentRecyclerview;
+    private List<MovieActor> movieActorList;
+    private List<Comment> commentList;
+    private Movie movie;
+    private String mv_showId;
+    private String mv_cname;
+    private MoviePresenter moviePresenter = new MoviePresenter(this);
+    private String TAG = "MovieInfoActivity";
+    private ImageView mMovieBuyImageview;
+    private TextView mMovieBuyName;
+    private TextView mMovieBuyIs3D;
+    private TextView mMovieBuyIsImax;
+    private TextView mMovieBuyEname;
+    private TextView mMovieBuyType;
+    private TextView mMovieBuyLocation;
+    private TextView mMovieBuyTime;
+    private RatingBar mItemMovieRatingbar;
+    private TextView mItemMovieRatingNums;
+
+    private RecyclerViewBaseAdapter<Comment> mCommentAdapter;
+    private RecyclerViewBaseAdapter<MovieActor> mMovieActorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_info);
+        initSwipeLayout((SwipeRefreshLayout) findViewById(R.id.movie_info_swipe_layout));
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mv_showId = getPassStringData(getIntent(), "mv_showId");
+        mv_cname = getPassStringData(getIntent(), "mv_cname");
+        moviePresenter.doGetMovieInfoData(mv_showId);
         initView();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("电影详情");
+        toolbar.setTitle(mv_cname);
         setSupportActionBar(toolbar);
-        setView();
-        initListener();
     }
 
     protected void initView() {
-        mMovieInfoSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.movie_info_swipe_layout);
         mMovieInfoScrollview = (ScrollView) findViewById(R.id.movie_info_scrollview);
         mMovieInfoTvDescription = (TextView) findViewById(R.id.movie_info_tv_description);
         mMovieInfoTvExpand = (TextView) findViewById(R.id.movie_info_tv_expand);
@@ -57,7 +86,28 @@ public class MovieInfoActivity extends BaseActivity implements View.OnClickListe
         mMovieInfoTvDescription.setHeight(mMovieInfoTvDescription.getLineHeight() * maxDescripLine);
         mMovieInfoActorRecyclerview = (RecyclerView) findViewById(R.id.movie_info_actor_recyclerview);
         mMovieInfoCommentRecyclerview = (RecyclerView) findViewById(R.id.movie_info_comment_recyclerview);
-        mMovieInfoSwipeLayout.setColorSchemeColors(Color.RED);
+        mMovieBuyImageview = (ImageView) findViewById(R.id.movie_buy_imageview);
+        mMovieBuyName = (TextView) findViewById(R.id.movie_buy_name);
+        mMovieBuyIs3D = (TextView) findViewById(R.id.movie_buy_is3D);
+        mMovieBuyIsImax = (TextView) findViewById(R.id.movie_buy_isImax);
+        mMovieBuyEname = (TextView) findViewById(R.id.movie_buy_ename);
+        mMovieBuyType = (TextView) findViewById(R.id.movie_buy_type);
+        mMovieBuyLocation = (TextView) findViewById(R.id.movie_buy_location);
+        mMovieBuyTime = (TextView) findViewById(R.id.movie_buy_time);
+        mItemMovieRatingbar = (RatingBar) findViewById(R.id.item_movie_ratingbar);
+        mItemMovieRatingNums = (TextView) findViewById(R.id.item_movie_ratingNums);
+    }
+
+    private void setViewData() {
+        MyImageUtils.loadMovieIconImageView(this, mMovieBuyImageview, movie.getMv_imageUrl());
+        mMovieBuyName.setText(movie.getMv_cname());
+        MyImageUtils.set3DIcon(mMovieBuyIs3D, mMovieBuyIsImax, movie.getMv_3d());
+        mMovieBuyEname.setText(movie.getMv_ename());
+        mMovieBuyType.setText(movie.getMv_category());
+        mMovieBuyLocation.setText(movie.getMv_placeTime());
+        mMovieBuyTime.setText(movie.getMv_releaseTime());
+        mItemMovieRatingbar.setNumStars((int) (Integer.parseInt(movie.getMv_score()) / 2));
+        mItemMovieRatingNums.setText(movie.getMv_score());
     }
 
     @Override
@@ -65,44 +115,45 @@ public class MovieInfoActivity extends BaseActivity implements View.OnClickListe
         mMovieInfoScrollview.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
             @Override
             public void onScrollChanged() {
-                mMovieInfoSwipeLayout.setEnabled(mMovieInfoScrollview.getScrollY() == 0);
+                mSwipeRefreshLayout.setEnabled(mMovieInfoScrollview.getScrollY() == 0);
             }
         });
         mMovieInfoLayoutDescription.setOnClickListener(this);
     }
 
-    private void setView() {
-        List<String> actorLists = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            actorLists.add("成龙");
-        }
+    private void initRecyclerView() {
+
         /**
          * 演员RecyclerView
          */
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        mMovieInfoActorRecyclerview.setAdapter(new RecyclerViewBaseAdapter<String>(this, R.layout.item_recyclerview_movie_actor, actorLists) {
+        mMovieActorAdapter = new RecyclerViewBaseAdapter<MovieActor>(this, R.layout.item_recyclerview_movie_actor, movieActorList) {
 
             @Override
-            public void convert(ViewHolder holder, String s) {
-                holder.setText(R.id.tv_item_recyclerview_movie_actor_name, s);
+            public void convert(ViewHolder holder, MovieActor movieActor) {
+                holder.setText(R.id.tv_item_recyclerview_movie_actor_avatar, movieActor.getAc_name());
+                MyImageUtils.loadMovieIconImageView(MovieInfoActivity.this, (ImageView) holder.getView(R.id.tv_item_recyclerview_movie_actor_avatar), movieActor.getAc_img());
             }
-        });
+        };
+        mMovieInfoActorRecyclerview.setAdapter(mMovieActorAdapter);
         mMovieInfoActorRecyclerview.setFocusable(false);
         mMovieInfoActorRecyclerview.setLayoutManager(linearLayoutManager);
         /**
          * 评论RecyclerView
          */
-        List<String> commentLists = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            commentLists.add(getString(R.string.large_text));
-        }
+
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mMovieInfoCommentRecyclerview.setAdapter(new RecyclerViewBaseAdapter<String>(this, R.layout.item_recyclerview_movie_comment, commentLists) {
+        mCommentAdapter = new RecyclerViewBaseAdapter<Comment>(this, R.layout.item_recyclerview_movie_comment, commentList) {
             @Override
-            public void convert(ViewHolder holder, String s) {
-                holder.setText(R.id.tv_comment_rating, s);
+            public void convert(ViewHolder holder, Comment comment) {
+                MyImageUtils.loadMovieActorAvatarImageView(MovieInfoActivity.this, (ImageView) holder.getView(R.id.item_comment_avatar), comment.getCm_userAvatar());
+                holder.setText(R.id.tv_comment_name, comment.getCm_userName());
+                holder.setText(R.id.tv_comment_content, comment.getCm_content());
+                holder.setText(R.id.tv_comment_time, comment.getCm_time());
+                ((RatingBar) holder.getView(R.id.item_movie_ratingbar)).setNumStars((int) (0.5 * Integer.parseInt(comment.getCm_score())));
             }
-        });
+        };
+        mMovieInfoCommentRecyclerview.setAdapter(mCommentAdapter);
         mMovieInfoCommentRecyclerview.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
         mMovieInfoCommentRecyclerview.setFocusable(false);
         mMovieInfoCommentRecyclerview.setLayoutManager(linearLayoutManager);
@@ -145,5 +196,38 @@ public class MovieInfoActivity extends BaseActivity implements View.OnClickListe
         };
         animation.setDuration(durationMills);
         mMovieInfoTvDescription.startAnimation(animation);
+    }
+
+    @Override
+    public void getMovieInfoSucceed(Movie movie, List<Comment> commentList, List<MovieActor> actorList) {
+        this.movie = movie;
+        this.movieActorList = actorList;
+        this.commentList = commentList;
+        if (mCommentAdapter == null) {
+            if (movie != null && movieActorList != null && commentList != null) {
+                initRecyclerView();
+                setViewData();
+                initListener();
+            } else {
+                showToast("暂无数据");
+            }
+        } else {
+            mMovieActorAdapter.notifyData(movieActorList);
+            mCommentAdapter.notifyData(commentList);
+        }
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void getMovieInfoFailed(String errorMsg) {
+        showToast(errorMsg);
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onRefresh() {
+        showRefreshLayout();
+        isRefresh = true;
+        moviePresenter.doGetMovieInfoData(mv_showId);
     }
 }

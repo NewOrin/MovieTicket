@@ -19,7 +19,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.etc.movieticket.R;
-import com.etc.movieticket.adapter.PickSeatActivity;
 import com.etc.movieticket.adapter.RecyclerViewBaseAdapter;
 import com.etc.movieticket.adapter.ViewHolder;
 import com.etc.movieticket.utils.DividerItemDecoration;

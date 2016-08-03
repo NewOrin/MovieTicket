@@ -7,6 +7,7 @@
     android:padding="@dimen/item_recyclerview_movie_actor_padding">
 
     <ImageView
+        android:id="@+id/tv_item_recyclerview_movie_actor_avatar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.etc.movieticket.adapter.PickSeatActivity">
+    tools:context=".ui.activity.PickSeatActivity">
 
     <com.etc.movieticket.view.SeatTable
         android:id="@+id/seatView"

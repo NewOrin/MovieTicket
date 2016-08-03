@@ -1,6 +1,5 @@
 package com.etc.movieticket.ui.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,7 +7,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,16 +18,19 @@ import com.etc.movieticket.R;
 import com.etc.movieticket.adapter.MovieImagePageAdapter;
 import com.etc.movieticket.adapter.RecyclerViewMovieAdapter;
 import com.etc.movieticket.entity.Movie;
+import com.etc.movieticket.presenter.MoviePresenter;
 import com.etc.movieticket.ui.activity.BuyTicketActivity;
 import com.etc.movieticket.ui.activity.MovieInfoActivity;
+import com.etc.movieticket.ui.i.IMovieView;
+import com.etc.movieticket.utils.Constants;
 import com.etc.movieticket.utils.DividerItemDecoration;
+import com.etc.movieticket.utils.MyImageUtils;
 import com.etc.movieticket.widget.WrapAdapter;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-public class HotMovieFragment extends BaseFragment {
+public class HotMovieFragment extends BaseFragment implements IMovieView {
 
     private LinearLayout headerLayout;//头布局
 
@@ -41,12 +42,12 @@ public class HotMovieFragment extends BaseFragment {
     private MovieImagePageAdapter mMovieImagePageAdapter;//轮播图片的PageAdapter
     private WrapAdapter<RecyclerViewMovieAdapter> mWrapAdapter;//数据适配器包装类
     private RecyclerViewMovieAdapter mRecyclerViewMovieAdapter;//Movie RecyclerView的适配器
-
+    private List<Movie> movieList;
     private View view;
     private RecyclerView mRecyclerView;//RecyclerView的控件
-    private SwipeRefreshLayout mSwipeLayout;
 
-    private LinkedList<Movie> movieDatas;//显示的Movie数据
+    private MoviePresenter moviePresenter = new MoviePresenter(this);
+
     private String TAG = "HotMovieFragment";
 
     public HotMovieFragment() {
@@ -57,32 +58,37 @@ public class HotMovieFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_hot_movie, container, false);
+        initSwipeLayout((SwipeRefreshLayout) view.findViewById(R.id.movie_swipelayout));
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                isRefresh = true;
+                showRefreshLayout();
+                moviePresenter.doGetMovieData(Constants.MOVIE_ISRELEASED);
+            }
+        });
+        showRefreshLayout();
         initHeaderView();
-        initDatas();
+        setCarouselImageUrls();
         initView();
-        initListener();
+        moviePresenter.doGetMovieData(Constants.MOVIE_ISRELEASED);
         return view;
     }
 
-    /**
-     * 初始化所需数据
-     */
-    private void initDatas() {
-        //电影数据
-        movieDatas = new LinkedList<>();
-        for (int i = 1; i < 31; i++) {
-            movieDatas.add(new Movie("泰山归来：险战丛林"));
-        }
+    private void setCarouselImageUrls() {
+        carouselImageUrls = new String[]{
+                "http://p1.meituan.net/movie/1d1eab9b02a7cd7cf48a09e90d94dc4445056.jpg@750w_1l",
+                "http://p1.meituan.net/movie/c4f6a6f0f6dddb2936af39c95656474143008.jpg@750w_1l",
+                "http://p0.meituan.net/movie/6fb96f24bf184d53e3e8c8e96e21abe945056.jpg@750w_1l",
+                "http://p0.meituan.net/movie/9dd9b0a6c807399110ec7f7b78ba870e38912.jpg@750w_1l"};
         //轮播图片数据
-        int[] movieImageIds = {R.drawable.pic_test1, R.drawable.pic_test2, R.drawable.pic_test3, R.drawable.pic_test4, R.drawable.pic_test5};
-        for (int i = 0; i < movieImageIds.length; i++) {
+        for (int i = 0; i < carouselImageUrls.length; i++) {
             imageView = new ImageView(getActivity());
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-            imageView.setBackgroundResource(movieImageIds[i]);
+            MyImageUtils.loadCarouseImageView(getActivity(), imageView, carouselImageUrls[i]);
             imageViewList.add(imageView);
         }
-
         // 多少个轮播广告就多少个dot
         for (int i = 0; i < imageViewList.size(); i++) {
             View view = new View(getActivity());
@@ -99,6 +105,28 @@ public class HotMovieFragment extends BaseFragment {
     }
 
     /**
+     * 初始化所需数据
+     */
+    private void initRecyclerView() {
+        //轮播图片
+        mMovieImagePageAdapter = new MovieImagePageAdapter(imageViewList);
+        mViewPager.setAdapter(mMovieImagePageAdapter);
+        //RecyclerView
+        mRecyclerViewMovieAdapter = new RecyclerViewMovieAdapter(getActivity(), movieList, Constants.MOVIE_ISRELEASED);
+        mWrapAdapter = new WrapAdapter<>(mRecyclerViewMovieAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        mWrapAdapter.adjustSpanSize(mRecyclerView);
+        mRecyclerView.setAdapter(mWrapAdapter);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        //添加头部
+        mWrapAdapter.addHeaderView(headerLayout);
+        //轮播图片设置
+        mViewPager.setCurrentItem(Integer.MAX_VALUE / 2 - ((Integer.MAX_VALUE / 2) % imageViewList.size()));
+        mHandler.sendEmptyMessageDelayed(0, 3000);
+        updateDot();
+    }
+
+    /**
      * 初始化Header
      */
     private void initHeaderView() {
@@ -111,26 +139,7 @@ public class HotMovieFragment extends BaseFragment {
      * 初始化数据
      */
     private void initView() {
-        mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.movie_swipelayout);
-        mSwipeLayout.setColorSchemeColors(Color.RED);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_hot_movie);
-
-        //轮播图片
-        mMovieImagePageAdapter = new MovieImagePageAdapter(imageViewList);
-        mViewPager.setAdapter(mMovieImagePageAdapter);
-        //RecyclerView
-        mRecyclerViewMovieAdapter = new RecyclerViewMovieAdapter(getActivity(), movieDatas);
-        mWrapAdapter = new WrapAdapter<>(mRecyclerViewMovieAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        mWrapAdapter.adjustSpanSize(mRecyclerView);
-        mRecyclerView.setAdapter(mWrapAdapter);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-        //添加头部
-        mWrapAdapter.addHeaderView(headerLayout);
-        //轮播图片设置
-        mViewPager.setCurrentItem(Integer.MAX_VALUE / 2 - ((Integer.MAX_VALUE / 2) % imageViewList.size()));
-        mHandler.sendEmptyMessageDelayed(0, 3000);
-        updateDot();
     }
 
     public void initListener() {
@@ -153,24 +162,15 @@ public class HotMovieFragment extends BaseFragment {
         mRecyclerViewMovieAdapter.setOnItemClickListener(new RecyclerViewMovieAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                startActivity(MovieInfoActivity.class, null);
+                Bundle bundle = new Bundle();
+                bundle.putString("mv_showId", movieList.get(position).getMv_showId());
+                bundle.putString("mv_cname",movieList.get(position).getMv_cname());
+                startActivity(MovieInfoActivity.class, bundle);
             }
 
             @Override
             public void onItemLongClick(View view, int position) {
                 Toast.makeText(getActivity(), "long click " + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mSwipeLayout.setRefreshing(true);
-                mSwipeLayout.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mSwipeLayout.setRefreshing(false);
-                    }
-                });
             }
         });
         mRecyclerViewMovieAdapter.setOnItemViewClickListener(new RecyclerViewMovieAdapter.OnItemViewClickListener() {
@@ -200,4 +200,39 @@ public class HotMovieFragment extends BaseFragment {
             mHandler.sendEmptyMessageDelayed(0, 3000);
         }
     };
+
+    @Override
+    public void getMovieSucceed(List<Movie> movies) {
+        if (movies.size() > 0) {
+            if (isRefresh) {
+                mRecyclerViewMovieAdapter.notifyRecyclerView(movies);
+                mSwipeRefreshLayout.setRefreshing(false);
+                isRefresh = false;
+            } else {
+                movieList = movies;
+                initRecyclerView();
+                initListener();
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        } else {
+            mSwipeRefreshLayout.setRefreshing(false);
+            runOnMain(new Runnable() {
+                @Override
+                public void run() {
+                    showToast("暂无数据");
+                }
+            });
+        }
+    }
+
+    @Override
+    public void getMovieFailed(final String errorMsg) {
+        mSwipeRefreshLayout.setRefreshing(false);
+        runOnMain(new Runnable() {
+            @Override
+            public void run() {
+                showToast(errorMsg);
+            }
+        });
+    }
 }

@@ -28,8 +28,12 @@
             android:label="@string/title_activity_movie_info"
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.activity.BuyTicketActivity" />
-        <activity android:name=".adapter.PickSeatActivity" />
+        <activity android:name=".ui.activity.PickSeatActivity" />
         <activity android:name=".ui.activity.SplashActivity"></activity>
+
+        <meta-data
+            android:name="com.etc.movieticket.utils.MyGlideModule"
+            android:value="GlideModule" />
     </application>
 
 </manifest>

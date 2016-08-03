@@ -19,9 +19,6 @@ public class UserPresenter {
     private String TAG = "UserPresenter";
     private Handler mHandler = new Handler();
 
-    String result;
-
-
     public UserPresenter(IUserLoginView userLoginView) {
         this.userBiz = new IUserBizImpl();
         this.userLoginView = userLoginView;

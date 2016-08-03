@@ -14,7 +14,7 @@ public abstract class BaseRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     protected final Context mContext;
 
     /** 数据集合 */
-    protected LinkedList<T> mItemLists = new LinkedList();
+    protected List<T> mItemLists = new ArrayList<>();
 
     /** 删除条目监听 */
     protected OnDeleteListener mOnDeleteListener;
@@ -25,7 +25,7 @@ public abstract class BaseRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
         this.mContext = context;
     }
 
-    public BaseRecyclerAdapter(Context mContext, LinkedList<T> mItemLists) {
+    public BaseRecyclerAdapter(Context mContext, List<T> mItemLists) {
         this.mContext = mContext;
         this.mItemLists = mItemLists;
     }
@@ -40,7 +40,7 @@ public abstract class BaseRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
      *
      * @return mItemLists
      */
-    public LinkedList<T> getItemLists() {
+    public List<T> getItemLists() {
         return mItemLists;
     }
 
@@ -120,7 +120,7 @@ public abstract class BaseRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     public void addToFirst(List<T> listDatas) {
         if (listDatas!= null) {
             for (T data : listDatas) {
-                mItemLists.addFirst(data);
+                mItemLists.add(0,data);
             }
         }
         notifyDataSetChanged();
