@@ -20,7 +20,7 @@ public class MyImageUtils {
         Glide.with(context).load(imageUrl).crossFade().centerCrop().diskCacheStrategy(DiskCacheStrategy.RESULT).override(400, 400).into(imageView);
     }
     public static void loadMovieActorAvatarImageView(Context context, ImageView imageView, String imageUrl){
-        Glide.with(context).load(imageUrl).crossFade().centerCrop().diskCacheStrategy(DiskCacheStrategy.RESULT).override(80, 80).into(imageView);
+        Glide.with(context).load(imageUrl).crossFade().centerCrop().diskCacheStrategy(DiskCacheStrategy.RESULT).into(imageView);
     }
     public static void set3DIcon(TextView tv_is3D,TextView tv_isImax,String params) {
         if (params.equals(Constants.M_2D)) {

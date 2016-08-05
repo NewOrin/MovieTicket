@@ -21,6 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected Typeface mTypeface;
     protected SwipeRefreshLayout mSwipeRefreshLayout;
     protected boolean isRefresh = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +41,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         this.mSwipeRefreshLayout = mSwipeRefreshLayout;
         mSwipeRefreshLayout.setColorSchemeColors(Color.RED);
     }
-    protected void showRefreshLayout(){
-        if(mSwipeRefreshLayout!=null){
+
+    protected void showRefreshLayout() {
+        if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.post(new Runnable() {
                 @Override
                 public void run() {
@@ -128,14 +130,25 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         this.startActivity(intent);
     }
-    protected String getPassStringData(Intent intent,String key){
+
+    protected String getPassStringData(Intent intent, String key) {
         return intent.getBundleExtra(this.getPackageName()).getString(key);
     }
+
     protected void saveSharedPfStr(String key, String value) {
         new SharedPreferenceUtil(this).putStr(key, value);
     }
 
     protected String getSharedPfStr(String key) {
         return new SharedPreferenceUtil(this).getStr(key);
+    }
+
+    /**
+     * 用户退出登录
+     */
+    protected void userLogout() {
+        saveSharedPfStr("u_phone", "");
+        saveSharedPfStr("u_pwd", "");
+        finish();
     }
 }

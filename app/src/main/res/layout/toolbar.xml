@@ -8,7 +8,8 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
         android:background="@color/toolbar_bg"
         android:textSize="@dimen/text_medium_size"
         toolbar:titleTextColor="@color/toolbar_title_color">
@@ -30,6 +31,6 @@
         android:layout_centerInParent="true"
         android:layout_marginRight="@dimen/tv_margin_5_dp"
         android:textColor="@color/toolbar_title_color"
-        android:textSize="@dimen/text_size_18_sp" />
+        android:textSize="@dimen/text_medium_size" />
 
 </RelativeLayout>

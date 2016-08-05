@@ -17,6 +17,7 @@
     <color name="tv_line_bg">#CCCFFF</color>
     <color name="tv_bottom_color">#757575</color>
     <color name="tv_cinema_summber_vacation">#FEB56C</color>
+    <color name="tv_text_edit_pwd_color">#8000FF</color>
     <!--Button-->
     <color name="btn_color_pressed">#CC4556</color>
     <color name="btn_color_normal">#FF4D64</color>
@@ -29,6 +30,8 @@
     <color name="btn_sell_stroke_normal">#8000FF</color>
     <color name="btn_buy_text_normal">#FF0000</color>
     <color name="btn_buy_text_pressed">#FFFFFF</color>
+    <color name="btn_pick_seat_pressed">#BB0000</color>
+    <color name="btn_pick_seat_normal">#FF0000</color>
 
     <!--BackGround-->
     <color name="layout_bg">#F5F5F5</color>
@@ -63,6 +66,10 @@
     <!--Movie Info-->
     <color name="movie_info_wanted_bg">#EAEAEA</color>
     <color name="movie_info_tv_expand">#9E3EFF</color>
+
+    <!--UserInfoActivity-->
+    <color name="user_info_layout_pressed">#D1D1D1</color>
+    <color name="user_info_layout_normal">#FFFFFF</color>
 
     <!--SwipeRefreshLayout-->
     <color name="swipe_refresh_layout">#FF0000</color>

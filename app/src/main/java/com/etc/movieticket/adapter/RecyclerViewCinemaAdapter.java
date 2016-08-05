@@ -46,20 +46,18 @@ public class RecyclerViewCinemaAdapter extends BaseRecyclerAdapter<Movie, MyView
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final int layoutPosition = holder.getLayoutPosition();
-                mOnItemClickListener.onItemClick(holder.itemView, layoutPosition);
+                mOnItemClickListener.onItemClick(holder.itemView, position);
             }
         });
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                int layoutPosition = holder.getLayoutPosition();
-                mOnItemClickListener.onItemLongClick(holder.itemView, layoutPosition);
+                mOnItemClickListener.onItemLongClick(holder.itemView, position);
                 return false;
             }
         });

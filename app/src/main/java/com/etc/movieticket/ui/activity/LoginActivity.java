@@ -74,6 +74,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login:
+                showmProgressDialog("正在登录");
                 submit();
                 break;
             case R.id.tv_register:
@@ -99,6 +100,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void loginSuccess() {
+        closemProgressDialog();
         showToast("登录成功");
         saveSharedPfStr("u_phone", getUserPhone());
         saveSharedPfStr("u_pwd", getPassword());
@@ -108,6 +110,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void loginFailed(String errorMsg) {
+        closemProgressDialog();
         showToast(errorMsg);
     }
 }

@@ -16,7 +16,7 @@ public class SplashActivity extends BaseActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if (getSharedPfStr("u_phone") != null) {
+        if (!getSharedPfStr("u_phone").equals("")) {
             startActivity(MainActivity.class, null);
         } else {
             startActivity(LoginActivity.class, null);

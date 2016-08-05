@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ import com.etc.movieticket.widget.WrapAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HotMovieFragment extends BaseFragment implements IMovieView {
+public class HotMovieFragment extends BaseFragment implements IMovieView, SwipeRefreshLayout.OnRefreshListener {
 
     private LinearLayout headerLayout;//头布局
 
@@ -45,7 +46,7 @@ public class HotMovieFragment extends BaseFragment implements IMovieView {
     private List<Movie> movieList;
     private View view;
     private RecyclerView mRecyclerView;//RecyclerView的控件
-
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private MoviePresenter moviePresenter = new MoviePresenter(this);
 
     private String TAG = "HotMovieFragment";
@@ -58,16 +59,9 @@ public class HotMovieFragment extends BaseFragment implements IMovieView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_hot_movie, container, false);
-        initSwipeLayout((SwipeRefreshLayout) view.findViewById(R.id.movie_swipelayout));
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                isRefresh = true;
-                showRefreshLayout();
-                moviePresenter.doGetMovieData(Constants.MOVIE_ISRELEASED);
-            }
-        });
-        showRefreshLayout();
+        showmProgressDialog("正在加载");
+        mSwipeRefreshLayout = ((SwipeRefreshLayout) view.findViewById(R.id.movie_swipelayout));
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         initHeaderView();
         setCarouselImageUrls();
         initView();
@@ -164,10 +158,11 @@ public class HotMovieFragment extends BaseFragment implements IMovieView {
             public void onItemClick(View view, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putString("mv_showId", movieList.get(position).getMv_showId());
-                bundle.putString("mv_cname",movieList.get(position).getMv_cname());
+                bundle.putString("mv_cname", movieList.get(position).getMv_cname());
+                Log.d(TAG,"查询电影的id----"+movieList.get(position).getMv_showId());
                 startActivity(MovieInfoActivity.class, bundle);
             }
-
+    
             @Override
             public void onItemLongClick(View view, int position) {
                 Toast.makeText(getActivity(), "long click " + position, Toast.LENGTH_SHORT).show();
@@ -204,35 +199,38 @@ public class HotMovieFragment extends BaseFragment implements IMovieView {
     @Override
     public void getMovieSucceed(List<Movie> movies) {
         if (movies.size() > 0) {
-            if (isRefresh) {
+            if (mMovieImagePageAdapter != null) {
+                movieList = movies;
                 mRecyclerViewMovieAdapter.notifyRecyclerView(movies);
-                mSwipeRefreshLayout.setRefreshing(false);
-                isRefresh = false;
+                showRefreshLayout(false);
             } else {
                 movieList = movies;
                 initRecyclerView();
                 initListener();
-                mSwipeRefreshLayout.setRefreshing(false);
             }
         } else {
-            mSwipeRefreshLayout.setRefreshing(false);
-            runOnMain(new Runnable() {
-                @Override
-                public void run() {
-                    showToast("暂无数据");
-                }
-            });
+            showToast("暂无数据");
         }
+        closemProgressDialog();
+    }
+
+    private void showRefreshLayout(final boolean isShow) {
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     @Override
     public void getMovieFailed(final String errorMsg) {
-        mSwipeRefreshLayout.setRefreshing(false);
-        runOnMain(new Runnable() {
-            @Override
-            public void run() {
-                showToast(errorMsg);
-            }
-        });
+        showToast(errorMsg);
+        closemProgressDialog();
+    }
+
+    @Override
+    public void onRefresh() {
+        moviePresenter.doGetMovieData(Constants.MOVIE_ISRELEASED);
     }
 }

@@ -1,15 +1,16 @@
 package com.etc.movieticket.ui.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -18,7 +19,6 @@ import android.widget.TextView;
 
 import com.etc.movieticket.R;
 import com.etc.movieticket.adapter.RecyclerViewBaseAdapter;
-import com.etc.movieticket.adapter.RecyclerViewMovieAdapter;
 import com.etc.movieticket.adapter.ViewHolder;
 import com.etc.movieticket.entity.Comment;
 import com.etc.movieticket.entity.Movie;
@@ -30,7 +30,7 @@ import com.etc.movieticket.utils.MyImageUtils;
 
 import java.util.List;
 
-public class MovieInfoActivity extends BaseActivity implements View.OnClickListener, IMovieInfoView, SwipeRefreshLayout.OnRefreshListener {
+public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
     private ScrollView mMovieInfoScrollview;
     private TextView mMovieInfoTvDescription;
@@ -57,23 +57,28 @@ public class MovieInfoActivity extends BaseActivity implements View.OnClickListe
     private TextView mMovieBuyTime;
     private RatingBar mItemMovieRatingbar;
     private TextView mItemMovieRatingNums;
+    private TextView toolbar_tv_title;
 
     private RecyclerViewBaseAdapter<Comment> mCommentAdapter;
     private RecyclerViewBaseAdapter<MovieActor> mMovieActorAdapter;
+    private Button mBtnMovieInfoPickSeat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_info);
         initSwipeLayout((SwipeRefreshLayout) findViewById(R.id.movie_info_swipe_layout));
+        toolbar_tv_title = (TextView) findViewById(R.id.toolbar_tv_title);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mv_showId = getPassStringData(getIntent(), "mv_showId");
         mv_cname = getPassStringData(getIntent(), "mv_cname");
         moviePresenter.doGetMovieInfoData(mv_showId);
         initView();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(mv_cname);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar_tv_title.setText(mv_cname);
     }
 
     protected void initView() {
@@ -83,7 +88,6 @@ public class MovieInfoActivity extends BaseActivity implements View.OnClickListe
         mMovieInfoLayoutDescription = (LinearLayout) findViewById(R.id.movie_info_layout_description);
 
         //设置mMovieInfoTvDescription默认显示高度
-        mMovieInfoTvDescription.setHeight(mMovieInfoTvDescription.getLineHeight() * maxDescripLine);
         mMovieInfoActorRecyclerview = (RecyclerView) findViewById(R.id.movie_info_actor_recyclerview);
         mMovieInfoCommentRecyclerview = (RecyclerView) findViewById(R.id.movie_info_comment_recyclerview);
         mMovieBuyImageview = (ImageView) findViewById(R.id.movie_buy_imageview);
@@ -96,9 +100,12 @@ public class MovieInfoActivity extends BaseActivity implements View.OnClickListe
         mMovieBuyTime = (TextView) findViewById(R.id.movie_buy_time);
         mItemMovieRatingbar = (RatingBar) findViewById(R.id.item_movie_ratingbar);
         mItemMovieRatingNums = (TextView) findViewById(R.id.item_movie_ratingNums);
+        mBtnMovieInfoPickSeat = (Button) findViewById(R.id.btn_movie_info_pick_seat);
+        mBtnMovieInfoPickSeat.setOnClickListener(this);
     }
 
-    private void setViewData() {
+    private void setMovieViewData() {
+        mMovieInfoTvDescription.setText(movie.getMv_introduce());
         MyImageUtils.loadMovieIconImageView(this, mMovieBuyImageview, movie.getMv_imageUrl());
         mMovieBuyName.setText(movie.getMv_cname());
         MyImageUtils.set3DIcon(mMovieBuyIs3D, mMovieBuyIsImax, movie.getMv_3d());
@@ -106,8 +113,14 @@ public class MovieInfoActivity extends BaseActivity implements View.OnClickListe
         mMovieBuyType.setText(movie.getMv_category());
         mMovieBuyLocation.setText(movie.getMv_placeTime());
         mMovieBuyTime.setText(movie.getMv_releaseTime());
-        mItemMovieRatingbar.setNumStars((int) (Integer.parseInt(movie.getMv_score()) / 2));
-        mItemMovieRatingNums.setText(movie.getMv_score());
+        if (movie.getMv_score().equals("")) {
+            mItemMovieRatingbar.setVisibility(View.GONE);
+            mItemMovieRatingNums.setText("暂无评分");
+        } else {
+            mItemMovieRatingbar.setNumStars((int) (Float.parseFloat(movie.getMv_score()) / 2));
+            mItemMovieRatingNums.setText(movie.getMv_score());
+        }
+        mMovieInfoTvDescription.setHeight(mMovieInfoTvDescription.getLineHeight() * maxDescripLine);
     }
 
     @Override
@@ -119,6 +132,28 @@ public class MovieInfoActivity extends BaseActivity implements View.OnClickListe
             }
         });
         mMovieInfoLayoutDescription.setOnClickListener(this);
+        mMovieActorAdapter.setOnItemClickListener(new RecyclerViewBaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClickListener(View view, int position) {
+
+            }
+
+            @Override
+            public void onItemLongClickListener(View view, int position) {
+
+            }
+        });
+        mCommentAdapter.setOnItemClickListener(new RecyclerViewBaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClickListener(View view, int position) {
+
+            }
+
+            @Override
+            public void onItemLongClickListener(View view, int position) {
+
+            }
+        });
     }
 
     private void initRecyclerView() {
@@ -131,7 +166,7 @@ public class MovieInfoActivity extends BaseActivity implements View.OnClickListe
 
             @Override
             public void convert(ViewHolder holder, MovieActor movieActor) {
-                holder.setText(R.id.tv_item_recyclerview_movie_actor_avatar, movieActor.getAc_name());
+                holder.setText(R.id.tv_item_recyclerview_movie_actor_name, movieActor.getAc_name());
                 MyImageUtils.loadMovieIconImageView(MovieInfoActivity.this, (ImageView) holder.getView(R.id.tv_item_recyclerview_movie_actor_avatar), movieActor.getAc_img());
             }
         };
@@ -164,6 +199,9 @@ public class MovieInfoActivity extends BaseActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.movie_info_layout_description:
                 doExpand();
+                break;
+            case R.id.btn_movie_info_pick_seat:
+                startActivity(PickSeatActivity.class, null);
                 break;
         }
     }
@@ -206,7 +244,7 @@ public class MovieInfoActivity extends BaseActivity implements View.OnClickListe
         if (mCommentAdapter == null) {
             if (movie != null && movieActorList != null && commentList != null) {
                 initRecyclerView();
-                setViewData();
+                setMovieViewData();
                 initListener();
             } else {
                 showToast("暂无数据");
@@ -216,6 +254,15 @@ public class MovieInfoActivity extends BaseActivity implements View.OnClickListe
             mCommentAdapter.notifyData(commentList);
         }
         mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

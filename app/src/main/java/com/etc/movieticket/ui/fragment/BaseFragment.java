@@ -1,12 +1,14 @@
 package com.etc.movieticket.ui.fragment;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.etc.movieticket.R;
+import com.etc.movieticket.utils.SharedPreferenceUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,10 +25,11 @@ public class BaseFragment extends Fragment {
     private Toast toast;
     protected final static String NULL = "";
 
+    private ProgressDialog mProgressDialog;
     protected String[] carouselImageUrls;
 
-    protected SwipeRefreshLayout mSwipeRefreshLayout;
-    protected boolean isRefresh = false;
+    private String TAG = "BaseFragment";
+
     public BaseFragment() {
     }
 
@@ -33,20 +37,28 @@ public class BaseFragment extends Fragment {
         getActivity().runOnUiThread(runnable);
     }
 
-    protected void initSwipeLayout(SwipeRefreshLayout mSwipeRefreshLayout) {
-        this.mSwipeRefreshLayout = mSwipeRefreshLayout;
-        mSwipeRefreshLayout.setColorSchemeColors(Color.RED);
+
+    /**
+     * 显示mProgressDialog
+     *
+     * @param showMsg
+     */
+    protected void showmProgressDialog(String showMsg) {
+        mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setMessage(showMsg);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.show();
     }
-    protected void showRefreshLayout(){
-        if(mSwipeRefreshLayout!=null){
-            mSwipeRefreshLayout.post(new Runnable() {
-                @Override
-                public void run() {
-                    mSwipeRefreshLayout.setRefreshing(true);
-                }
-            });
+
+    /**
+     * 关闭ProgressDialog
+     */
+    protected void closemProgressDialog() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
         }
     }
+
     /**
      * 显示Toast
      *
@@ -78,5 +90,21 @@ public class BaseFragment extends Fragment {
             intent.putExtra(getActivity().getPackageName(), bundle);
         }
         getActivity().startActivity(intent);
+    }
+
+    protected void saveSharedPfStr(String key, String value) {
+        new SharedPreferenceUtil(getActivity()).putStr(key, value);
+    }
+
+    protected boolean isUserLogin() {
+        if (getSharedPfStr("u_phone").equals("")) {
+            showToast("请先登录");
+            return false;
+        }
+        return true;
+    }
+
+    protected String getSharedPfStr(String key) {
+        return new SharedPreferenceUtil(getActivity()).getStr(key);
     }
 }

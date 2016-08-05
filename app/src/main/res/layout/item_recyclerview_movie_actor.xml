@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/item_reyclerview_movie_actor_width"
     android:layout_height="@dimen/item_reyclerview_movie_actor_height"
+    android:clickable="false"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="@dimen/item_recyclerview_movie_actor_padding">

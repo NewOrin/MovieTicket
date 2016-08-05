@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.etc.movieticket.ui.activity.UserInfoActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/black" />
+
+    <RelativeLayout
+        android:id="@+id/user_info_layout_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_info_avatar_layout_height"
+        android:background="@drawable/user_info_layout_selector"
+        android:clickable="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/user_info_padding_20dp"
+            android:text="头像"
+            android:textColor="@color/text_color_black"
+            android:textSize="@dimen/text_medium_size" />
+
+        <com.etc.movieticket.view.CircleImageView
+            android:id="@+id/user_info_avatar"
+            android:layout_width="@dimen/user_info_avatar_height"
+            android:layout_height="@dimen/user_info_avatar_width"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/user_info_padding_20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_avatar"
+            app:border_color="@color/white" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/black" />
+
+    <RelativeLayout
+        android:id="@+id/user_info_layout_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_info_avatar_layout_height"
+        android:background="@drawable/user_info_layout_selector"
+        android:clickable="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/user_info_padding_20dp"
+            android:text="昵称"
+            android:textColor="@color/text_color_black"
+            android:textSize="@dimen/text_medium_size" />
+
+        <TextView
+            android:id="@+id/tv_user_info_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/user_info_padding_20dp"
+            android:scaleType="centerCrop"
+            android:text="用户昵称"
+            android:textSize="@dimen/text_medium_size" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/black" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_info_avatar_layout_height">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/user_info_padding_20dp"
+            android:text="会员等级"
+            android:textColor="@color/text_color_black"
+            android:textSize="@dimen/text_medium_size" />
+
+        <TextView
+            android:id="@+id/tv_user_info_vip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/user_info_padding_20dp"
+            android:scaleType="centerCrop"
+            android:text="会员等级"
+            android:textSize="@dimen/text_medium_size" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/black" />
+
+
+    <RelativeLayout
+        android:id="@+id/user_info_layout_edit_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_info_avatar_layout_height"
+        android:background="@drawable/user_info_layout_selector"
+        android:clickable="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/user_info_padding_20dp"
+            android:text="修改密码"
+            android:textColor="@color/tv_text_edit_pwd_color"
+            android:textSize="@dimen/text_medium_size" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/black" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_info_btn_logout_height"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/btn_pick_seat_selector"
+        android:gravity="center"
+        android:text="退出登录"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_medium_size" />
+</LinearLayout>

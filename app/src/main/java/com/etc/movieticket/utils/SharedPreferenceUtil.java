@@ -56,7 +56,7 @@ public class SharedPreferenceUtil {
      */
     public String getStr(String key) {
         if (mSharedPreferences != null) {
-            return mSharedPreferences.getString(key, null);
+            return mSharedPreferences.getString(key, "");
         }
         return null;
     }

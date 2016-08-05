@@ -88,16 +88,14 @@ public class RecyclerViewMovieAdapter extends BaseRecyclerAdapter<Movie, MyViewH
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final int layoutPosition = holder.getLayoutPosition();
-                mOnItemClickListener.onItemClick(holder.itemView, layoutPosition);
+                mOnItemClickListener.onItemClick(holder.itemView, position);
             }
         });
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                int layoutPosition = holder.getLayoutPosition();
-                mOnItemClickListener.onItemLongClick(holder.itemView, layoutPosition);
+                mOnItemClickListener.onItemLongClick(holder.itemView, position);
                 return false;
             }
         });
@@ -105,8 +103,7 @@ public class RecyclerViewMovieAdapter extends BaseRecyclerAdapter<Movie, MyViewH
         holder.btn_item_movie_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int layoutPosition = holder.getLayoutPosition();
-                onItemViewClickListener.onItemViewClick(v, layoutPosition);
+                onItemViewClickListener.onItemViewClick(v, position);
             }
         });
     }

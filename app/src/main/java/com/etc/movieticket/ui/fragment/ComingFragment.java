@@ -1,11 +1,11 @@
 package com.etc.movieticket.ui.fragment;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +34,9 @@ public class ComingFragment extends BaseFragment implements IMovieView {
     private MoviePresenter moviePresenter = new MoviePresenter(this);
     private RecyclerViewMovieAdapter mRecyclerViewMovieAdapter;
     private WrapAdapter<RecyclerViewMovieAdapter> mWrapAdapter;//数据适配器包装类
+    private SwipeRefreshLayout movie_swipelayout;
+    private List<Movie> movieList;
+    private String TAG = "CommingFragment";
 
     public ComingFragment() {
         // Required empty public constructor
@@ -43,27 +46,19 @@ public class ComingFragment extends BaseFragment implements IMovieView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_hot_movie, container, false);
-        initSwipeLayout((SwipeRefreshLayout) view.findViewById(R.id.movie_swipelayout));
-        showRefreshLayout(); mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                isRefresh = true;
-                mSwipeRefreshLayout.setRefreshing(true);
-                moviePresenter.doGetMovieData(Constants.MOVIE_NOTRELEASED);
-            }
-        });
         initView();
         moviePresenter.doGetMovieData(Constants.MOVIE_NOTRELEASED);
         return view;
     }
 
-    private void initRecyclerView(List<Movie> movies) {
+    private void initRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        mRecyclerViewMovieAdapter = new RecyclerViewMovieAdapter(getActivity(), movies, Constants.MOVIE_NOTRELEASED);
+        mRecyclerViewMovieAdapter = new RecyclerViewMovieAdapter(getActivity(), movieList, Constants.MOVIE_NOTRELEASED);
         mRecyclerviewHotMovie.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         mRecyclerviewHotMovie.setLayoutManager(linearLayoutManager);
         mWrapAdapter = new WrapAdapter<>(mRecyclerViewMovieAdapter);
         mRecyclerviewHotMovie.setAdapter(mWrapAdapter);
+        movie_swipelayout = (SwipeRefreshLayout) view.findViewById(R.id.movie_swipelayout);
         initListener();
     }
 
@@ -71,7 +66,11 @@ public class ComingFragment extends BaseFragment implements IMovieView {
         mRecyclerViewMovieAdapter.setOnItemClickListener(new RecyclerViewMovieAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                startActivity(MovieInfoActivity.class, null);
+                Bundle bundle = new Bundle();
+                bundle.putString("mv_showId", movieList.get(position).getMv_showId());
+                bundle.putString("mv_cname", movieList.get(position).getMv_cname());
+                Log.d(TAG, "查询电影的id----" + movieList.get(position).getMv_showId());
+                startActivity(MovieInfoActivity.class, bundle);
             }
 
             @Override
@@ -86,6 +85,12 @@ public class ComingFragment extends BaseFragment implements IMovieView {
                 startActivity(BuyTicketActivity.class, null);
             }
         });
+        movie_swipelayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                moviePresenter.doGetMovieData(Constants.MOVIE_NOTRELEASED);
+            }
+        });
     }
 
     private void initView() {
@@ -94,24 +99,27 @@ public class ComingFragment extends BaseFragment implements IMovieView {
 
     @Override
     public void getMovieSucceed(List<Movie> movies) {
-        if (movies.size() > 0) {
-            if (isRefresh) {
-                mRecyclerViewMovieAdapter.notifyRecyclerView(movies);
-                mSwipeRefreshLayout.setRefreshing(false);
-                isRefresh = false;
-            } else {
-                initRecyclerView(movies);
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
+        if (mRecyclerViewMovieAdapter == null) {
+            movieList = movies;
+            initRecyclerView();
         } else {
-            mSwipeRefreshLayout.setRefreshing(false);
-            showToast("暂无数据");
+            movieList = movies;
+            mRecyclerViewMovieAdapter.notifyRecyclerView(movies);
+            showRefreshLayout(false);
         }
+    }
+
+    private void showRefreshLayout(final boolean isShow) {
+        movie_swipelayout.post(new Runnable() {
+            @Override
+            public void run() {
+                movie_swipelayout.setRefreshing(isShow);
+            }
+        });
     }
 
     @Override
     public void getMovieFailed(String errorMsg) {
-        mSwipeRefreshLayout.setRefreshing(false);
         showToast(errorMsg);
     }
 }
