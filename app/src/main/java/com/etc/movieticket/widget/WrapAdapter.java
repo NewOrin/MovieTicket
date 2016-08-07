@@ -239,7 +239,7 @@ public class WrapAdapter<T extends RecyclerView.Adapter> extends RecyclerView.Ad
 	private RecyclerView.ViewHolder createHeaderFooterViewHolder(View view) {
 		if (isStaggeredGrid) {
 			StaggeredGridLayoutManager.LayoutParams params = new StaggeredGridLayoutManager.LayoutParams(
-					StaggeredGridLayoutManager.LayoutParams.MATCH_PARENT, StaggeredGridLayoutManager.LayoutParams.WRAP_CONTENT);
+					StaggeredGridLayoutManager.LayoutParams.MATCH_PARENT, StaggeredGridLayoutManager.LayoutParams.MATCH_PARENT);
 			params.setFullSpan(true);
 			view.setLayoutParams(params);
 		}

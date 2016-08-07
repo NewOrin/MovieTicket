@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.etc.movieticket.biz.IUserBiz;
 import com.etc.movieticket.biz.impl.IUserBizImpl;
+import com.etc.movieticket.ui.i.IUserInfoView;
 import com.etc.movieticket.ui.i.IUserLoginView;
 import com.etc.movieticket.ui.i.IUserRegisterView;
 
@@ -16,6 +17,8 @@ public class UserPresenter {
     private IUserBiz userBiz;
     private IUserLoginView userLoginView;
     private IUserRegisterView userRegisterView;
+    private IUserInfoView userInfoView;
+
     private String TAG = "UserPresenter";
     private Handler mHandler = new Handler();
 
@@ -27,6 +30,11 @@ public class UserPresenter {
     public UserPresenter(IUserRegisterView userRegisterView) {
         this.userBiz = new IUserBizImpl();
         this.userRegisterView = userRegisterView;
+    }
+
+    public UserPresenter(IUserInfoView userInfoView) {
+        this.userBiz = new IUserBizImpl();
+        this.userInfoView = userInfoView;
     }
 
     /**
@@ -70,6 +78,23 @@ public class UserPresenter {
             @Override
             public void registerFailed(String errorMsg) {
                 userRegisterView.registerFailed(errorMsg);
+            }
+        });
+    }
+
+    /**
+     * 修改昵称
+     */
+    public void editNickname() {
+        userBiz.editNickname(userInfoView.getU_id(), userInfoView.getNickname(), new IUserBizImpl.OnEditNicknameListener() {
+            @Override
+            public void editNicknameSuccess() {
+                userInfoView.editUserNicknameSuccess();
+            }
+
+            @Override
+            public void editNicknameFailed(String errorMsg) {
+                userInfoView.editUserNicknameFialed(errorMsg);
             }
         });
     }

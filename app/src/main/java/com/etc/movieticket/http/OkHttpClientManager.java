@@ -104,9 +104,9 @@ public class OkHttpClientManager {
         return result;
     }
 
-    public String uploadFile() {
-        RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart("userid", "userid")
-                .addFormDataPart("image", "avatar.jpg", RequestBody.create(MEDIA_TYPE_PNG, new File(""))).build();
+    public String uploadFile(File file,String u_id) {
+        RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart("u_id", u_id)
+                .addFormDataPart("image", "avatar.jpg", RequestBody.create(MEDIA_TYPE_PNG, file)).build();
         Request request = new Request.Builder()
                 .header("Authorization", "Client-ID " + "...")
                 .url("https://api.imgur.com/3/image")
@@ -114,12 +114,12 @@ public class OkHttpClientManager {
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                Log.d(TAG,"上传失败");
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-
+                Log.d(TAG,"上传成功");
             }
         });
         return "";

@@ -12,14 +12,9 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.activity.BaseActivity" />
-        <activity android:name=".ui.activity.LoginActivity"></activity>
+        <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity
             android:name=".ui.activity.MovieInfoActivity"
@@ -33,8 +28,15 @@
             android:name="com.etc.movieticket.utils.MyGlideModule"
             android:value="GlideModule" />
 
-        <activity android:name=".ui.activity.UserInfoActivity"></activity>
+        <activity android:name=".ui.activity.UserInfoActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+        <activity android:name=".ui.activity.CitySelectorActivity" />
+        <activity android:name=".ui.activity.SearchActivity"></activity>
     </application>
 
 </manifest>

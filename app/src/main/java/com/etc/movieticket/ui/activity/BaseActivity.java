@@ -3,6 +3,8 @@ package com.etc.movieticket.ui.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.etc.movieticket.db.DBOpenHelper;
 import com.etc.movieticket.utils.SharedPreferenceUtil;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -150,5 +153,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         saveSharedPfStr("u_phone", "");
         saveSharedPfStr("u_pwd", "");
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 }

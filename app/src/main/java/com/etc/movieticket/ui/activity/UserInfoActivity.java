@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.etc.movieticket.R;
+import com.etc.movieticket.ui.i.IUserInfoView;
 import com.etc.movieticket.utils.DialogTool;
 import com.etc.movieticket.utils.ImageUtils;
 import com.etc.movieticket.utils.MyImageUtils;
@@ -24,7 +25,7 @@ import com.soundcloud.android.crop.Crop;
 
 import java.io.File;
 
-public class UserInfoActivity extends BaseActivity implements View.OnClickListener {
+public class UserInfoActivity extends BaseActivity implements View.OnClickListener, IUserInfoView {
 
     private Toolbar toolbar;
     private TextView toolbar_tv_title;
@@ -36,6 +37,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     private TextView mTvUserInfoNickname;
     private TextView mTvUserInfoVip;
     private String TAG = "UserInfoActivity";
+    private String editNickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +91,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         DialogTool.createEditDialog(this, "修改昵称", edit_userinfo_view, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                editNickname = tv_edit_userinfo.getText().toString();
                 showToast(tv_edit_userinfo.getText().toString());
             }
         }).create().show();
@@ -150,10 +153,10 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     }
 
     /**
-     * 确认退出?
+     * 退出登录?
      */
     private void showConfirmDialog() {
-        DialogTool.createAlertDialog(this, "确认退出?", new DialogInterface.OnClickListener() {
+        DialogTool.createAlertDialog(this, "退出登录?", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 startActivity(LoginActivity.class, null);
@@ -170,5 +173,35 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void uploadAvatarSuccess() {
+
+    }
+
+    @Override
+    public void uploadAvatarFailed(String errorMsg) {
+
+    }
+
+    @Override
+    public void editUserNicknameSuccess() {
+
+    }
+
+    @Override
+    public void editUserNicknameFialed(String errorMsg) {
+
+    }
+
+    @Override
+    public String getNickname() {
+        return editNickname;
+    }
+
+    @Override
+    public Integer getU_id() {
+        return Integer.parseInt(getSharedPfStr("u_id"));
     }
 }

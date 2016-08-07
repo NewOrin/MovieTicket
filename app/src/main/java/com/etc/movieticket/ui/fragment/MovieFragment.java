@@ -1,6 +1,5 @@
 package com.etc.movieticket.ui.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,20 +7,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.etc.movieticket.R;
 import com.etc.movieticket.adapter.MyFragmentPagerAdapter;
-import com.etc.movieticket.event.MoveLayoutEvent;
-import com.etc.movieticket.ui.activity.MainActivity;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
+import com.etc.movieticket.ui.activity.CitySelectorActivity;
+import com.etc.movieticket.ui.activity.SearchActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +23,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MovieFragment extends BaseFragment {
+public class MovieFragment extends BaseFragment implements View.OnClickListener {
 
     private TabLayout mFragmentTablayout;
     private TextView mToolbarTvTitle;
@@ -44,6 +38,7 @@ public class MovieFragment extends BaseFragment {
     private HotMovieFragment hotMovieFragment;
     private ComingFragment comingFragment;
     private String TAG = "MovieFragment";
+    private TextView mToolbarTvSearch;
 
     public MovieFragment() {
         // Required empty public constructor
@@ -54,6 +49,7 @@ public class MovieFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_movie, container, false);
         initView();
+        initListener();
         return view;
     }
 
@@ -64,8 +60,7 @@ public class MovieFragment extends BaseFragment {
         mToolbarTvTitle = (TextView) view.findViewById(R.id.toolbar_tv_title);
         mToolbarTvLeft = (TextView) view.findViewById(R.id.toolbar_tv_left);
 
-        mToolbarTvLeft.setVisibility(View.VISIBLE);
-        myToolbar.setTitle("厦门");
+        myToolbar.setTitle("上海");
         mToolbarTvLeft.setText("下拉");
         mToolbarTvTitle.setText("电影");
 
@@ -85,5 +80,25 @@ public class MovieFragment extends BaseFragment {
         myFragmentPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager(), titles, list_fragment);
         mFragmentMovieViewPager.setAdapter(myFragmentPagerAdapter);
         mFragmentTablayout.setupWithViewPager(mFragmentMovieViewPager);
+        mToolbarTvSearch = (TextView) view.findViewById(R.id.toolbar_tv_search);
+        mToolbarTvSearch.setVisibility(View.VISIBLE);
+    }
+
+    private void initListener() {
+        mToolbarTvSearch.setOnClickListener(this);
+        mToolbarTvLeft.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.toolbar_tv_search:
+                startActivity(SearchActivity.class, null);
+                break;
+            case R.id.toolbar_tv_left:
+                startActivity(CitySelectorActivity.class, null);
+                break;
+        }
     }
 }

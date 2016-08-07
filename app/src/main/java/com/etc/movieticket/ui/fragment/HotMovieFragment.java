@@ -59,13 +59,13 @@ public class HotMovieFragment extends BaseFragment implements IMovieView, SwipeR
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_hot_movie, container, false);
-        showmProgressDialog("正在加载");
+//        showmProgressDialog("正在加载");
         mSwipeRefreshLayout = ((SwipeRefreshLayout) view.findViewById(R.id.movie_swipelayout));
         mSwipeRefreshLayout.setOnRefreshListener(this);
         initHeaderView();
         setCarouselImageUrls();
         initView();
-        moviePresenter.doGetMovieData(Constants.MOVIE_ISRELEASED);
+//        moviePresenter.doGetMovieData(Constants.MOVIE_ISRELEASED);
         return view;
     }
 
@@ -218,7 +218,7 @@ public class HotMovieFragment extends BaseFragment implements IMovieView, SwipeR
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
-                mSwipeRefreshLayout.setRefreshing(false);
+                mSwipeRefreshLayout.setRefreshing(isShow);
             }
         });
     }

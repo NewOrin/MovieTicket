@@ -107,4 +107,11 @@
     <dimen name="app_bar_height">220dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+
+    <!--SearchActivity-->
+    <dimen name="search_text_margin">5dp</dimen>
+    <dimen name="search_edittext_margin">5dp</dimen>
+    <dimen name="search_ll_padding">5dp</dimen>
+    <dimen name="search_et_height">40dp</dimen>
+    <dimen name="search_history_listview_height">40dp</dimen>
 </resources>

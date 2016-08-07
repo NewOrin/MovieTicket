@@ -4,7 +4,9 @@ package com.etc.movieticket.ui.fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -27,10 +29,17 @@ public class BaseFragment extends Fragment {
 
     private ProgressDialog mProgressDialog;
     protected String[] carouselImageUrls;
+    protected Typeface mTypeface;
 
     private String TAG = "BaseFragment";
 
     public BaseFragment() {
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mTypeface = Typeface.createFromAsset(getActivity().getAssets(), "iconfont.ttf");
     }
 
     protected void runOnMain(Runnable runnable) {

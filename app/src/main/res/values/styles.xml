@@ -56,6 +56,7 @@
         <item name="android:textColor">@color/text_color_black</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="MyMovieInfoTextViewStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/movie_info_tv_margin_top</item>
@@ -63,7 +64,12 @@
         <item name="android:textSize">@dimen/text_small_size</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MyToolbarTheme" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/text_size_14_sp</item>
+    </style>
 </resources>

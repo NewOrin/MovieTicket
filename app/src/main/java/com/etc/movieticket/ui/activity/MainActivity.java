@@ -86,17 +86,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mLlUser.setOnClickListener(this);
         mLlMovie.setOnClickListener(this);
         mLlCinema.setOnClickListener(this);
-        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.tb_search:
-                        showToast("搜索");
-                        break;
-                }
-                return true;
-            }
-        });
     }
 
     /**
@@ -147,12 +136,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 setTextViewTitle(mToolbarTvTitle, "我的");
                 break;
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
     }
 }

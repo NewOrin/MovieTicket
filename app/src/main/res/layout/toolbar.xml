@@ -9,9 +9,9 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
         android:background="@color/toolbar_bg"
-        android:textSize="@dimen/text_medium_size"
+        android:minHeight="?attr/actionBarSize"
+        toolbar:titleTextAppearance="@style/MyToolbarTheme"
         toolbar:titleTextColor="@color/toolbar_title_color">
 
         <TextView
@@ -19,8 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:textSize="@dimen/text_medium_size"
-            android:visibility="gone"
+            android:textAppearance="@style/MyToolbarTheme"
             toolbar:titleTextColor="@color/toolbar_title_color" />
     </android.support.v7.widget.Toolbar>
 
@@ -30,7 +29,19 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginRight="@dimen/tv_margin_5_dp"
+        android:text=""
         android:textColor="@color/toolbar_title_color"
-        android:textSize="@dimen/text_medium_size" />
+        android:textSize="@dimen/text_size_18_sp" />
 
+    <TextView
+        android:id="@+id/toolbar_tv_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:text="搜索"
+        android:textColor="@color/toolbar_title_color"
+        android:textSize="@dimen/text_medium_size"
+        android:visibility="invisible" />
 </RelativeLayout>
