@@ -52,20 +52,19 @@ public class HotMovieFragment extends BaseFragment implements IMovieView, SwipeR
     private String TAG = "HotMovieFragment";
 
     public HotMovieFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_hot_movie, container, false);
-//        showmProgressDialog("正在加载");
+        showmProgressDialog("正在加载");
         mSwipeRefreshLayout = ((SwipeRefreshLayout) view.findViewById(R.id.movie_swipelayout));
         mSwipeRefreshLayout.setOnRefreshListener(this);
         initHeaderView();
         setCarouselImageUrls();
         initView();
-//        moviePresenter.doGetMovieData(Constants.MOVIE_ISRELEASED);
+        moviePresenter.doGetMovieData(Constants.MOVIE_ISRELEASED);
         return view;
     }
 
@@ -159,10 +158,10 @@ public class HotMovieFragment extends BaseFragment implements IMovieView, SwipeR
                 Bundle bundle = new Bundle();
                 bundle.putString("mv_showId", movieList.get(position).getMv_showId());
                 bundle.putString("mv_cname", movieList.get(position).getMv_cname());
-                Log.d(TAG,"查询电影的id----"+movieList.get(position).getMv_showId());
+                Log.d(TAG, "查询电影的id----" + movieList.get(position).getMv_showId());
                 startActivity(MovieInfoActivity.class, bundle);
             }
-    
+
             @Override
             public void onItemLongClick(View view, int position) {
                 Toast.makeText(getActivity(), "long click " + position, Toast.LENGTH_SHORT).show();
@@ -171,9 +170,14 @@ public class HotMovieFragment extends BaseFragment implements IMovieView, SwipeR
         mRecyclerViewMovieAdapter.setOnItemViewClickListener(new RecyclerViewMovieAdapter.OnItemViewClickListener() {
             @Override
             public void onItemViewClick(View view, int position) {
-                startActivity(BuyTicketActivity.class, null);
+                switch (view.getId()) {
+                    case R.id.item_btn_buy_ticket:
+                        startActivity(BuyTicketActivity.class, null);
+                        break;
+                }
             }
         });
+
     }
 
     /**

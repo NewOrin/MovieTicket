@@ -12,10 +12,10 @@
 
         <android.support.percent.PercentRelativeLayout
             android:id="@+id/user_prlayout"
-            android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="@dimen/userinfo_layout_height"
-            android:background="@color/layout_bg_white">
+            android:background="@color/layout_bg_white"
+            android:clickable="true">
 
             <com.etc.movieticket.view.CircleImageView
                 android:id="@+id/img_avatar"
@@ -72,7 +72,7 @@
             android:layout_height="70dp"
             android:layout_below="@+id/user_prlayout"
             android:layout_marginTop="@dimen/user_fg_layout_height"
-            android:background="@color/layout_bg_white"
+            android:background="@drawable/item_layout_bg"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -167,7 +167,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@color/layout_bg_white"
+                android:background="@drawable/item_layout_bg"
                 android:gravity="center_vertical">
 
                 <TextView
@@ -217,7 +217,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@color/layout_bg_white"
+                android:background="@drawable/item_layout_bg"
                 android:gravity="center_vertical">
 
                 <TextView

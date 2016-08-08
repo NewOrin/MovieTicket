@@ -31,8 +31,7 @@ public class MovieFragment extends BaseFragment implements View.OnClickListener 
     private Toolbar myToolbar;
     private ViewPager mFragmentMovieViewPager;
     private View view;
-    private List<Fragment> list_fragment;
-    ;//Fragment列表
+    private List<Fragment> list_fragment;//Fragment列表
     private String titles[] = {"正在热映", "即将上映"};//TabLayout 的title列表
     private MyFragmentPagerAdapter myFragmentPagerAdapter;
     private HotMovieFragment hotMovieFragment;
@@ -59,11 +58,12 @@ public class MovieFragment extends BaseFragment implements View.OnClickListener 
 
         mToolbarTvTitle = (TextView) view.findViewById(R.id.toolbar_tv_title);
         mToolbarTvLeft = (TextView) view.findViewById(R.id.toolbar_tv_left);
-
+        mToolbarTvSearch = (TextView) view.findViewById(R.id.toolbar_tv_search);
+        mToolbarTvSearch.setVisibility(View.VISIBLE);
         myToolbar.setTitle("上海");
-        mToolbarTvLeft.setText("下拉");
         mToolbarTvTitle.setText("电影");
-
+        mToolbarTvLeft.setTypeface(mTypeface);
+        mToolbarTvSearch.setTypeface(mTypeface);
         list_fragment = new ArrayList<>();
         Log.d(TAG, "MovieFrg初始化..");
         hotMovieFragment = new HotMovieFragment();
@@ -80,8 +80,6 @@ public class MovieFragment extends BaseFragment implements View.OnClickListener 
         myFragmentPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager(), titles, list_fragment);
         mFragmentMovieViewPager.setAdapter(myFragmentPagerAdapter);
         mFragmentTablayout.setupWithViewPager(mFragmentMovieViewPager);
-        mToolbarTvSearch = (TextView) view.findViewById(R.id.toolbar_tv_search);
-        mToolbarTvSearch.setVisibility(View.VISIBLE);
     }
 
     private void initListener() {

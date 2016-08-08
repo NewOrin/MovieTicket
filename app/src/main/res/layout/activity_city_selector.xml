@@ -8,20 +8,26 @@
 
     <include layout="@layout/toolbar" />
 
-    <com.etc.movieticket.view.ClearEditText
-        android:id="@+id/filter_edit"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:background="@drawable/city_edit"
-        android:drawableLeft="@drawable/shape_rectangle_white"
-        android:gravity="center"
-        android:hint="搜索城市"
-        android:singleLine="true"
-        android:textSize="15dp" />
+        android:layout_height="45dp"
+        android:background="@drawable/item_layout_bg">
 
+        <com.etc.movieticket.view.ClearEditText
+            android:id="@+id/filter_edit"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_et_search"
+            android:hint="搜索城市"
+            android:singleLine="true"
+            android:textSize="15dp" />
+
+    </RelativeLayout>
 
     <FrameLayout
         android:layout_width="fill_parent"

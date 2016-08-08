@@ -19,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
+            android:text="@string/ic_arrow_down"
             android:textAppearance="@style/MyToolbarTheme"
             toolbar:titleTextColor="@color/toolbar_title_color" />
     </android.support.v7.widget.Toolbar>
@@ -40,8 +41,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
-        android:text="搜索"
+        android:text="@string/ic_movie_search"
         android:textColor="@color/toolbar_title_color"
-        android:textSize="@dimen/text_medium_size"
-        android:visibility="invisible" />
+        android:textSize="@dimen/text_medium_size" />
+
 </RelativeLayout>

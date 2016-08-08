@@ -31,6 +31,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private Toolbar mToolbar;
     private TextView mToolbarTvTitle;
     private TextView mToolbarTvLeft;
+    private TextView mToolbarTvSearch;
     private String TAG = "MainActivity";
     private Fragment currentFragment;
     private MovieFragment movieFragment;
@@ -63,11 +64,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbarTvTitle = (TextView) findViewById(R.id.toolbar_tv_title);
         mToolbarTvLeft = (TextView) findViewById(R.id.toolbar_tv_left);
-
+        mToolbarTvSearch = (TextView) findViewById(R.id.toolbar_tv_search);
         setToolbar(mToolbar, "厦门", mToolbarTvTitle, "电影");
 
         mToolbarTvLeft.setVisibility(View.VISIBLE);
-        mToolbarTvLeft.setText("下拉");
+        mToolbarTvLeft.setTypeface(mTypeface);
+        mToolbarTvSearch.setVisibility(View.VISIBLE);
+        mToolbarTvSearch.setTypeface(mTypeface);
 
         movieFragment = new MovieFragment();
         cinemaFragment = new CinemaFragment();

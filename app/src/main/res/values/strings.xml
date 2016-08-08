@@ -5,16 +5,18 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="bottom_bar_movie">&#xe611;</string>
-    <string name="bottom_bar_cinema">&#xe604;</string>
-    <string name="bottom_bar_user">&#xe614;</string>
+    <string name="bottom_bar_cinema">&#xe61d;</string>
+    <string name="bottom_bar_user">&#xe609;</string>
 
-    <string name="ic_movie_ticket">&#xe80c;</string>
+    <string name="ic_movie_ticket">&#xe7f8;</string>
     <string name="ic_perform_ticket">&#xe7fa;</string>
-    <string name="ic_coupon_ticket">&#xe60f;</string>
-    <string name="ic_vip_card">&#xe7ab;</string>
+    <string name="ic_coupon_ticket">&#xe625;</string>
+    <string name="ic_vip_card">&#xe620;</string>
 
-    <string name="ic_arrow_right">&#xe61d;</string>
-    <string name="ic_arrow_up">&#xe81c;</string>
+    <string name="ic_arrow_right">&#xe600;</string>
+    <string name="ic_arrow_down">&#xe62b;</string>
+    <string name="ic_movie_search">&#xe66e;</string>
+
     <string name="title_activity_movie_detail">MovieDetailActivity</string>
     <string name="large_text">
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."

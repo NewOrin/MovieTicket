@@ -9,6 +9,8 @@ import com.etc.movieticket.ui.i.IUserInfoView;
 import com.etc.movieticket.ui.i.IUserLoginView;
 import com.etc.movieticket.ui.i.IUserRegisterView;
 
+import java.io.File;
+
 /**
  * Created by NewOrin Zhang on 2016/7/26.
  * E-mail: NewOrin@163.com
@@ -78,6 +80,20 @@ public class UserPresenter {
             @Override
             public void registerFailed(String errorMsg) {
                 userRegisterView.registerFailed(errorMsg);
+            }
+        });
+    }
+
+    public void updateAvatar(File file, String uphone) {
+        userBiz.uploadAvatar(file, uphone, new IUserBizImpl.OnUploadListener() {
+            @Override
+            public void uploadSuccess() {
+                Log.d(TAG,"上传成功!");
+            }
+
+            @Override
+            public void uploadFailed() {
+                Log.d(TAG,"上传失败!");
             }
         });
     }

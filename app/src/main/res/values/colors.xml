@@ -73,4 +73,9 @@
 
     <!--SwipeRefreshLayout-->
     <color name="swipe_refresh_layout">#FF0000</color>
+
+    <!--SearchActivity EditText-->
+    <color name="search_et_bg">#E4E4E4</color>
+
+    <color name="layout_bg_stroke_color">#CDCDCD</color>
 </resources>

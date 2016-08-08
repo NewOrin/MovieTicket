@@ -104,8 +104,14 @@ public class OkHttpClientManager {
         return result;
     }
 
-    public String uploadFile(File file,String u_id) {
-        RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart("u_id", u_id)
+    /**
+     * 上传头像
+     * @param file
+     * @param uphone
+     * @return
+     */
+    public String uploadFile(File file,String uphone) {
+        RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart("u_phone", uphone)
                 .addFormDataPart("image", "avatar.jpg", RequestBody.create(MEDIA_TYPE_PNG, file)).build();
         Request request = new Request.Builder()
                 .header("Authorization", "Client-ID " + "...")

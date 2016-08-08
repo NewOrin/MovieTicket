@@ -67,6 +67,12 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             search_recyclerview.setAdapter(mWrapAdapter);
             mWrapAdapter.addFooterView(footerView, true);
             footer_clear_view.setOnClickListener(this);
+            searchHistoryRecyclerViewAdapter.setOnItemClickListener(new SearchHistoryRecyclerViewAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    showToast("搜索" + mDatas.get(position));
+                }
+            });
         }
     }
 
@@ -89,12 +95,6 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                     }
                 }
                 return false;
-            }
-        });
-        searchHistoryRecyclerViewAdapter.setOnItemClickListener(new SearchHistoryRecyclerViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                showToast("搜索" + mDatas.get(position));
             }
         });
     }

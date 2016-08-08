@@ -74,9 +74,9 @@ public class RecyclerViewMovieAdapter extends BaseRecyclerAdapter<Movie, MyViewH
             holder.item_movie_ratingNums.setText("暂无评分");
         } else {
             holder.item_movie_ratingNums.setText(mItemLists.get(position).getMv_score());
-            holder.item_movie_ratingbar.setNumStars((int) (Float.parseFloat(mItemLists.get(position).getMv_score()) / 2));
+            holder.item_movie_ratingbar.setRating((float) (Float.parseFloat(mItemLists.get(position).getMv_score()) * 0.5));
         }
-        MyImageUtils.set3DIcon(holder.movie_buy_is3D,holder.movie_buy_isImax,mItemLists.get(position).getMv_3d());
+        MyImageUtils.set3DIcon(holder.movie_buy_is3D, holder.movie_buy_isImax, mItemLists.get(position).getMv_3d());
         if (movieFlag.equals(Constants.MOVIE_ISRELEASED)) {
             holder.btn_item_movie_buy.setBackgroundResource(R.drawable.btn_buy_selector);
             holder.btn_item_movie_buy.setText("购买");
@@ -101,6 +101,12 @@ public class RecyclerViewMovieAdapter extends BaseRecyclerAdapter<Movie, MyViewH
         });
 
         holder.btn_item_movie_buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemViewClickListener.onItemViewClick(v, position);
+            }
+        });
+        holder.item_recyclerview_movie_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onItemViewClickListener.onItemViewClick(v, position);

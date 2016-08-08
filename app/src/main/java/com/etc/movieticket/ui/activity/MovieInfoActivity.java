@@ -17,6 +17,7 @@ import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.etc.movieticket.R;
 import com.etc.movieticket.adapter.RecyclerViewBaseAdapter;
 import com.etc.movieticket.adapter.ViewHolder;
@@ -40,8 +41,10 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
     private boolean isExpand = false;
     private RecyclerView mMovieInfoActorRecyclerview;
     private RecyclerView mMovieInfoCommentRecyclerview;
+    private RecyclerView mMovieInfoPhotoRecyclerview;
     private List<MovieActor> movieActorList;
     private List<Comment> commentList;
+    private List<String> moviePhotoList;
     private Movie movie;
     private String mv_showId;
     private String mv_cname;
@@ -61,6 +64,7 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
 
     private RecyclerViewBaseAdapter<Comment> mCommentAdapter;
     private RecyclerViewBaseAdapter<MovieActor> mMovieActorAdapter;
+    private RecyclerViewBaseAdapter<String> mMoviePhotoAdapter;
     private Button mBtnMovieInfoPickSeat;
 
     @Override
@@ -90,6 +94,7 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
         //设置mMovieInfoTvDescription默认显示高度
         mMovieInfoActorRecyclerview = (RecyclerView) findViewById(R.id.movie_info_actor_recyclerview);
         mMovieInfoCommentRecyclerview = (RecyclerView) findViewById(R.id.movie_info_comment_recyclerview);
+        mMovieInfoPhotoRecyclerview = (RecyclerView) findViewById(R.id.movie_info_photo_recyclerview);
         mMovieBuyImageview = (ImageView) findViewById(R.id.movie_buy_imageview);
         mMovieBuyName = (TextView) findViewById(R.id.movie_buy_name);
         mMovieBuyIs3D = (TextView) findViewById(R.id.movie_buy_is3D);
@@ -117,8 +122,8 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
             mItemMovieRatingbar.setVisibility(View.GONE);
             mItemMovieRatingNums.setText("暂无评分");
         } else {
-            mItemMovieRatingbar.setNumStars((int) (Float.parseFloat(movie.getMv_score()) / 2));
             mItemMovieRatingNums.setText(movie.getMv_score());
+            mItemMovieRatingbar.setRating((float) (Float.parseFloat(movie.getMv_score()) * 0.5));
         }
         mMovieInfoTvDescription.setHeight(mMovieInfoTvDescription.getLineHeight() * maxDescripLine);
     }
@@ -154,16 +159,25 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
 
             }
         });
+        mMoviePhotoAdapter.setOnItemClickListener(new RecyclerViewBaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClickListener(View view, int position) {
+
+            }
+
+            @Override
+            public void onItemLongClickListener(View view, int position) {
+
+            }
+        });
     }
 
     private void initRecyclerView() {
-
         /**
          * 演员RecyclerView
          */
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mMovieActorAdapter = new RecyclerViewBaseAdapter<MovieActor>(this, R.layout.item_recyclerview_movie_actor, movieActorList) {
-
             @Override
             public void convert(ViewHolder holder, MovieActor movieActor) {
                 holder.setText(R.id.tv_item_recyclerview_movie_actor_name, movieActor.getAc_name());
@@ -176,7 +190,6 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
         /**
          * 评论RecyclerView
          */
-
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mCommentAdapter = new RecyclerViewBaseAdapter<Comment>(this, R.layout.item_recyclerview_movie_comment, commentList) {
             @Override
@@ -192,6 +205,19 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
         mMovieInfoCommentRecyclerview.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
         mMovieInfoCommentRecyclerview.setFocusable(false);
         mMovieInfoCommentRecyclerview.setLayoutManager(linearLayoutManager);
+
+        mMoviePhotoAdapter = new RecyclerViewBaseAdapter<String>(this, R.layout.item_recyclerview_movie_image, moviePhotoList) {
+            @Override
+            public void convert(ViewHolder holder, String s) {
+                holder.setImageView(R.id.movie_imageview, s);
+            }
+        };
+
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mMovieInfoPhotoRecyclerview.setAdapter(mMoviePhotoAdapter);
+        mMovieInfoPhotoRecyclerview.setLayoutManager(linearLayoutManager);
+        mMovieInfoPhotoRecyclerview.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+        mMovieInfoPhotoRecyclerview.setFocusable(false);
     }
 
     @Override
@@ -241,6 +267,7 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
         this.movie = movie;
         this.movieActorList = actorList;
         this.commentList = commentList;
+        this.moviePhotoList = JSON.parseArray(movie.getMv_photos(), String.class);
         if (mCommentAdapter == null) {
             if (movie != null && movieActorList != null && commentList != null) {
                 initRecyclerView();

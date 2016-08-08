@@ -6,7 +6,11 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -57,6 +61,12 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     public ViewHolder setText(int viewId, String text) {
         TextView tv = getView(viewId);
         tv.setText(text);
+        return this;
+    }
+
+    public ViewHolder setImageView(int viewId, String imageUrl) {
+        ImageView imageView = getView(viewId);
+        Glide.with(mContext).load(imageUrl).crossFade().centerCrop().diskCacheStrategy(DiskCacheStrategy.RESULT).into(imageView);
         return this;
     }
 

@@ -9,6 +9,7 @@
         android:id="@+id/ll_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/search_et_bg"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/search_ll_padding"
         android:paddingTop="@dimen/search_ll_padding">

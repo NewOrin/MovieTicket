@@ -28,7 +28,7 @@ public interface IUserBiz {
      */
     void register(String phone, String nickname, String password, IUserBizImpl.OnRegisterLinstener onRegisterLinstener);
 
-    void uploadAvatar(File file, String u_id, IUserBizImpl.OnUploadListener onUploadListener);
+    void uploadAvatar(File file, String uphone, IUserBizImpl.OnUploadListener onUploadListener);
 
     void editNickname(Integer u_id,String editName, IUserBizImpl.OnEditNicknameListener onEditNicknameListener);
 }

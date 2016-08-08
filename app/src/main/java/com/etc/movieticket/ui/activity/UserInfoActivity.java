@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.etc.movieticket.R;
+import com.etc.movieticket.presenter.UserPresenter;
 import com.etc.movieticket.ui.i.IUserInfoView;
 import com.etc.movieticket.utils.DialogTool;
 import com.etc.movieticket.utils.ImageUtils;
@@ -38,6 +39,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     private TextView mTvUserInfoVip;
     private String TAG = "UserInfoActivity";
     private String editNickname;
+    private UserPresenter userPresenter = new UserPresenter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void setViewData() {
-        setToolbar(toolbar, "个人信息", null, "");
+        setToolbar(toolbar, "", toolbar_tv_title, "个人信息");
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (getSharedPfStr("avatar_url").equals("")) {
@@ -128,9 +130,10 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
             Crop.of(data.getData(), destination).asSquare().start(UserInfoActivity.this);
         }
         if (requestCode == Crop.REQUEST_CROP && resultCode == RESULT_OK) {
-            Log.d(TAG, "裁剪后返回的uri--->" + data.getData());
             String picPath = ImageUtils.getPath(this, Crop.getOutput(data));
             picPath = ImageUtils.saveBitmap(BitmapFactory.decodeFile(picPath));
+            Log.d(TAG, "裁剪后的图片保存路径--->" + picPath);
+            userPresenter.updateAvatar(new File(picPath), getSharedPfStr("u_phone"));
         }
     }
 
@@ -153,7 +156,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     }
 
     /**
-     * 退出登录?
+     * 退出登录
      */
     private void showConfirmDialog() {
         DialogTool.createAlertDialog(this, "退出登录?", new DialogInterface.OnClickListener() {

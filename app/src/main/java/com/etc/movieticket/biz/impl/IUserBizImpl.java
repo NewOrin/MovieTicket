@@ -85,11 +85,11 @@ public class IUserBizImpl implements IUserBiz {
     }
 
     @Override
-    public void uploadAvatar(final File file, final String u_id, OnUploadListener onUploadListener) {
+    public void uploadAvatar(final File file, final String uphone, OnUploadListener onUploadListener) {
         new Thread() {
             @Override
             public void run() {
-                OkHttpClientManager.getInstance().uploadFile(file, u_id);
+                OkHttpClientManager.getInstance().uploadFile(file, uphone);
             }
         }.start();
     }
