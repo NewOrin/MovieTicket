@@ -126,7 +126,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentBottom="true"
-                                    android:progressDrawable="@drawable/ratingbar_layer"  />
+                                    android:progressDrawable="@drawable/ratingbar_layer" />
 
                                 <TextView
                                     android:id="@+id/item_movie_ratingNums"
@@ -149,34 +149,40 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:id="@+id/movie_info_ll_wanted"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="@dimen/movie_info_wanted_margin"
                             android:layout_marginRight="@dimen/movie_info_wanted_margin"
                             android:layout_weight="1"
                             android:background="@color/movie_info_wanted_bg"
+                            android:clickable="true"
                             android:gravity="center"
                             android:orientation="horizontal">
 
                             <TextView
+                                android:id="@+id/tv_movie_wanted"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="想看" />
 
                             <TextView
+                                android:id="@+id/tv_ic_movie_wanted"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/movie_info_wanted_margin"
-                                android:text="想看" />
+                                android:text="@string/ic_movie_wanted" />
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/movie_info_ll_comment"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="@dimen/movie_info_wanted_margin"
                             android:layout_marginRight="@dimen/movie_info_wanted_margin"
                             android:layout_weight="1"
                             android:background="@color/movie_info_wanted_bg"
+                            android:clickable="true"
                             android:gravity="center"
                             android:orientation="horizontal">
 
@@ -186,10 +192,11 @@
                                 android:text="写影评" />
 
                             <TextView
+                                android:id="@+id/tv_ic_movie_comment"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/movie_info_wanted_margin"
-                                android:text="写影评" />
+                                android:text="@string/ic_movie_comment" />
                         </LinearLayout>
                     </LinearLayout>
 

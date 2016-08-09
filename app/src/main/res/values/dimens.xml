@@ -72,7 +72,7 @@
     <!--Movie Info-->
     <dimen name="movie_info_layout_height">180dp</dimen>
     <dimen name="movie_info_layout_padding_bottom">5dp</dimen>
-    <dimen name="movie_info_wanted_margin">20dp</dimen>
+    <dimen name="movie_info_wanted_margin">10dp</dimen>
     <dimen name="movie_info_imageview_width">100dp</dimen>
     <dimen name="movie_info_tv_height">150dp</dimen>
     <dimen name="movie_info_tv_width">200dp</dimen>
@@ -114,4 +114,12 @@
     <dimen name="search_ll_padding">5dp</dimen>
     <dimen name="search_et_height">40dp</dimen>
     <dimen name="search_history_listview_height">40dp</dimen>
+
+    <!--ActorInfoActivity-->
+    <dimen name="actor_info_margin_5dp">5dp</dimen>
+    <dimen name="actor_info_margin_10dp">10dp</dimen>
+
+    <!--CommentActivity-->
+    <dimen name="comment_activity_layout_margin_5dp">5dp</dimen>
+    <dimen name="comment_activity_layout_margin_10dp">10dp</dimen>
 </resources>

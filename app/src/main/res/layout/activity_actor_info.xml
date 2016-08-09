@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.etc.movieticket.ui.activity.ActorInfoActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/actor_info_swipelayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:id="@+id/actor_info_scrollview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/movie_info_layout_height"
+                    android:background="#687676"
+                    android:paddingBottom="@dimen/movie_info_layout_padding_bottom">
+
+                    <ImageView
+                        android:id="@+id/actor_info_imageview"
+                        android:layout_width="@dimen/movie_info_imageview_width"
+                        android:layout_height="@dimen/movie_info_imageview_height"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/movie_info_margin"
+                        android:scaleType="centerCrop"  />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/movie_info_tv_height"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/movie_info_margin"
+                        android:layout_marginRight="@dimen/movie_info_margin"
+                        android:layout_toRightOf="@+id/actor_info_imageview">
+
+                        <TextView
+                            android:id="@+id/actor_info_cname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/actor_info_margin_10dp"
+                            android:text=""
+                            android:textColor="@color/text_color_white"
+                            android:textSize="@dimen/text_medium_size" />
+
+                        <TextView
+                            android:id="@+id/actor_info_ename"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/actor_info_cname"
+                            android:layout_marginTop="@dimen/actor_info_margin_10dp"
+                            android:text=""
+                            android:textColor="@color/text_color_white" />
+
+                        <TextView
+                            android:id="@+id/actor_info_birthday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/actor_info_ename"
+                            android:layout_marginTop="@dimen/actor_info_margin_10dp"
+                            android:text=""
+                            android:textColor="@color/text_color_white" />
+
+                        <TextView
+                            android:id="@+id/actor_info_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/actor_info_birthday"
+                            android:layout_marginTop="@dimen/actor_info_margin_10dp"
+                            android:text=""
+                            android:textColor="@color/text_color_white" />
+
+                        <TextView
+                            android:id="@+id/actor_info_duty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/actor_info_location"
+                            android:layout_marginTop="@dimen/actor_info_margin_10dp"
+                            android:text=""
+                            android:textColor="@color/text_color_white" />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/movie_info_margin"
+                    android:layout_marginTop="20dp"
+                    android:text="影人简介"
+                    android:textColor="@color/text_color_black"
+                    android:textSize="@dimen/text_medium_size" />
+
+                <LinearLayout
+                    android:id="@+id/actor_info_layout_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/movie_info_margin"
+                    android:layout_marginRight="@dimen/movie_info_margin"
+                    android:clickable="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/actor_info_tv_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_medium_size" />
+
+                    <TextView
+                        android:id="@+id/actor_info_tv_expand"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="展开"
+                        android:textColor="@color/movie_info_tv_expand"
+                        android:textSize="@dimen/text_medium_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/movie_info_margin"
+                    android:layout_marginRight="@dimen/movie_info_margin"
+                    android:layout_marginTop="@dimen/movie_info_margin"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="电影作品"
+                        android:textColor="@color/text_color_black"
+                        android:textSize="@dimen/text_size_18_sp" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/actor_info_works_recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/movie_info_margin"
+                    android:layout_marginRight="@dimen/movie_info_margin"
+                    android:layout_marginTop="@dimen/movie_info_margin"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="影人相册"
+                        android:textColor="@color/text_color_black"
+                        android:textSize="@dimen/text_size_18_sp" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/actor_info_photos_recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

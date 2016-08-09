@@ -1,5 +1,6 @@
 package com.etc.movieticket.ui.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -61,11 +62,13 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
     private RatingBar mItemMovieRatingbar;
     private TextView mItemMovieRatingNums;
     private TextView toolbar_tv_title;
-
+    private TextView tv_ic_movie_wanted, tv_ic_movie_comment, tv_movie_wanted;
+    private LinearLayout movie_info_ll_wanted, movie_info_ll_comment;
     private RecyclerViewBaseAdapter<Comment> mCommentAdapter;
     private RecyclerViewBaseAdapter<MovieActor> mMovieActorAdapter;
     private RecyclerViewBaseAdapter<String> mMoviePhotoAdapter;
     private Button mBtnMovieInfoPickSeat;
+    private boolean isWanted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +109,16 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
         mItemMovieRatingbar = (RatingBar) findViewById(R.id.item_movie_ratingbar);
         mItemMovieRatingNums = (TextView) findViewById(R.id.item_movie_ratingNums);
         mBtnMovieInfoPickSeat = (Button) findViewById(R.id.btn_movie_info_pick_seat);
+        tv_movie_wanted = (TextView) findViewById(R.id.tv_movie_wanted);
         mBtnMovieInfoPickSeat.setOnClickListener(this);
+
+        tv_ic_movie_wanted = (TextView) findViewById(R.id.tv_ic_movie_wanted);
+        tv_ic_movie_wanted.setTypeface(mTypeface2);
+        tv_ic_movie_comment = (TextView) findViewById(R.id.tv_ic_movie_comment);
+        tv_ic_movie_comment.setTypeface(mTypeface2);
+
+        movie_info_ll_wanted = (LinearLayout) findViewById(R.id.movie_info_ll_wanted);
+        movie_info_ll_comment = (LinearLayout) findViewById(R.id.movie_info_ll_comment);
     }
 
     private void setMovieViewData() {
@@ -140,7 +152,9 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
         mMovieActorAdapter.setOnItemClickListener(new RecyclerViewBaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(View view, int position) {
-
+                Bundle bundle = new Bundle();
+                bundle.putString("webid", movieActorList.get(position).getAc_webId() + "");
+                startActivity(ActorInfoActivity.class, bundle);
             }
 
             @Override
@@ -170,6 +184,8 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
 
             }
         });
+        movie_info_ll_wanted.setOnClickListener(this);
+        movie_info_ll_comment.setOnClickListener(this);
     }
 
     private void initRecyclerView() {
@@ -194,7 +210,7 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
         mCommentAdapter = new RecyclerViewBaseAdapter<Comment>(this, R.layout.item_recyclerview_movie_comment, commentList) {
             @Override
             public void convert(ViewHolder holder, Comment comment) {
-                MyImageUtils.loadMovieActorAvatarImageView(MovieInfoActivity.this, (ImageView) holder.getView(R.id.item_comment_avatar), comment.getCm_userAvatar());
+                MyImageUtils.loadActorAvatarImageView(MovieInfoActivity.this, (ImageView) holder.getView(R.id.item_comment_avatar), comment.getCm_userAvatar());
                 holder.setText(R.id.tv_comment_name, comment.getCm_userName());
                 holder.setText(R.id.tv_comment_content, comment.getCm_content());
                 holder.setText(R.id.tv_comment_time, comment.getCm_time());
@@ -228,6 +244,24 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
                 break;
             case R.id.btn_movie_info_pick_seat:
                 startActivity(PickSeatActivity.class, null);
+                break;
+            case R.id.movie_info_ll_wanted:
+                if (!isWanted) {
+                    tv_movie_wanted.setText("已想看");
+                    tv_ic_movie_wanted.setTextColor(Color.RED);
+                    isWanted = true;
+                    showToast("已添加到想看的电影");
+                } else {
+                    tv_movie_wanted.setText("想看");
+                    tv_ic_movie_wanted.setTextColor(getResources().getColor(R.color.tv_text_default));
+                    isWanted = false;
+                }
+                break;
+            case R.id.movie_info_ll_comment:
+                Bundle bundle = new Bundle();
+                bundle.putString("mv_showId", mv_showId);
+                bundle.putString("mv_cname", mv_cname);
+                startActivity(CommentActivity.class, bundle);
                 break;
         }
     }
@@ -270,8 +304,8 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
         this.moviePhotoList = JSON.parseArray(movie.getMv_photos(), String.class);
         if (mCommentAdapter == null) {
             if (movie != null && movieActorList != null && commentList != null) {
-                initRecyclerView();
                 setMovieViewData();
+                initRecyclerView();
                 initListener();
             } else {
                 showToast("暂无数据");
@@ -296,6 +330,16 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
     public void getMovieInfoFailed(String errorMsg) {
         showToast(errorMsg);
         mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void addWantedMovieSuccess() {
+
+    }
+
+    @Override
+    public void addWantedMovieFailed(String errorMsg) {
+
     }
 
     @Override

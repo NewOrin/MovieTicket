@@ -34,6 +34,18 @@ public class IMovieBizImpl implements IMovieBiz {
         void getMovieInfoDataFailed(String errorMsg);
     }
 
+    public interface IAddMovieWanted {
+        void addMovieWantedSuccess();
+
+        void addMovieWantedFailed(String errorMsg);
+    }
+
+    public interface IMovieComment {
+        void commentMovieSuccess();
+
+        void commentMovieFailed();
+    }
+
     @Override
     public void getMovieData(final IGetMovieData iGetMovieData, final String movieFlag) {
         new Thread() {
@@ -72,6 +84,31 @@ public class IMovieBizImpl implements IMovieBiz {
                     iGetMovieInfoData.getMovieInfoDataSuccess(JSON.parseObject(result).getObject("movie", Movie.class),
                             JSON.parseArray(JSON.parseObject(result).getJSONArray("comment").toString(), Comment.class),
                             JSON.parseArray(JSON.parseObject(result).getJSONArray("actors").toString(), MovieActor.class));
+                }
+            }
+        }.start();
+    }
+
+    @Override
+    public void addMovieWanted(String u_phone, String mv_showId, IAddMovieWanted iAddMovieWanted) {
+        new Thread() {
+            @Override
+            public void run() {
+
+            }
+        }.start();
+    }
+
+    @Override
+    public void commentMovie(final Comment comment, final IMovieComment iMovieComment) {
+        new Thread() {
+            @Override
+            public void run() {
+                String result = OkHttpClientManager.getInstance().doHttpPost("", JSON.toJSONString(comment));
+                if (result.equals("error")) {
+                    iMovieComment.commentMovieSuccess();
+                } else {
+                    iMovieComment.commentMovieFailed();
                 }
             }
         }.start();

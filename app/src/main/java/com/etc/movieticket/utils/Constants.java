@@ -11,6 +11,7 @@ public class Constants {
     public static final String DO_REGISTER = "user/add";
     public static final String DO_GET_MOVIE = "movie/released?pagenum=1";
     public static final String DO_GET_MOVIE_INFO = "movie/selectinf?showid=";
+    public static final String DO_GET_ACTOR_INFO = "actor/actorinf?webid=";
     public static final String M_IMAX = "imax2d";
     public static final String M_IMAX_3D = "imax3d";
     public static final String M_3D = "m3d";

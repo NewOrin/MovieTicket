@@ -57,8 +57,10 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"></service>
+            android:process=":remote" />
 
+        <activity android:name=".ui.activity.ActorInfoActivity" />
+        <activity android:name=".ui.activity.CommentActivity"></activity>
     </application>
 
 </manifest>

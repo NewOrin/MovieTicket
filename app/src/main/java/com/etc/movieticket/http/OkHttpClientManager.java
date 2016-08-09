@@ -74,7 +74,7 @@ public class OkHttpClientManager {
      * @param url
      * @return
      */
-    public String doHttp(RequestBody body, String url) {
+    private String doHttp(RequestBody body, String url) {
         String result;
         Request request;
         if (body == null) {
@@ -106,11 +106,12 @@ public class OkHttpClientManager {
 
     /**
      * 上传头像
+     *
      * @param file
      * @param uphone
      * @return
      */
-    public String uploadFile(File file,String uphone) {
+    public String uploadFile(File file, String uphone) {
         RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart("u_phone", uphone)
                 .addFormDataPart("image", "avatar.jpg", RequestBody.create(MEDIA_TYPE_PNG, file)).build();
         Request request = new Request.Builder()
@@ -120,12 +121,12 @@ public class OkHttpClientManager {
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Log.d(TAG,"上传失败");
+                Log.d(TAG, "上传失败");
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Log.d(TAG,"上传成功");
+                Log.d(TAG, "上传成功");
             }
         });
         return "";

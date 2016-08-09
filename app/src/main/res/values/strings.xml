@@ -17,6 +17,9 @@
     <string name="ic_arrow_down">&#xe62b;</string>
     <string name="ic_movie_search">&#xe66e;</string>
 
+    <string name="ic_movie_wanted">&#xe7e8;</string>
+    <string name="ic_movie_comment">&#xe663;</string>
+
     <string name="title_activity_movie_detail">MovieDetailActivity</string>
     <string name="large_text">
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."

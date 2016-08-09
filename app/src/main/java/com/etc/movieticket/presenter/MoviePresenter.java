@@ -81,4 +81,19 @@ public class MoviePresenter {
             }
         }, mv_showId);
     }
+
+    public void doAddMovieWanted(String u_phone, String mv_showId) {
+        iMovieBiz.addMovieWanted(u_phone, mv_showId, new IMovieBizImpl.IAddMovieWanted() {
+            @Override
+            public void addMovieWantedSuccess() {
+                iMovieInfoView.addWantedMovieSuccess();
+            }
+
+            @Override
+            public void addMovieWantedFailed(String errorMsg) {
+                iMovieInfoView.addWantedMovieFailed(errorMsg);
+            }
+
+        });
+    }
 }

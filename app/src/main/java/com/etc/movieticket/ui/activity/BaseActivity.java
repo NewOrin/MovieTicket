@@ -22,6 +22,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private ProgressDialog mProgressDialog;
     protected Typeface mTypeface;
+    protected Typeface mTypeface2;
     protected SwipeRefreshLayout mSwipeRefreshLayout;
     protected boolean isRefresh = false;
 
@@ -29,6 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mTypeface = Typeface.createFromAsset(getAssets(), "iconfont.ttf");
+        mTypeface2 = Typeface.createFromAsset(getAssets(), "iconfont02.ttf");
     }
 
     protected abstract void initView();//初始化控件

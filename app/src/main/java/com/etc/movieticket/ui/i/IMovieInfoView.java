@@ -15,4 +15,8 @@ public interface IMovieInfoView {
     void getMovieInfoSucceed(Movie movie, List<Comment> commentList, List<MovieActor> actorList);
 
     void getMovieInfoFailed(String errorMsg);
+
+    void addWantedMovieSuccess();
+
+    void addWantedMovieFailed(String errorMsg);
 }

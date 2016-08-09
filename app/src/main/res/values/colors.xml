@@ -18,6 +18,7 @@
     <color name="tv_bottom_color">#757575</color>
     <color name="tv_cinema_summber_vacation">#FEB56C</color>
     <color name="tv_text_edit_pwd_color">#8000FF</color>
+    <color name="tv_text_default">#6B6B6B</color>
     <!--Button-->
     <color name="btn_color_pressed">#CC4556</color>
     <color name="btn_color_normal">#FF4D64</color>

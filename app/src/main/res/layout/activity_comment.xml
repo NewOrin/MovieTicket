@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.etc.movieticket.ui.activity.CommentActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_layout_bg"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_comment_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="尚未评分"
+            android:textSize="@dimen/text_medium_size" />
+
+        <RatingBar
+            android:id="@+id/rating_bar_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/comment_activity_layout_margin_10dp" />
+
+        <EditText
+            android:id="@+id/et_comment"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="@dimen/comment_activity_layout_margin_10dp"
+            android:background="@null"
+            android:gravity="top|left"
+            android:hint="写出我的看法"
+            android:padding="5dp"
+            android:textSize="@dimen/text_medium_size" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_comment_publish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/comment_activity_layout_margin_5dp"
+        android:layout_marginTop="@dimen/comment_activity_layout_margin_5dp"
+        android:background="@drawable/btn_selector"
+        android:text="发布"
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/text_medium_size" />
+
+</LinearLayout>
