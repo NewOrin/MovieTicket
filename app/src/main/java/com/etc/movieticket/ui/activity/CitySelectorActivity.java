@@ -114,8 +114,10 @@ public class CitySelectorActivity extends BaseActivity implements View.OnClickLi
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // 这里要利用adapter.getItem(position)来获取当前position所对应的对象
 //                if (position != 0) {
-                    Toast.makeText(getApplication(), ((SortModel) sortAdapter.getItem(position)).getName(), Toast.LENGTH_SHORT).show();
-                    hideSoftInput(mClearEditText.getWindowToken());
+//                Toast.makeText(getApplication(), ((SortModel) sortAdapter.getItem(position)).getName(), Toast.LENGTH_SHORT).show();
+                saveSharedPfStr("place", ((SortModel) sortAdapter.getItem(position)).getName());
+//                hideSoftInput(mClearEditText.getWindowToken());
+                finish();
 //                }
             }
         });

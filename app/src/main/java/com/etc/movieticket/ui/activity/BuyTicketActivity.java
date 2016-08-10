@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
@@ -48,11 +49,13 @@ public class BuyTicketActivity extends BaseActivity implements View.OnClickListe
     private RecyclerView mRecyclerviewBuyTicket;
     private ScrollView mBuyTicketScrollview;
     private SwipeRefreshLayout mBuyTicketSwipeLayout;
+    private String movie_cname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy_ticket);
+        movie_cname = getPassStringData(getIntent(), "mv_cname");
         initView();
         setRecyclerView();
         initListener();
@@ -75,8 +78,7 @@ public class BuyTicketActivity extends BaseActivity implements View.OnClickListe
         mMovieBuyTime = (TextView) findViewById(R.id.movie_buy_time);
         mItemMovieRatingbar = (RatingBar) findViewById(R.id.item_movie_ratingbar);
         mItemMovieRatingNums = (TextView) findViewById(R.id.item_movie_ratingNums);
-
-        mToolbarTvTitle.setText("电影详情");
+        setToolbar(mToolbar, "", mToolbarTvTitle, movie_cname);
 
         mTabLayoutBuyTicket = (TabLayout) findViewById(R.id.tab_layout_buy_ticket);
         mTabLayoutBuyTicket.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -89,6 +91,8 @@ public class BuyTicketActivity extends BaseActivity implements View.OnClickListe
         mBuyTicketScrollview = (ScrollView) findViewById(R.id.buy_ticket_scrollview);
         mBuyTicketSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.buy_ticket_swipe_layout);
         mBuyTicketSwipeLayout.setColorSchemeColors(Color.RED);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     private void setRecyclerView() {
@@ -153,7 +157,6 @@ public class BuyTicketActivity extends BaseActivity implements View.OnClickListe
         mTabLayoutBuyTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("点击..");
             }
         });
     }
@@ -161,5 +164,14 @@ public class BuyTicketActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

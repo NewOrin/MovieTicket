@@ -8,16 +8,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.etc.movieticket.R;
-import com.etc.movieticket.entity.Movie;
+import com.etc.movieticket.entity.Cinema;
 import com.etc.movieticket.widget.BaseRecyclerAdapter;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by NewOrin Zhang on 2016/7/31.
  * E-Mail : NewOrinZhang@Gmail.com
  */
-public class RecyclerViewCinemaAdapter extends BaseRecyclerAdapter<Movie, MyViewHolder> {
+public class RecyclerViewCinemaAdapter extends BaseRecyclerAdapter<Cinema, CinemaViewHolder> {
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -35,18 +35,21 @@ public class RecyclerViewCinemaAdapter extends BaseRecyclerAdapter<Movie, MyView
         super(context);
     }
 
-    public RecyclerViewCinemaAdapter(Context mContext, LinkedList<Movie> mItemLists) {
+    public RecyclerViewCinemaAdapter(Context mContext, List<Cinema> mItemLists) {
         super(mContext, mItemLists);
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CinemaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_recyclerview_cinema, parent, false);
-        return new MyViewHolder(view);
+        return new CinemaViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final CinemaViewHolder holder, final int position) {
+        holder.item_tv_cinema_name.setText(mItemLists.get(position).getC_name());
+        holder.item_tv_cinema_address.setText(mItemLists.get(position).getC_address());
+        holder.item_tv_cinema_price.setText(mItemLists.get(position).getC_price() + "元起");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,9 +68,12 @@ public class RecyclerViewCinemaAdapter extends BaseRecyclerAdapter<Movie, MyView
 }
 
 class CinemaViewHolder extends RecyclerView.ViewHolder {
+    public TextView item_tv_cinema_name, item_tv_cinema_price, item_tv_cinema_address;
 
     public CinemaViewHolder(View itemView) {
         super(itemView);
-
+        item_tv_cinema_name = (TextView) itemView.findViewById(R.id.item_tv_cinema_name);
+        item_tv_cinema_price = (TextView) itemView.findViewById(R.id.item_tv_cinema_price);
+        item_tv_cinema_address = (TextView) itemView.findViewById(R.id.item_tv_cinema_address);
     }
 }

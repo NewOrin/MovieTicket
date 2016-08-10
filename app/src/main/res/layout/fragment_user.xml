@@ -24,7 +24,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_avatar"
+                android:src="@drawable/ic_user_default_avatar"
                 app:layout_marginTopPercent="8%" />
 
             <TextView
@@ -34,7 +34,6 @@
                 android:layout_below="@+id/img_avatar"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="0dp"
-                android:text="NewOrin"
                 android:textColor="@color/text_color_black"
                 android:textSize="@dimen/text_size_18_sp"
                 app:layout_marginTopPercent="3%" />
@@ -83,9 +82,10 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_ic_ticket"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="电影票"
+                    android:text="@string/ic_movie_ticket"
                     android:textSize="@dimen/text_size_18_sp" />
 
                 <TextView
@@ -103,9 +103,10 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_ic_perform"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="演出票"
+                    android:text="@string/ic_perform_ticket"
                     android:textSize="@dimen/text_size_18_sp" />
 
                 <TextView
@@ -123,9 +124,10 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_ic_coupon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="优惠券"
+                    android:text="@string/ic_coupon_ticket"
                     android:textSize="@dimen/text_size_18_sp" />
 
                 <TextView
@@ -143,9 +145,10 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_ic_vip_card"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="VIP"
+                    android:text="@string/ic_vip_card"
                     android:textSize="@dimen/text_size_18_sp" />
 
                 <TextView
@@ -178,10 +181,11 @@
                     app:layout_marginLeftPercent="5%" />
 
                 <TextView
+                    android:id="@+id/tv_ic_arrow_right01"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="想看的电影"
+                    android:text="@string/ic_arrow_right"
                     android:textSize="@dimen/text_medium_size"
                     app:layout_marginRightPercent="5%" />
             </android.support.percent.PercentRelativeLayout>
@@ -203,10 +207,11 @@
                     app:layout_marginLeftPercent="5%" />
 
                 <TextView
+                    android:id="@+id/tv_ic_arrow_right02"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="看过的电影"
+                    android:text="@string/ic_arrow_right"
                     android:textSize="@dimen/text_medium_size"
                     app:layout_marginRightPercent="5%" />
             </android.support.percent.PercentRelativeLayout>
@@ -228,10 +233,11 @@
                     app:layout_marginLeftPercent="5%" />
 
                 <TextView
+                    android:id="@+id/tv_ic_arrow_right03"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="设置"
+                    android:text="@string/ic_arrow_right"
                     android:textSize="@dimen/text_medium_size"
                     app:layout_marginRightPercent="5%" />
             </android.support.percent.PercentRelativeLayout>

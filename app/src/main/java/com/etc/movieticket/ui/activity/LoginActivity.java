@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.etc.movieticket.R;
 import com.etc.movieticket.entity.User;
 import com.etc.movieticket.presenter.UserPresenter;
@@ -33,7 +34,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         initView();
         initListener();
         setToolbar(mToolbar, "账号登录", null, "");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -99,12 +99,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     }
 
     @Override
-    public void loginSuccess() {
+    public void loginSuccess(String userinfo) {
         closemProgressDialog();
         showToast("登录成功");
         saveSharedPfStr("u_phone", getUserPhone());
         saveSharedPfStr("u_pwd", getPassword());
         startActivity(MainActivity.class, null);
+        User user = JSON.parseObject(userinfo, User.class);
+        saveSharedPfStr("u_nickname", user.getU_nickname());
+        if (user.getU_avatar() != null) {
+            saveSharedPfStr("u_avatar", user.getU_avatar());
+        }
         finish();
     }
 

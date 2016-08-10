@@ -8,8 +8,8 @@
     tools:context="com.etc.movieticket.ui.activity.BuyTicketActivity">
 
     <ScrollView
-        android:layout_width="match_parent"
         android:id="@+id/buy_ticket_scrollview"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -19,15 +19,11 @@
 
             <include layout="@layout/toolbar" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/text_color_black" />
-
             <android.support.percent.PercentRelativeLayout
                 android:layout_width="match_parent"
-                android:gravity="center_vertical"
-                android:layout_height="80dp">
+                android:layout_height="80dp"
+                android:background="@drawable/item_layout_bg"
+                android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/tv_buy_ticket_movie_name"
@@ -75,8 +71,7 @@
                     android:layout_height="@dimen/movie_info_imageview_height"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="@dimen/movie_info_margin"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_test" />
+                    android:scaleType="centerCrop" />
 
                 <RelativeLayout
                     android:layout_width="@dimen/movie_info_tv_width"
@@ -89,7 +84,8 @@
                         android:id="@+id/movie_buy_name"
                         style="@style/MyRecyclerViewMovieTextViewStyle"
                         android:layout_alignParentTop="true"
-                        android:text="绝地逃亡"
+                        android:textColor="@color/text_color_white"
+                        android:text=""
                         android:textSize="@dimen/text_size_20_sp" />
 
                     <TextView
@@ -121,25 +117,25 @@
                         android:id="@+id/movie_buy_ename"
                         style="@style/MyMovieInfoTextViewStyle"
                         android:layout_below="@+id/movie_buy_name"
-                        android:text="Skiptrace" />
+                        android:text="" />
 
                     <TextView
                         android:id="@+id/movie_buy_type"
                         style="@style/MyMovieInfoTextViewStyle"
                         android:layout_below="@+id/movie_buy_ename"
-                        android:text="Skiptrace" />
+                        android:text="" />
 
                     <TextView
                         android:id="@+id/movie_buy_location"
                         style="@style/MyMovieInfoTextViewStyle"
                         android:layout_below="@+id/movie_buy_type"
-                        android:text="Skiptrace" />
+                        android:text="" />
 
                     <TextView
                         android:id="@+id/movie_buy_time"
                         style="@style/MyMovieInfoTextViewStyle"
                         android:layout_below="@+id/movie_buy_location"
-                        android:text="Skiptrace" />
+                        android:text="" />
 
                     <android.support.percent.PercentRelativeLayout
                         android:layout_width="match_parent"
@@ -153,8 +149,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
-                            android:progressDrawable="@drawable/ratingbar_layer"
-                            android:rating="3.7" />
+                            android:progressDrawable="@drawable/ratingbar_layer"/>
 
                         <TextView
                             android:id="@+id/item_movie_ratingNums"
@@ -162,7 +157,6 @@
                             android:layout_alignParentBottom="true"
                             android:layout_marginLeft="0dp"
                             android:layout_toRightOf="@+id/item_movie_ratingbar"
-                            android:text="3.7"
                             android:textSize="@dimen/text_small_size"
                             app:layout_marginLeftPercent="3%" />
                     </android.support.percent.PercentRelativeLayout>

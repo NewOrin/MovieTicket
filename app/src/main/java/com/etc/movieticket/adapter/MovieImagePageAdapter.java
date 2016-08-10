@@ -29,12 +29,6 @@ public class MovieImagePageAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
         ImageView imageView = imageViewList.get(position % imageViewList.size());
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "点击了第" + (position % imageViewList.size()) + 1 + "张图片");
-            }
-        });
         if (imageView.getParent() == null) {
             container.addView(imageView);
         } else {

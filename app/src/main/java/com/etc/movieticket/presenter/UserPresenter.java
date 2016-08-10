@@ -45,12 +45,12 @@ public class UserPresenter {
     public void userLogin() {
         userBiz.login(userLoginView.getUserPhone(), userLoginView.getPassword(), new IUserBizImpl.OnLoginListener() {
             @Override
-            public void loginSuccess() {
+            public void loginSuccess(final String userinfo) {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         Log.d(TAG, "登录成功!");
-                        userLoginView.loginSuccess();
+                        userLoginView.loginSuccess(userinfo);
                     }
                 });
             }

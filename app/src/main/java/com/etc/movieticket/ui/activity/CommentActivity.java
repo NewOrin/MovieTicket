@@ -92,7 +92,13 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     @Override
     public Comment getComment() {
         Comment comment = new Comment();
-        return null;
+        comment.setCm_content(mEtComment.getText().toString());
+        comment.setCm_score(mRatingBarComment.getRating() * 2 + "");
+        comment.setCm_showMvId(mv_showId);
+        comment.setCm_userId(Integer.parseInt(getSharedPfStr("u_phone")));
+        comment.setCm_userAvatar(getSharedPfStr("u_avatar"));
+        comment.setCm_userName(getSharedPfStr("u_name"));
+        return comment;
     }
 
     @Override

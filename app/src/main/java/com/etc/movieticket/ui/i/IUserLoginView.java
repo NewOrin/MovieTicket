@@ -25,7 +25,7 @@ public interface IUserLoginView {
     /**
      * 登录成功
      */
-    void loginSuccess();
+    void loginSuccess(String userinfo);
 
     /**
      * 登录失败

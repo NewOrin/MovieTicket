@@ -60,7 +60,8 @@
             android:process=":remote" />
 
         <activity android:name=".ui.activity.ActorInfoActivity" />
-        <activity android:name=".ui.activity.CommentActivity"></activity>
+        <activity android:name=".ui.activity.CommentActivity" />
+        <activity android:name=".ui.activity.CinemaMovieActivity"></activity>
     </application>
 
 </manifest>

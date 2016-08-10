@@ -56,7 +56,7 @@ public class IMovieBizImpl implements IMovieBiz {
                 if (result.equals("error") | result.equals("网络请求错误")) {
                     iGetMovieData.getMovieDataFailed(result);
                 } else {
-                    iGetMovieData.getMovieDataSuccess((List<Movie>) MyJsonUtils.json2List(result));
+                    iGetMovieData.getMovieDataSuccess(JSON.parseArray(result,Movie.class));
                 }
             }
         }.start();

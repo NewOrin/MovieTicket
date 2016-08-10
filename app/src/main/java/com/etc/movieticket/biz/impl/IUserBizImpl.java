@@ -19,7 +19,7 @@ public class IUserBizImpl implements IUserBiz {
     private static final String TAG = "IUserBizImpl";
 
     public interface OnLoginListener {
-        void loginSuccess();
+        void loginSuccess(String userinfo);
 
         void loginFailed(String errorMsg);
     }
@@ -54,10 +54,10 @@ public class IUserBizImpl implements IUserBiz {
                 Log.d(TAG, "用户登录:" + json);
                 String result = OkHttpClientManager.getInstance().doHttpPost(Constants.SERVER_URL + Constants.DO_LOGIN, json);
                 Log.d(TAG, "返回：" + result);
-                if (result.equals("ok")) {
-                    onLoginListener.loginSuccess();
-                } else {
+                if (result.equals("error")) {
                     onLoginListener.loginFailed(result);
+                } else {
+                    onLoginListener.loginSuccess(result);
                 }
             }
         }.start();

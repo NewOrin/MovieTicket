@@ -75,7 +75,7 @@ public class ComingFragment extends BaseFragment implements IMovieView {
 
             @Override
             public void onItemLongClick(View view, int position) {
-                Toast.makeText(getActivity(), "long click " + position, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "long click " + position, Toast.LENGTH_SHORT).show();
             }
         });
 

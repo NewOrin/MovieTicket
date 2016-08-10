@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +19,20 @@ import android.widget.Toast;
 import com.etc.movieticket.R;
 import com.etc.movieticket.adapter.MovieImagePageAdapter;
 import com.etc.movieticket.adapter.RecyclerViewCinemaAdapter;
+import com.etc.movieticket.entity.Cinema;
 import com.etc.movieticket.entity.Movie;
+import com.etc.movieticket.presenter.CinemaPresenter;
+import com.etc.movieticket.ui.activity.CinemaMovieActivity;
+import com.etc.movieticket.ui.i.ICinemaView;
 import com.etc.movieticket.utils.DividerItemDecoration;
+import com.etc.movieticket.utils.MyImageUtils;
 import com.etc.movieticket.widget.WrapAdapter;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CinemaFragment extends BaseFragment {
+public class CinemaFragment extends BaseFragment implements ICinemaView {
 
     private View view;
     private String TAG = "CinemaFragment";
@@ -46,7 +52,9 @@ public class CinemaFragment extends BaseFragment {
 
     private SwipeRefreshLayout mSwipeLayout;
 
-    private LinkedList<Movie> movieDatas;
+    private List<Cinema> cinemaList;
+
+    private CinemaPresenter cinemaPresenter = new CinemaPresenter(this);
 
     public CinemaFragment() {
         // Required empty public constructor
@@ -57,27 +65,23 @@ public class CinemaFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_cinema, container, false);
-        initHeaderView();
-        initDatas();
-        initView();
-        initListener();
+        showmProgressDialog("正在加载");
+        cinemaPresenter.doGetCinemaData(getSharedPfStr("place"));
         return view;
     }
 
     private void initDatas() {
-
-        //电影数据
-        movieDatas = new LinkedList<>();
-        for (int i = 1; i < 31; i++) {
-            movieDatas.add(new Movie("泰山归来：险战丛林"));
-        }
+        carouselImageUrls = new String[]{
+                "http://p1.meituan.net/movie/6faa351e8606eca3eb1c1007bb87ff50104448.jpg@750w_1l",
+                "http://p0.meituan.net/movie/1ffe638c14f06e0b4a540c2045da9c6579872.jpg@750w_1l",
+                "http://p1.meituan.net/movie/3174d7bb3ca02a817b0a4cfe57aaf25a94208.jpg@750w_1l",
+                "http://p1.meituan.net/movie/bd3d302bedc0a9cdcf4d7b7aaa4ad45c313344.jpg@750w_1l"};
         //轮播图片数据
-        int[] movieImageIds = {R.drawable.pic_test1, R.drawable.pic_test2, R.drawable.pic_test3, R.drawable.pic_test4, R.drawable.pic_test5};
-        for (int i = 0; i < movieImageIds.length; i++) {
+        for (int i = 0; i < carouselImageUrls.length; i++) {
             imageView = new ImageView(getActivity());
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-            imageView.setBackgroundResource(movieImageIds[i]);
+            MyImageUtils.loadCarouseImageView(getActivity(), imageView, carouselImageUrls[i]);
             imageViewList.add(imageView);
         }
 
@@ -109,12 +113,11 @@ public class CinemaFragment extends BaseFragment {
         mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.movie_swipelayout);
         mSwipeLayout.setColorSchemeColors(Color.RED);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_cinema);
-
         //轮播图片
         mMovieImagePageAdapter = new MovieImagePageAdapter(imageViewList);
         mViewPager.setAdapter(mMovieImagePageAdapter);
         //RecyclerView
-        mRecyclerViewCinemaAdapter = new RecyclerViewCinemaAdapter(getActivity(), movieDatas);
+        mRecyclerViewCinemaAdapter = new RecyclerViewCinemaAdapter(getActivity(), cinemaList);
         mWrapAdapter = new WrapAdapter<>(mRecyclerViewCinemaAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
@@ -148,24 +151,20 @@ public class CinemaFragment extends BaseFragment {
         mRecyclerViewCinemaAdapter.setOnItemClickListener(new RecyclerViewCinemaAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity(), "click " + position, Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                bundle.putString("cinema", cinemaList.get(position).getC_name());
+                startActivity(CinemaMovieActivity.class, bundle);
             }
 
             @Override
             public void onItemLongClick(View view, int position) {
-                Toast.makeText(getActivity(), "long click " + position, Toast.LENGTH_SHORT).show();
             }
         });
         mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 mSwipeLayout.setRefreshing(true);
-                mSwipeLayout.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mSwipeLayout.setRefreshing(false);
-                    }
-                });
+                cinemaPresenter.doGetCinemaData(getSharedPfStr("place"));
             }
         });
     }
@@ -189,4 +188,41 @@ public class CinemaFragment extends BaseFragment {
             mHandler.sendEmptyMessageDelayed(0, 3000);
         }
     };
+
+    @Override
+    public void getCinemaSuccess(List<Cinema> cinemaList) {
+        Log.d(TAG, "获取电影数据长度:" + cinemaList.size());
+        this.cinemaList = cinemaList;
+        if (cinemaList.size() > 0) {
+            if (mRecyclerViewCinemaAdapter == null) {
+                initHeaderView();
+                initDatas();
+                initView();
+                initListener();
+            } else {
+                mRecyclerViewCinemaAdapter.notifyDataSetChanged();
+            }
+        } else {
+            showToast("暂无数据");
+        }
+        mSwipeLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeLayout.setRefreshing(false);
+            }
+        });
+        closemProgressDialog();
+    }
+
+    @Override
+    public void getCinemaFailed(String errorMsg) {
+        showToast("获取数据失败");
+        closemProgressDialog();
+        mSwipeLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeLayout.setRefreshing(false);
+            }
+        });
+    }
 }

@@ -164,7 +164,7 @@ public class HotMovieFragment extends BaseFragment implements IMovieView, SwipeR
 
             @Override
             public void onItemLongClick(View view, int position) {
-                Toast.makeText(getActivity(), "long click " + position, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "long click " + position, Toast.LENGTH_SHORT).show();
             }
         });
         mRecyclerViewMovieAdapter.setOnItemViewClickListener(new RecyclerViewMovieAdapter.OnItemViewClickListener() {
@@ -172,7 +172,9 @@ public class HotMovieFragment extends BaseFragment implements IMovieView, SwipeR
             public void onItemViewClick(View view, int position) {
                 switch (view.getId()) {
                     case R.id.item_btn_buy_ticket:
-                        startActivity(BuyTicketActivity.class, null);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("mv_cname", movieList.get(position).getMv_cname());
+                        startActivity(BuyTicketActivity.class, bundle);
                         break;
                 }
             }

@@ -13,4 +13,5 @@ public interface IMovieView {
     void getMovieSucceed(List<Movie> movies);
 
     void getMovieFailed(String errorMsg);
+
 }

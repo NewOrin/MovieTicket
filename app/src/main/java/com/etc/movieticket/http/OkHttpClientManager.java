@@ -64,6 +64,7 @@ public class OkHttpClientManager {
      * @return 返回json字符串
      */
     public String doHttpGet(String url) {
+        Log.d(TAG, "请求URL ---> " + url);
         return doHttp(null, url);
     }
 
@@ -74,8 +75,9 @@ public class OkHttpClientManager {
      * @param url
      * @return
      */
+    String result;
+
     private String doHttp(RequestBody body, String url) {
-        String result;
         Request request;
         if (body == null) {
             request = new Request.Builder().url(url).build();

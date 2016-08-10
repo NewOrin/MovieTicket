@@ -1,14 +1,12 @@
 package com.etc.movieticket.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -16,9 +14,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.etc.movieticket.R;
+import com.etc.movieticket.event.SetCityEvent;
 import com.etc.movieticket.ui.fragment.CinemaFragment;
 import com.etc.movieticket.ui.fragment.MovieFragment;
 import com.etc.movieticket.ui.fragment.UserFragment;
+import com.etc.movieticket.utils.Constants;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -45,6 +47,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (getSharedPfStr("place").equals("")) {
+            startActivityForResult(new Intent(MainActivity.this, CitySelectorActivity.class), Constants.SELECT_CITY_CODE);
+        }
         initView();
         initListener();
         currentFragment = movieFragment;
@@ -65,7 +70,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mToolbarTvTitle = (TextView) findViewById(R.id.toolbar_tv_title);
         mToolbarTvLeft = (TextView) findViewById(R.id.toolbar_tv_left);
         mToolbarTvSearch = (TextView) findViewById(R.id.toolbar_tv_search);
-        setToolbar(mToolbar, "厦门", mToolbarTvTitle, "电影");
+        setToolbar(mToolbar, getSharedPfStr("place"), mToolbarTvTitle, "电影");
 
         mToolbarTvLeft.setVisibility(View.VISIBLE);
         mToolbarTvLeft.setTypeface(mTypeface);
@@ -123,6 +128,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 setTextViewTitle(mToolbarTvTitle, "电影");
                 break;
             case R.id.ll_cinema:
+                mToolbar.setTitle(getSharedPfStr("place"));
                 mTvBottomCinema.setTextColor(Color.RED);
                 mTvBottomMovie.setTextColor(getResources().getColor(R.color.tv_bottom_color));
                 mTvBottomUser.setTextColor(getResources().getColor(R.color.tv_bottom_color));
@@ -138,6 +144,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 switchFragment(userFragment);
                 setTextViewTitle(mToolbarTvTitle, "我的");
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constants.SELECT_CITY_CODE) {
+            mToolbar.setTitle(getSharedPfStr("place"));
+            EventBus.getDefault().post(new SetCityEvent(getSharedPfStr("place")));
         }
     }
 }
