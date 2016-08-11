@@ -36,6 +36,7 @@
                     app:layout_marginLeftPercent="5%" />
 
                 <TextView
+                    android:id="@+id/buy_ticket_cinema_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_buy_ticket_movie_name"
@@ -50,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="电话"
+                    android:text="--"
                     app:layout_marginRightPercent="5%" />
             </android.support.percent.PercentRelativeLayout>
 
@@ -84,8 +85,8 @@
                         android:id="@+id/movie_buy_name"
                         style="@style/MyRecyclerViewMovieTextViewStyle"
                         android:layout_alignParentTop="true"
+                        android:text="--"
                         android:textColor="@color/text_color_white"
-                        android:text=""
                         android:textSize="@dimen/text_size_20_sp" />
 
                     <TextView
@@ -117,25 +118,25 @@
                         android:id="@+id/movie_buy_ename"
                         style="@style/MyMovieInfoTextViewStyle"
                         android:layout_below="@+id/movie_buy_name"
-                        android:text="" />
+                        android:text="--" />
 
                     <TextView
                         android:id="@+id/movie_buy_type"
                         style="@style/MyMovieInfoTextViewStyle"
                         android:layout_below="@+id/movie_buy_ename"
-                        android:text="" />
+                        android:text="--" />
 
                     <TextView
                         android:id="@+id/movie_buy_location"
                         style="@style/MyMovieInfoTextViewStyle"
                         android:layout_below="@+id/movie_buy_type"
-                        android:text="" />
+                        android:text="--" />
 
                     <TextView
                         android:id="@+id/movie_buy_time"
                         style="@style/MyMovieInfoTextViewStyle"
                         android:layout_below="@+id/movie_buy_location"
-                        android:text="" />
+                        android:text="--" />
 
                     <android.support.percent.PercentRelativeLayout
                         android:layout_width="match_parent"
@@ -149,7 +150,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
-                            android:progressDrawable="@drawable/ratingbar_layer"/>
+                            android:progressDrawable="@drawable/ratingbar_layer" />
 
                         <TextView
                             android:id="@+id/item_movie_ratingNums"
@@ -168,10 +169,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview_buy_ticket"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+
+                <ProgressBar
+                    android:id="@+id/progressbar_buy_ticket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_buy_ticket"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </android.support.v4.widget.SwipeRefreshLayout>

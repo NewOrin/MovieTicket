@@ -40,6 +40,8 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     private String TAG = "UserInfoActivity";
     private String editNickname;
     private UserPresenter userPresenter = new UserPresenter(this);
+    private TextView mToolbarTvLeft;
+    private TextView mToolbarTvSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,10 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         btn_logout = (Button) findViewById(R.id.btn_logout);
         mTvUserInfoNickname = (TextView) findViewById(R.id.tv_user_info_nickname);
         mTvUserInfoVip = (TextView) findViewById(R.id.tv_user_info_vip);
+        mToolbarTvLeft = (TextView) findViewById(R.id.toolbar_tv_left);
+        mToolbarTvLeft.setVisibility(View.GONE);
+        mToolbarTvSearch = (TextView) findViewById(R.id.toolbar_tv_search);
+        mToolbarTvSearch.setVisibility(View.GONE);
     }
 
     @Override

@@ -21,6 +21,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
+                android:id="@+id/tv_buy_start_time"
                 android:layout_height="wrap_content"
                 android:text="12:35"
                 android:textColor="@color/text_color_black"
@@ -31,6 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:id="@+id/tv_buy_end_time"
                 android:text="14:24散场"
                 android:textSize="@dimen/text_small_size" />
         </LinearLayout>
@@ -44,6 +46,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
+                android:id="@+id/tv_buy_ticket_type"
                 android:layout_height="wrap_content"
                 android:text="国语3D"
                 android:textColor="@color/text_color_black"
@@ -51,6 +54,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
+                android:id="@+id/tv_buy_ticket_place"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="2号厅"
@@ -75,6 +79,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
+                android:id="@+id/tv_buy_ticket_price"
                 android:layout_height="wrap_content"
                 android:text="暑期特惠37.5元"
                 android:textColor="@color/red"
@@ -97,7 +102,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="@dimen/recyclerview_buy_ticket_margin"
             android:background="@drawable/btn_buy_selector"
-            android:text="购票"
+            android:text="选座"
             android:textColor="@color/btn_buy_text_normal"
             android:textSize="@dimen/text_size_14_sp" />
     </LinearLayout>

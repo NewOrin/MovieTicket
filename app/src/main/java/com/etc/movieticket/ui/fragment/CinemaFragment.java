@@ -152,7 +152,7 @@ public class CinemaFragment extends BaseFragment implements ICinemaView {
             @Override
             public void onItemClick(View view, int position) {
                 Bundle bundle = new Bundle();
-                bundle.putString("cinema", cinemaList.get(position).getC_name());
+                bundle.putSerializable("cinema", cinemaList.get(position));
                 startActivity(CinemaMovieActivity.class, bundle);
             }
 

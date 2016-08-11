@@ -13,6 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.etc.movieticket.R;
 import com.etc.movieticket.event.SetCityEvent;
 import com.etc.movieticket.ui.fragment.CinemaFragment;
@@ -43,13 +47,37 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private TextView mTvBottomCinema;
     private TextView mTvBottomUser;
 
+    //声明AMapLocationClient类对象
+    public AMapLocationClient mLocationClient = null;
+    //声明定位回调监听器
+    public AMapLocationListener mLocationListener = new AMapLocationListener() {
+        @Override
+        public void onLocationChanged(AMapLocation aMapLocation) {
+            if (aMapLocation != null) {
+                if (aMapLocation.getErrorCode() == 0) {
+                    //可在其中解析amapLocation获取相应内容。
+                    Log.d(TAG, "定位成功!:省份:" + aMapLocation.getProvince() + "，城市:" + aMapLocation.getCity());
+                    saveSharedPfStr("place", aMapLocation.getCity());//保存定位信息
+                } else {
+                    //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
+                    Log.e(TAG, "定位失败, ErrCode:"
+                            + aMapLocation.getErrorCode() + ", errInfo:"
+                            + aMapLocation.getErrorInfo());
+                }
+            }
+        }
+    };
+    //声明AMapLocationClientOption对象
+    public AMapLocationClientOption mLocationOption = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (getSharedPfStr("place").equals("")) {
+        if (getSharedPfStr("u_phone").equals("")) {
             startActivityForResult(new Intent(MainActivity.this, CitySelectorActivity.class), Constants.SELECT_CITY_CODE);
         }
+        setLocation();
         initView();
         initListener();
         currentFragment = movieFragment;
@@ -154,5 +182,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             mToolbar.setTitle(getSharedPfStr("place"));
             EventBus.getDefault().post(new SetCityEvent(getSharedPfStr("place")));
         }
+    }
+
+    private void setLocation() {
+        //初始化定位
+        mLocationClient = new AMapLocationClient(getApplicationContext());
+        //设置定位回调监听
+        mLocationClient.setLocationListener(mLocationListener);
+        //初始化AMapLocationClientOption对象
+        mLocationOption = new AMapLocationClientOption();
+        //设置定位间隔
+        mLocationOption.setInterval(2000);
+        //设置定位模式为AMapLocationMode.Hight_Accuracy，高精度模式。
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        //给定位客户端对象设置定位参数
+        mLocationClient.setLocationOption(mLocationOption);
+        //启动定位
+        mLocationClient.startLocation();
     }
 }

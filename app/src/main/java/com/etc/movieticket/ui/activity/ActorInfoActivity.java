@@ -17,10 +17,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.etc.movieticket.R;
 import com.etc.movieticket.adapter.RecyclerViewBaseAdapter;
 import com.etc.movieticket.adapter.ViewHolder;
@@ -57,6 +54,8 @@ public class ActorInfoActivity extends BaseActivity implements View.OnClickListe
     private String webid;
     private RecyclerViewBaseAdapter<String> mWorkRecyclerViewAdapter, mAlbumRecyclerViewAdapter;
     private String TAG = "ActorInfoActivity";
+    private TextView mToolbarTvLeft;
+    private TextView mToolbarTvSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +92,10 @@ public class ActorInfoActivity extends BaseActivity implements View.OnClickListe
             }
         });
         initSwipeLayout(mActorInfoSwipelayout);
+        mToolbarTvLeft = (TextView) findViewById(R.id.toolbar_tv_left);
+        mToolbarTvLeft.setVisibility(View.GONE);
+        mToolbarTvSearch = (TextView) findViewById(R.id.toolbar_tv_search);
+        mToolbarTvSearch.setVisibility(View.GONE);
     }
 
     private void setViewData() {

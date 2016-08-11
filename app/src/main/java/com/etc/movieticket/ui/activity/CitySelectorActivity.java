@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.etc.movieticket.R;
 import com.etc.movieticket.adapter.SortAdapter;
@@ -34,8 +33,7 @@ import java.util.List;
 public class CitySelectorActivity extends BaseActivity implements View.OnClickListener {
 
     private List<RegionInfo> provinceList;
-    private List<RegionInfo>
-            cityList;
+    private List<RegionInfo> cityList;
     private List<String> provinces;
     private ListView sortListView;
     private SideBar sideBar;
@@ -59,6 +57,8 @@ public class CitySelectorActivity extends BaseActivity implements View.OnClickLi
      * @param savedInstanceState
      */
     private PinyinComparator pinyinComparator;
+    private TextView mToolbarTvLeft;
+    private TextView mToolbarTvSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +85,10 @@ public class CitySelectorActivity extends BaseActivity implements View.OnClickLi
         characterParser = CharacterParser.getInstance();
         pinyinComparator = new PinyinComparator();
         sideBar.setTextView(dialog);
+        mToolbarTvLeft = (TextView) findViewById(R.id.toolbar_tv_left);
+        mToolbarTvLeft.setVisibility(View.GONE);
+        mToolbarTvSearch = (TextView) findViewById(R.id.toolbar_tv_search);
+        mToolbarTvSearch.setVisibility(View.GONE);
     }
 
     private void initData() {

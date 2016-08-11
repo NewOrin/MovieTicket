@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.etc.movieticket.R;
 import com.etc.movieticket.presenter.UserPresenter;
@@ -21,6 +22,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private PasswordView mEtRegisterPassword;
     private Button mBtnRegister;
     private UserPresenter userPresenter = new UserPresenter(this);
+    private TextView mToolbarTvLeft;
+    private TextView mToolbarTvTitle;
+    private TextView mToolbarTvSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         mEtRegisterNickname = (EditText) findViewById(R.id.et_register_nickname);
         mEtRegisterPassword = (PasswordView) findViewById(R.id.et_register_password);
         mBtnRegister = (Button) findViewById(R.id.btn_register);
+        mToolbarTvLeft = (TextView) findViewById(R.id.toolbar_tv_left);
+        mToolbarTvLeft.setVisibility(View.GONE);
+        mToolbarTvTitle = (TextView) findViewById(R.id.toolbar_tv_title);
+        mToolbarTvTitle.setVisibility(View.GONE);
+        mToolbarTvSearch = (TextView) findViewById(R.id.toolbar_tv_search);
+        mToolbarTvSearch.setVisibility(View.GONE);
     }
 
     @Override

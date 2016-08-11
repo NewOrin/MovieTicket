@@ -22,6 +22,7 @@ import com.alibaba.fastjson.JSON;
 import com.etc.movieticket.R;
 import com.etc.movieticket.adapter.RecyclerViewBaseAdapter;
 import com.etc.movieticket.adapter.ViewHolder;
+import com.etc.movieticket.entity.Cinema;
 import com.etc.movieticket.entity.Comment;
 import com.etc.movieticket.entity.Movie;
 import com.etc.movieticket.entity.MovieActor;
@@ -69,12 +70,16 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
     private RecyclerViewBaseAdapter<String> mMoviePhotoAdapter;
     private Button mBtnMovieInfoPickSeat;
     private boolean isWanted = false;
+    private TextView mToolbarTvLeft;
+    private TextView mToolbarTvSearch;
+    private Cinema cinema;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_info);
         initSwipeLayout((SwipeRefreshLayout) findViewById(R.id.movie_info_swipe_layout));
+        cinema = (Cinema) getIntent().getBundleExtra(this.getPackageName()).getSerializable("cinema");
         toolbar_tv_title = (TextView) findViewById(R.id.toolbar_tv_title);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mv_showId = getPassStringData(getIntent(), "mv_showId");
@@ -119,6 +124,10 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
 
         movie_info_ll_wanted = (LinearLayout) findViewById(R.id.movie_info_ll_wanted);
         movie_info_ll_comment = (LinearLayout) findViewById(R.id.movie_info_ll_comment);
+        mToolbarTvLeft = (TextView) findViewById(R.id.toolbar_tv_left);
+        mToolbarTvLeft.setVisibility(View.GONE);
+        mToolbarTvSearch = (TextView) findViewById(R.id.toolbar_tv_search);
+        mToolbarTvSearch.setVisibility(View.GONE);
     }
 
     private void setMovieViewData() {
@@ -238,12 +247,20 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
 
     @Override
     public void onClick(View v) {
+        Bundle bundle;
         switch (v.getId()) {
             case R.id.movie_info_layout_description:
                 doExpand();
                 break;
             case R.id.btn_movie_info_pick_seat:
-                startActivity(PickSeatActivity.class, null);
+                bundle = new Bundle();
+                bundle.putSerializable("movie", movie);
+                if (cinema == null) {
+                    startActivity(ShowCinemaActivity.class, bundle);
+                } else {
+                    bundle.putSerializable("cinema", cinema);
+                    startActivity(BuyTicketActivity.class, bundle);
+                }
                 break;
             case R.id.movie_info_ll_wanted:
                 if (!isWanted) {
@@ -258,7 +275,7 @@ public class MovieInfoActivity extends BaseActivity implements IMovieInfoView, S
                 }
                 break;
             case R.id.movie_info_ll_comment:
-                Bundle bundle = new Bundle();
+                bundle = new Bundle();
                 bundle.putString("mv_showId", mv_showId);
                 bundle.putString("mv_cname", mv_cname);
                 startActivity(CommentActivity.class, bundle);

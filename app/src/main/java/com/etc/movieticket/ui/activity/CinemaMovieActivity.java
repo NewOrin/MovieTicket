@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.etc.movieticket.R;
 import com.etc.movieticket.adapter.RecyclerViewMovieAdapter;
+import com.etc.movieticket.entity.Cinema;
 import com.etc.movieticket.entity.Movie;
 import com.etc.movieticket.presenter.MoviePresenter;
 import com.etc.movieticket.ui.i.IMovieView;
@@ -30,13 +30,17 @@ public class CinemaMovieActivity extends BaseActivity implements View.OnClickLis
     private MoviePresenter moviePresenter = new MoviePresenter(this);
     private List<Movie> movieList;
     private WrapAdapter<RecyclerViewMovieAdapter> mWrapAdapter;
+    private TextView mToolbarTvLeft;
+    private TextView mToolbarTvSearch;
+    private Cinema cinema;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cinema_movie);
         showmProgressDialog("正在加载");
-        mTitle = getPassStringData(getIntent(), "cinema");
+        cinema = (Cinema) getIntent().getBundleExtra(this.getPackageName()).getSerializable("cinema");
+        mTitle = cinema.getC_name();
         moviePresenter.doGetMovieData(Constants.MOVIE_ISRELEASED);
         initView();
         initListener();
@@ -52,6 +56,10 @@ public class CinemaMovieActivity extends BaseActivity implements View.OnClickLis
         setToolbar(mToolbar, "", mToolbarTvTitle, mTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        mToolbarTvLeft = (TextView) findViewById(R.id.toolbar_tv_left);
+        mToolbarTvLeft.setVisibility(View.GONE);
+        mToolbarTvSearch = (TextView) findViewById(R.id.toolbar_tv_search);
+        mToolbarTvSearch.setVisibility(View.GONE);
     }
 
     @Override
@@ -74,6 +82,7 @@ public class CinemaMovieActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onItemClick(View view, int position) {
                 Bundle bundle = new Bundle();
+                bundle.putSerializable("cinema", cinema);
                 bundle.putString("mv_showId", movieList.get(position).getMv_showId());
                 bundle.putString("mv_cname", movieList.get(position).getMv_cname());
                 startActivity(MovieInfoActivity.class, bundle);
@@ -89,6 +98,9 @@ public class CinemaMovieActivity extends BaseActivity implements View.OnClickLis
             public void onItemViewClick(View view, int position) {
                 switch (view.getId()) {
                     case R.id.item_btn_buy_ticket:
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("movie", movieList.get(position));
+                        bundle.putSerializable("cinema", cinema);
                         startActivity(BuyTicketActivity.class, null);
                         break;
                 }

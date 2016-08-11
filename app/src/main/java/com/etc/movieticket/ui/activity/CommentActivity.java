@@ -2,7 +2,6 @@ package com.etc.movieticket.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +23,8 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     private Button mBtnCommentPublish;
     private String TAG = "CommentActivity";
     private String mv_showId, mv_cname;
+    private TextView mToolbarTvLeft;
+    private TextView mToolbarTvSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,10 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
         setToolbar(mToolbar, "", mToolbarTvTitle, mv_cname);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        mToolbarTvLeft = (TextView) findViewById(R.id.toolbar_tv_left);
+        mToolbarTvLeft.setVisibility(View.GONE);
+        mToolbarTvSearch = (TextView) findViewById(R.id.toolbar_tv_search);
+        mToolbarTvSearch.setVisibility(View.GONE);
     }
 
     @Override

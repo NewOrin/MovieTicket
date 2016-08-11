@@ -22,6 +22,7 @@ import com.etc.movieticket.entity.Movie;
 import com.etc.movieticket.presenter.MoviePresenter;
 import com.etc.movieticket.ui.activity.BuyTicketActivity;
 import com.etc.movieticket.ui.activity.MovieInfoActivity;
+import com.etc.movieticket.ui.activity.ShowCinemaActivity;
 import com.etc.movieticket.ui.i.IMovieView;
 import com.etc.movieticket.utils.Constants;
 import com.etc.movieticket.utils.DividerItemDecoration;
@@ -173,8 +174,8 @@ public class HotMovieFragment extends BaseFragment implements IMovieView, SwipeR
                 switch (view.getId()) {
                     case R.id.item_btn_buy_ticket:
                         Bundle bundle = new Bundle();
-                        bundle.putString("mv_cname", movieList.get(position).getMv_cname());
-                        startActivity(BuyTicketActivity.class, bundle);
+                        bundle.putSerializable("movie", movieList.get(position));
+                        startActivity(ShowCinemaActivity.class, bundle);
                         break;
                 }
             }

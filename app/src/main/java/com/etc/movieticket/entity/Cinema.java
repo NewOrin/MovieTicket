@@ -1,6 +1,8 @@
 package com.etc.movieticket.entity;
 
-public class Cinema {
+import java.io.Serializable;
+
+public class Cinema implements Serializable {
     private Integer c_id;
     private String c_name;
     private String c_address;

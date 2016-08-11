@@ -1,6 +1,5 @@
 package com.etc.movieticket.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -14,7 +13,6 @@ import com.etc.movieticket.R;
 import com.etc.movieticket.entity.User;
 import com.etc.movieticket.presenter.UserPresenter;
 import com.etc.movieticket.ui.i.IUserLoginView;
-import com.etc.movieticket.utils.SharedPreferenceUtil;
 import com.subhrajyoti.passwordview.PasswordView;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener, IUserLoginView {
@@ -26,6 +24,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private TextView mTvRegister;
     private TextView mTvForgetPwd;
     private UserPresenter userPresenter = new UserPresenter(this);
+    private TextView mToolbarTvLeft;
+    private TextView mToolbarTvTitle;
+    private TextView mToolbarTvSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         mBtnLogin = (Button) findViewById(R.id.btn_login);
         mTvRegister = (TextView) findViewById(R.id.tv_register);
         mTvForgetPwd = (TextView) findViewById(R.id.tv_forget_pwd);
+        mToolbarTvLeft = (TextView) findViewById(R.id.toolbar_tv_left);
+        mToolbarTvLeft.setVisibility(View.GONE);
+        mToolbarTvTitle = (TextView) findViewById(R.id.toolbar_tv_title);
+        mToolbarTvTitle.setVisibility(View.GONE);
+        mToolbarTvSearch = (TextView) findViewById(R.id.toolbar_tv_search);
+        mToolbarTvSearch.setVisibility(View.GONE);
     }
 
     @Override

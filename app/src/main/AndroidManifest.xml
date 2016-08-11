@@ -24,7 +24,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.activity.MainActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme">
+        </activity>
         <activity android:name=".ui.activity.BaseActivity" />
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
@@ -39,29 +40,26 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            </intent-filter></activity>
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="d9225a6d02147d4144f438416ca27071"></meta-data>
+
+        <service android:name="com.amap.api.location.APSService" />
 
         <meta-data
             android:name="com.etc.movieticket.utils.MyGlideModule"
             android:value="GlideModule" />
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="5fCzElmmb6UCkykp1wmm2R8ChhkkQ0f8" />
 
         <activity android:name=".ui.activity.UserInfoActivity" />
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
         <activity android:name=".ui.activity.CitySelectorActivity" />
         <activity android:name=".ui.activity.SearchActivity" />
-
-        <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" />
-
         <activity android:name=".ui.activity.ActorInfoActivity" />
         <activity android:name=".ui.activity.CommentActivity" />
-        <activity android:name=".ui.activity.CinemaMovieActivity"></activity>
+        <activity android:name=".ui.activity.CinemaMovieActivity" />
+        <activity android:name=".ui.activity.ShowCinemaActivity"></activity>
     </application>
 
 </manifest>
