@@ -19,13 +19,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.activity.MainActivity"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".ui.activity.BaseActivity" />
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
@@ -40,11 +39,12 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter></activity>
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="d9225a6d02147d4144f438416ca27071"></meta-data>
+            android:value="d9225a6d02147d4144f438416ca27071" />
 
         <service android:name="com.amap.api.location.APSService" />
 
@@ -59,7 +59,9 @@
         <activity android:name=".ui.activity.ActorInfoActivity" />
         <activity android:name=".ui.activity.CommentActivity" />
         <activity android:name=".ui.activity.CinemaMovieActivity" />
-        <activity android:name=".ui.activity.ShowCinemaActivity"></activity>
+        <activity android:name=".ui.activity.ShowCinemaActivity" />
+        <activity android:name=".ui.activity.SubmitOrderActivity" />
+        <activity android:name=".ui.activity.MyOrderActivity"></activity>
     </application>
 
 </manifest>

@@ -14,10 +14,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
  */
 public class MyImageUtils {
     public static void loadMovieIconImageView(Context context, ImageView imageView, String imageUrl) {
-        Glide.with(context).load(imageUrl).crossFade().centerCrop().diskCacheStrategy(DiskCacheStrategy.RESULT).override(180, 180).into(imageView);
+        Glide.with(context).load(imageUrl).crossFade().centerCrop().diskCacheStrategy(DiskCacheStrategy.RESULT).into(imageView);
     }
     public static void loadCarouseImageView(Context context,ImageView imageView,String imageUrl){
-        Glide.with(context).load(imageUrl).crossFade().centerCrop().diskCacheStrategy(DiskCacheStrategy.RESULT).override(400, 400).into(imageView);
+        Glide.with(context).load(imageUrl).crossFade().centerCrop().diskCacheStrategy(DiskCacheStrategy.RESULT).into(imageView);
     }
     public static void loadActorAvatarImageView(Context context, ImageView imageView, String imageUrl){
         Glide.with(context).load(imageUrl).crossFade().centerCrop().diskCacheStrategy(DiskCacheStrategy.RESULT).into(imageView);

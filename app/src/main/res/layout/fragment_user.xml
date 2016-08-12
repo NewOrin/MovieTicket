@@ -19,8 +19,8 @@
 
             <com.etc.movieticket.view.CircleImageView
                 android:id="@+id/img_avatar"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_centerHorizontal="true"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
@@ -193,16 +193,18 @@
             <include layout="@layout/tv_line" />
 
             <android.support.percent.PercentRelativeLayout
+                android:id="@+id/rl_order"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@color/layout_bg_white"
+                android:clickable="true"
                 android:gravity="center_vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="看过的电影"
+                    android:text="我的订单"
                     android:textSize="@dimen/text_medium_size"
                     app:layout_marginLeftPercent="5%" />
 

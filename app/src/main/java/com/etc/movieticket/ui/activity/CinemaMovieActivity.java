@@ -86,6 +86,7 @@ public class CinemaMovieActivity extends BaseActivity implements View.OnClickLis
                 bundle.putString("mv_showId", movieList.get(position).getMv_showId());
                 bundle.putString("mv_cname", movieList.get(position).getMv_cname());
                 startActivity(MovieInfoActivity.class, bundle);
+                finish();
             }
 
             @Override
@@ -102,6 +103,7 @@ public class CinemaMovieActivity extends BaseActivity implements View.OnClickLis
                         bundle.putSerializable("movie", movieList.get(position));
                         bundle.putSerializable("cinema", cinema);
                         startActivity(BuyTicketActivity.class, null);
+                        finish();
                         break;
                 }
             }

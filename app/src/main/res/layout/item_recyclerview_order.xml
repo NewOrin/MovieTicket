@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:background="@drawable/item_layout_bg"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/imageview_order"
+        android:layout_width="90dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_avatar" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_tv_order_cname"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="电影名称"
+            android:textSize="@dimen/text_size_18_sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item_tv_order_address"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="电影名称"
+            android:textSize="@dimen/text_medium_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item_tv_order_date"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="电影名称"
+            android:textSize="@dimen/text_medium_size"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

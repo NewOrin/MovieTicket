@@ -12,6 +12,8 @@
         android:id="@+id/seatView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:background="@color/white" />
 
@@ -20,21 +22,62 @@
         android:layout_height="40dp"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="选择座位:"
-            android:textColor="@color/text_color_black"
-            android:textSize="@dimen/text_medium_size" />
-
         <LinearLayout
             android:id="@+id/ll_bottom_pickseat"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:orientation="horizontal" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp">
+
+            <TextView
+                android:id="@+id/tv_pick_seat1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_medium_size" />
+
+            <TextView
+                android:id="@+id/tv_pick_seat2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_medium_size" />
+
+            <TextView
+                android:id="@+id/tv_pick_seat3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_medium_size" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_ticket_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:text=""
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_18_sp"
+            android:textStyle="bold" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_submit_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/btn_selector"
+        android:text="提交订单"
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/text_medium_size" />
 </LinearLayout>

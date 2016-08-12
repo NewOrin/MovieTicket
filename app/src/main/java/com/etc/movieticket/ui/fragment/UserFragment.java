@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.etc.movieticket.R;
 import com.etc.movieticket.ui.activity.LoginActivity;
+import com.etc.movieticket.ui.activity.MyOrderActivity;
 import com.etc.movieticket.ui.activity.UserInfoActivity;
 import com.etc.movieticket.utils.MyImageUtils;
 import com.etc.movieticket.view.CircleImageView;
@@ -31,6 +32,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     private TextView mTvIcArrowRight02;
     private TextView mTvIcArrowRight03;
     private String user_avatarUrl;
+    private PercentRelativeLayout rl_order;
 
     public UserFragment() {
         // Required empty public constructor
@@ -47,6 +49,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 
     private void initListener() {
         mUserPrlayout.setOnClickListener(this);
+        rl_order.setOnClickListener(this);
     }
 
     private void initView(View view) {
@@ -61,6 +64,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         mTvIcArrowRight01 = (TextView) view.findViewById(R.id.tv_ic_arrow_right01);
         mTvIcArrowRight02 = (TextView) view.findViewById(R.id.tv_ic_arrow_right02);
         mTvIcArrowRight03 = (TextView) view.findViewById(R.id.tv_ic_arrow_right03);
+        rl_order = (PercentRelativeLayout) view.findViewById(R.id.rl_order);
         mTvIcTicket.setTypeface(mTypeface);
         mTvIcPerform.setTypeface(mTypeface);
         mTvIcCoupon.setTypeface(mTypeface);
@@ -85,6 +89,9 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
                     startActivity(LoginActivity.class, null);
                     getActivity().finish();
                 }
+                break;
+            case R.id.rl_order:
+                startActivity(MyOrderActivity.class, null);
                 break;
         }
     }

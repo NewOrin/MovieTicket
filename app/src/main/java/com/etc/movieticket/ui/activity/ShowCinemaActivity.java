@@ -75,7 +75,7 @@ public class ShowCinemaActivity extends BaseActivity implements ICinemaView {
             public void convert(ViewHolder holder, Cinema cinema) {
                 holder.setText(R.id.item_tv_cinema_name, cinema.getC_name());
                 holder.setText(R.id.item_tv_cinema_address, cinema.getC_address());
-                holder.setText(R.id.item_tv_cinema_price, cinema.getC_price());
+                holder.setText(R.id.item_tv_cinema_price, cinema.getC_price() + "元起");
             }
         };
         recyclerViewBaseAdapter.setOnItemClickListener(new RecyclerViewBaseAdapter.OnItemClickListener() {
@@ -85,6 +85,7 @@ public class ShowCinemaActivity extends BaseActivity implements ICinemaView {
                 bundle.putSerializable("movie", movie);
                 bundle.putSerializable("cinema", cinemaList.get(position));
                 startActivity(BuyTicketActivity.class, bundle);
+                finish();
             }
 
             @Override

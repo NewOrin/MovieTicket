@@ -57,7 +57,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (getSharedPfStr("avatar_url").equals("")) {
-            user_info_avatar.setImageResource(R.mipmap.ic_launcher);
+            user_info_avatar.setImageResource(R.drawable.ic_user_default_avatar);
         } else {
             MyImageUtils.loadMovieIconImageView(this, user_info_avatar, getSharedPfStr("avatar_url"));
         }

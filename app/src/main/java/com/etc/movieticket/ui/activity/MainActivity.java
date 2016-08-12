@@ -3,6 +3,7 @@ package com.etc.movieticket.ui.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
@@ -46,18 +47,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private TextView mTvBottomMovie;
     private TextView mTvBottomCinema;
     private TextView mTvBottomUser;
+    private Handler mHandler = new Handler();
 
     //声明AMapLocationClient类对象
     public AMapLocationClient mLocationClient = null;
     //声明定位回调监听器
     public AMapLocationListener mLocationListener = new AMapLocationListener() {
         @Override
-        public void onLocationChanged(AMapLocation aMapLocation) {
+        public void onLocationChanged(final AMapLocation aMapLocation) {
             if (aMapLocation != null) {
                 if (aMapLocation.getErrorCode() == 0) {
                     //可在其中解析amapLocation获取相应内容。
                     Log.d(TAG, "定位成功!:省份:" + aMapLocation.getProvince() + "，城市:" + aMapLocation.getCity());
                     saveSharedPfStr("place", aMapLocation.getCity());//保存定位信息
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            EventBus.getDefault().post(new SetCityEvent(aMapLocation.getCity()));
+                        }
+                    });
                 } else {
                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                     Log.e(TAG, "定位失败, ErrCode:"
@@ -74,10 +82,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setLocation();
         if (getSharedPfStr("u_phone").equals("")) {
             startActivityForResult(new Intent(MainActivity.this, CitySelectorActivity.class), Constants.SELECT_CITY_CODE);
         }
-        setLocation();
         initView();
         initListener();
         currentFragment = movieFragment;

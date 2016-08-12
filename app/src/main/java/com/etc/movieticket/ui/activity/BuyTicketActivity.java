@@ -74,6 +74,7 @@ public class BuyTicketActivity extends BaseActivity implements View.OnClickListe
     private String result;
     private Handler mHandler = new Handler();
     private ProgressBar progressbar_buy_ticket;
+    private String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,7 @@ public class BuyTicketActivity extends BaseActivity implements View.OnClickListe
         initView();
         getNetData(getUrl(currentDate));
         initListener();
+        date = currentDate;
     }
 
     private String getUrl(String date) {
@@ -196,7 +198,9 @@ public class BuyTicketActivity extends BaseActivity implements View.OnClickListe
                         bundle.putSerializable("movie", movie);
                         bundle.putSerializable("movieShow", movieShow);
                         bundle.putSerializable("cinema", cinema);
+                        bundle.putString("date", date);
                         startActivity(PickSeatActivity.class, bundle);
+                        finish();
                     }
                 });
             }
@@ -204,8 +208,7 @@ public class BuyTicketActivity extends BaseActivity implements View.OnClickListe
         mAdapter.setOnItemClickListener(new RecyclerViewBaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(View view, int position) {
-                showToast("点击了item" + position);
-            }
+             }
 
             @Override
             public void onItemLongClickListener(View view, int position) {
@@ -228,10 +231,13 @@ public class BuyTicketActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0) {
+                    date = currentDate;
                     getNetData(getUrl(currentDate));
                 } else if (tab.getPosition() == 1) {
+                    date = tommorrowDate;
                     getNetData(getUrl(tommorrowDate));
                 } else if (tab.getPosition() == 2) {
+                    date = afterTomDate;
                     getNetData(getUrl(afterTomDate));
                 }
             }
